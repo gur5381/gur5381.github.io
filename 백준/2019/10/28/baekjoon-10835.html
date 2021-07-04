@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(백준 알고리즘 문제풀이) 10835번 카드게임</title>
+  <meta name="description" content="문제">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="문제" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(백준 알고리즘 문제풀이) 10835번 카드게임" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(백준 알고리즘 문제풀이) 10835번 카드게임">
+  <meta name="twitter:description" content="문제">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/%EB%B0%B1%EC%A4%80/2019/10/28/baekjoon-10835.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(백준 알고리즘 문제풀이) 10835번 카드게임</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">October 28, 2019</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/백준">백준</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="문제">문제</h2>
+
+<p>이 문제는 점화식으로 풀면 너무 좋은 문제이지만, 그렇게 풀지 않는다면 정말 고통속에서 코드를 짜게 될 수도 있다.</p>
+
+<p><a href="https://www.acmicpc.net/problem/10835">문제 링크</a></p>
+
+<h2 id="문제-접근">문제 접근</h2>
+
+<blockquote>
+  <ul>
+    <li>처음에 이문제를 평소 푸는 것 처럼 점화식을 이용하지 않고 풀려고 했다.</li>
+    <li>하지만 이와 같이 규칙이 딱딱 정해져 있는 경우에는 점화식을 이용하는 것이 훨씬 수월하다는 것을 나중가서 깨달았다.</li>
+    <li>일단 규칙 대로 코드화 하고 한번 가본 길을 또 가는 것은 낭비이기 때문에 그 길을 저장하는 용도로 디피를 사용한다.</li>
+  </ul>
+</blockquote>
+
+<h2 id="코드">코드</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+#include &lt;cstring&gt;
+using namespace std;
+int n, A[2001], B[2001], dp[2001][2001];
+int find(int x, int y){
+    if(x == n || y == n)return 0;
+    int &amp;ret = dp[x][y];
+    if(ret != -1) return ret;
+    ret = max(find(x + 1, y + 1), find(x + 1, y));
+    if(A[x] &gt; B[y])ret = max(ret, find(x, y + 1) + B[y]);
+    return ret;
+}
+int main(){
+    scanf("%d", &amp;n);
+    memset(dp, -1, sizeof(dp));
+    for(int i = 0; i &lt; n; i++)scanf("%d", &amp;A[i]);
+    for(int i = 0; i &lt; n; i++)scanf("%d", &amp;B[i]);
+    printf("%d", find(0, 0));
+}
+</code></pre></div></div>
+
+<h2 id="느낀점">느낀점</h2>
+
+<blockquote>
+  <ul>
+    <li>점화식을 이용해서 dp를 푸는 방법이 유용한 때가 있다는 걸 오늘 처음 알았다!</li>
+  </ul>
+</blockquote>
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/dp">dp</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/%EB%B0%B1%EC%A4%80/2019/10/27/baekjoon-1509.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(백준 알고리즘 문제풀이) 1509번 팰린드롬 분할</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/%EB%B0%B1%EC%A4%80/2019/10/28/baekjoon-9253.html">
+					<span class="page-number">(백준 알고리즘 문제풀이) 9253번 LCS 2</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/%EB%B0%B1%EC%A4%80/2019/10/28/baekjoon-10835.html',
+    'title': '(백준 알고리즘 문제풀이) 10835번 카드게임'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

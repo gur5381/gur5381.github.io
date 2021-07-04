@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>줌코딩의 코딩일기</title>
+  <meta name="description" content="Zoom in Coding from the Basic.">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Zoom in Coding from the Basic." />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="줌코딩의 코딩일기" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/crewcials.jpeg" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="줌코딩의 코딩일기">
+  <meta name="twitter:description" content="Zoom in Coding from the Basic.">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/crewcials.jpeg">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/page8/">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="home">
+
+<div class="site-header-container has-cover" style="background-image: url(/assets/header_image.jpeg);">
+  <div class="scrim has-cover">
+    <header class="site-header">
+      <h1 class="title">줌코딩의 코딩일기</h1>
+      <p class="subtitle">Zoom in Coding</p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+<ul class="post-list">
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/codeforces/2019/11/15/codeforces-597.html">Codeforces Round 597 (Div. 2) 후기 및 문제 풀이</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>후기 더도 말고 덜도 말고 딱 오늘 시험만 같으면 좋겠다. 이번 virtual participation에서는 2100점 받았다. 이정도면 아마 떨어지지는 않을것 같다 ㅎㅎ A. Good ol’ Numbers Coloring 문제 링크 빨리 풀어보려했으나 그냥 생각이 좀 필요했던 문제였다. 이 문제는 두 수의 최대 공약수가 1이라면 FINITE를 출력하도록 하면 되는 문제이다. #include &lt;cstdio&gt; #include...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">November 15, 2019</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/codeforces">Codeforces</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/codeforces/2019/11/13/codeforces-76.html">Codeforces Educational Codeforces Round 76 후기 및 문제 풀이</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>후기 실제 참가한 시험으로 4문제 풀면 너무 좋겠다 했는데 4문제를 풀어버렸다. 첫 문제를 10분 안에 풀고 두 번째 문제에서 어떻게 접근할지 고민하다가 1시간대를 통과했다. 망했다 했는데 남은 1시간 동안 빡집중해서 3문제를 풀어냈다. 2번만 좀만 빨리 풀었다면 엄청 좋은 결과가 있을 뻔했다. 일단 엄청 만족스러운 라운드였다! A. Two Rival Students 문제...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">November 13, 2019</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/codeforces">Codeforces</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/codeforces/2019/11/11/codeforces-599.html">Codeforces Round 599 (Div. 2) 후기 및 문제 풀이</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>후기 virtual participation으로 풀었는데 2200점이라니ㅠㅠㅠㅠㅠㅠ 지난주에 시험칠걸 그랬나ㅠㅠㅠ 앞 3문제의 난이도는 그닥 어렵지 않았지만 4번문제를 푸냐 못푸느냐가 관건인것 같다. 제대로 푼 게 아니라 어쩌다가 4번을 풀어버렸다. 뭐 이런저런 걸 떠나서 나름 만족스러운 시험이었다! 그리고 잔실수 줄이는 연습이 필요할 듯하다. A. Maximum Square 문제 링크 이 문제는 4분컷 해버렸다. 보자마자 방법이...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">November 11, 2019</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/codeforces">Codeforces</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/codingtest/2019/11/09/2019-kakao-winter-intern-1.html">2019 카카오 개발자 겨울 인턴십 코딩 테스트 후기</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>카카오 겨울 인턴십 감히 내가 카카오를 지원해.. 라는 생각으로 지원 조차 포기하려 하던 찰나에 상현이의 띵언 덕에 지원하게 됐다. 지원서를 작성하고 인턴 코테 후기를 검색해봤는데 어렵다고 해서 긴장을 하고 시험을 쳤다. 이번에는 총 5문제 4시간 시험으로 진행되었다.(3문제는 정확도만 봤고 뒤 두문제는 효율성까지 체크했다.) 카카오 겨울 코딩 테스트 후기 문제의 난이도는...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">November 9, 2019</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/codingtest">Codingtest</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/%EB%B0%B1%EC%A4%80/2019/10/28/baekjoon-1562.html">(백준 알고리즘 문제풀이) 1562번 계단 수</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>문제 설마 비트마스크 했는데… 맞았다…ㅎㅎ 문제 링크 문제 접근 숫자가 다 사용된 경우를 찾아야 하기 때문에 이를 위해서 비트마스크를 사용했다. dp[i][j][k]에서 i는 현재 자리, j는 비트마스크로 원소를 표현했고, k는 현재 자리의 수를 의미한다. 각 자리의 값을 업데이트 한후에 이를 기반으로 다음 자리를 업데이트 한다. 코드 #include &lt;cstdio&gt; long long ans,...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">October 28, 2019</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/백준">백준</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  
+</ul>
+
+<nav class="pagination" role="navigation">
+	<p>
+    
+			
+			<a class="newer-posts" href="/page7">
+				<span class="fa-stack fa-lg">
+					<i class="fa fa-square fa-stack-2x"></i>
+					<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+				</span>
+			</a>
+			
+		
+		<span class="page-number">Page 8 of 62</span>
+		
+		<a class="newer-posts" href="/page9">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-square fa-stack-2x"></i>
+        <i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+		
+	</p>
+</nav>
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/page8/',
+    'title': '줌코딩의 코딩일기'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

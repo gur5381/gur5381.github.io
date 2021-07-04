@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(JS 다시 보기) 자바스크립트에서의 함수</title>
+  <meta name="description" content="함수 정의">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="함수 정의" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(JS 다시 보기) 자바스크립트에서의 함수" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(JS 다시 보기) 자바스크립트에서의 함수">
+  <meta name="twitter:description" content="함수 정의">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/javascript/2019/12/10/javascript-2.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(JS 다시 보기) 자바스크립트에서의 함수</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">December 10, 2019</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/javascript">Javascript</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="함수-정의">함수 정의</h2>
+
+<p>함수를 정의하는 방법은 3가지가 있다. 예제를 통해 이해하면 빠르다.</p>
+
+<h3 id="1-함수-선언문">1. 함수 선언문</h3>
+
+<p>함수명이 필수이며 함수명으로 함수를 호출한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function add(x, y){
+    return x + y;
+}
+
+console.log(add(3, 4)); //7
+</code></pre></div></div>
+
+<h3 id="2-함수-표현식">2. 함수 표현식</h3>
+
+<p>함수의 이름은 선택 사항이며, 보통 사용하지 않는다. 
+해당 함수을 참조하는 함수 변수를 생성해준다. 호출시에는 함수 변수명으로 호출 가능하다. 이 때 유의할 점은 함수 이름으로는 호출이 불가능하다는 것이다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var add = function sum(x, y){
+    return x + y;
+}
+
+console.log(add(3, 4)); //7
+console.log(sum(3, 4)); //Uncaught ReferenceError
+</code></pre></div></div>
+
+<p>함수 선언문으로 정의한 add()는 사실상 다음과 같은 형태로 변경된다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var add = function add(x, y){
+    return x + y;
+}
+</code></pre></div></div>
+
+<h3 id="3-function-생성자-함수로-함수-생성하기">3. Function() 생성자 함수로 함수 생성하기</h3>
+
+<p>Function()이라는 기본 내장 생성자로도 생성이 가능하다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var add = new Function('x', 'y', 'return x + y');
+console.log(add(3, 4)); //7
+</code></pre></div></div>
+
+<p>이건 잘 사용안되니 그냥 있다는 것만 알아두자.</p>
+
+<h3 id="함수-호이스팅">함수 호이스팅</h3>
+
+<p>함수 호이스팅이란 <strong>함수 선언문 형태로 정의한 함수의 유효 범위는 코드의 맨 처음부터 시작한다는 것이다.</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>add(2,3); //5
+
+function add(x, y){
+    return x + y;
+}
+
+add(3,4) //7
+</code></pre></div></div>
+
+<p><strong>호이스팅은 함수를 사용하기 전에 반드시 선언해야 한다는 규칙을 무시하므로 코드의 구조를 엉성하게 만들 수 있기 때문에 함수 표현식 사용을 권장한다.</strong></p>
+
+<p><br /></p>
+
+<h2 id="함수도-객체다">함수도 객체다</h2>
+
+<p>함수도 객체다. 객체이기 때문에 함수에 프로퍼티를 추가하는 것 또한 가능하다.</p>
+
+<p><br /></p>
+
+<h3 id="함수는-일급-객체이다">함수는 일급 객체이다.</h3>
+
+<p>일급객체란 다음과 같은 특징을 가지는 객체를 의미한다.</p>
+
+<ul>
+  <li>리터럴에 의해 생성</li>
+  <li>변수나 배열의 요쇼, 객체의 프로퍼티 등에 할당 가능</li>
+  <li>함수의 인자로 전달 가능</li>
+  <li>함수의 리턴값으로 리턴 가능</li>
+  <li>동적으로 프로퍼티를 생성 및 할당 가능</li>
+</ul>
+
+<p>자바 스크립트에서 함수는 이러한 특징을 모두 가지는 입급 객체이다.</p>
+
+<h4 id="변수나-프로퍼티의-값으로-할당">변수나 프로퍼티의 값으로 할당</h4>
+
+<p>변수로 할당하는 것은 이미 경험해봤고 다음과 같이 프로퍼티 값이 될 수도 있다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var obj = {}
+obj.func = function(){
+    return 200;
+}
+</code></pre></div></div>
+
+<h4 id="함수-인자로-전달">함수 인자로 전달</h4>
+
+<p>함수의 결과값으로 function을 전달할 수도 있다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var foo = function(func){
+    func();
+};
+
+foo(function(){
+    console.log("function passed as an argument");
+});
+</code></pre></div></div>
+
+<p>foo는 인자로 함수를 받는 함수이다. 위의 코드에서 foo를 호출할 때 익명함수를 인자로 넘겨주었다.</p>
+
+<h4 id="리턴값으로-활용">리턴값으로 활용</h4>
+
+<p>함수는 다른 함수를 return 값으로 사용할 수 있다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var foo = function(){
+    return function(){
+        console.log("this function is used as a return value.")
+    }
+}
+</code></pre></div></div>
+
+<p>위의 코드에서는 익명함수가 return 값으로 사용되었다.</p>
+
+<p><br /></p>
+
+<h3 id="함수-객체의-기본-프로퍼티">함수 객체의 기본 프로퍼티</h3>
+
+<p>모든 함수의 부모 객체는 Function Prototype 객체이다.(크롬에서는 이 객체를 Empty() 함수라고 명하고 있다.)</p>
+
+<p>이러한 Function 객체의 prototype은 모든 객체의 조상 격인 Object.prototype 객체를 가르키고 있는 것을 볼 수 있다.</p>
+
+<h4 id="length-프로퍼티">length 프로퍼티</h4>
+
+<p>함수 객체에서 length는 인자의 개수를 의미한다.</p>
+
+<h4 id="prototype-프로퍼티">prototype 프로퍼티</h4>
+
+<p>[[Prototype]]과 prototype 프로퍼티는 다르다.<br />
+prototype 프로퍼티는 연결된 함수를 가르키고 있다. 이는 함수 생성시 만들어지고 프로토타입 객체의 constructor 프로퍼티는 자신과 연결된 함수를 가르킨다.
+그리고 constructor 프로퍼티는 함수 객체를 가르키고 있어 서로 밀접하게 관련되어 있다.</p>
+
+<h2 id="함수의-다양한-형태">함수의 다양한 형태</h2>
+
+<h3 id="콜백-함수">콜백 함수</h3>
+
+<p>이벤트 핸들러 용도로 많이 쓰인다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.onload = function(){
+    alert('This is the callback function.');
+};
+</code></pre></div></div>
+
+<h3 id="즉시-실행-함수">즉시 실행 함수</h3>
+
+<p>함수를 정의함과 동시에 실행돠는 함수로 최초 한번의 실행만을 필요로 하는 초기화 코드 부분 등에 사용할 수 있다. 또, 즉시 실행 함수를 이용하면 함수 내부의 매개변수와 변수들의 유효범위를 지정할 수 있어서 jQuery에서 많이 사용된다고 한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(function(name){
+    console.log('This is the immediate function -&gt; ' + name);
+})('foo');
+</code></pre></div></div>
+
+<h3 id="내부-함수">내부 함수</h3>
+
+<p>함수 내부에 존재하는 함수를 의미한다. 내부 함수를 이용하면 함수 외부로 부터 접근을 막고 독립적인 헬퍼 함수를 구현하는 용도 등으로 사용된다.</p>
+
+<p>내부함수는 <strong>스코프 체이닝</strong> 덕분에 자신을 둘러싼 외부 함수의 변수에 접근이 가능하다.</p>
+
+<p>실행이 끝난 부모 함수의 변수를 참조하는 함수를 <strong>클로저</strong>라고 한다.</p>
+
+<p>스코프와 클로저는 5장에서 다룰 예정이다.</p>
+
+<p><br /></p>
+
+<h2 id="함수-호출과-this">함수 호출과 this</h2>
+
+<h3 id="arguments-객체">arguments 객체</h3>
+
+<p>자바스크립트에서 인자 개수에 민감하게 반응하지 않는다. 원하는 인자보다 적게 호출할 수도 있고 많게 호출할 수도 있다.(적을 때는 남은 인자를 undefined로 두고 많을 때는 무시한다.)</p>
+
+<p>인자 개수에 맞춰서 반응해줘야햘 때도 있는데 이를 가능하게 하는 것이 arguments 객체이다.</p>
+
+<p>arguments는 <strong>유사 배열 객체</strong>이며 프로퍼티로 callee, length, 0, 1, … 등을 가지고 있다.
+이를 이용하면 arguments에 동적으로 반응할 수 있는 함수 구현이 가능하다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function sum(){
+    var result = 0;
+    for(var i = 0; i &lt; arguments.length; i++){
+        result += arguments[i];
+    }
+    return result;
+}
+</code></pre></div></div>
+
+<h3 id="호출-패턴과-this-바인딩">호출 패턴과 this 바인딩</h3>
+
+<p>함수에서 this를 사용할 때 this가 어떤 값과 바인딩 되는지 유의해야한다.</p>
+
+<p>두 경우로 나누고 생각하면 된다.</p>
+
+<ol>
+  <li>객체의 프로퍼티인 경우 : this = 객체</li>
+  <li>그냥 메서드 호출인 경우 : this = window(전역)</li>
+</ol>
+
+<p><strong>객체의 프로퍼티인 함수의 내부함수에서의 this도 메서드 호출로 보기 때문에 window와 바인딩 된다.</strong>(이 문제를 해결하기 위해서는 프로퍼티 함수의 this를 다른 변수에 받아서 사용해야 한다. ex. var that = this)</p>
+
+<h3 id="생성자-함수를-호출할-때-this-바인딩">생성자 함수를 호출할 때 this 바인딩</h3>
+
+<p>생성자 함수는 <strong>대문자로 시작</strong>한다. 기존 함수에 <strong>new 연산자를 붙여서 호출</strong>하면 해당 함수는 생성자로 동작한다.<br />
+생성자 함수에서 this는 새로 생성될 빈 객체를 가르킨다. 생성자 함수는 따로 리턴 값이 없어도 만들어진 객체를 리턴한다.</p>
+
+<p>객체 리터럴로 만든 객체와 생성자 함수로 만든 객체는 __proto__의 값이 다르다. 그 이유는 생성하는데 사용된 프로토타입 객체가 다르기 때문이다.</p>
+
+<p>여기서 주의할 점은 <strong>생성자 함수는 반드시 new</strong>로 시작해야한다는 것이다.</p>
+
+<p>new를 붙이고 안붙이고의 실수를 확인하기 위해 this가 함수에 속한 instance인지 확인해주기도 한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function A(arg){
+    if(!(this instanceof A)) return new A(arg);
+    this.value = arg ? arg : 0;
+}
+</code></pre></div></div>
+
+<h3 id="call과-apply-메서드를-이용한-명시적인-this-바인딩">call과 apply 메서드를 이용한 명시적인 this 바인딩</h3>
+
+<p>apply 함수를 이용하면 this를 특정 객체에 바인딩이 가능하다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function.apply(thisArg, argArray);
+</code></pre></div></div>
+
+<p>위의 함수 형태와 같이, 첫번째 인자로 오는 thisArg를 function의 this와 바인딩하고 argument를 배열의 형태로 입력 받는다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function Person(name, age, gender){
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+}
+
+var foo = {};
+
+Person.apply(foo, ['zoomkoding', 26, 'man']);
+</code></pre></div></div>
+
+<p>call은 apply와 같은데 argument를 배열의 형태가 아닌 각각의 인자로 넘긴다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Person.call(foo, 'zoomkoding', 26, 'man');
+</code></pre></div></div>
+
+<h3 id="함수-리턴">함수 리턴</h3>
+
+<p><strong>자바스크립트에서 함수는 무조건 리턴 값이 있다.</strong> 리턴 문이 없다면 undefined 값을 리턴한다. 생성자 함수에서 리턴이 없는 경우 생성자로 리턴한다.
+다른 객체를 리턴하는 리턴문이 있다면 리턴문의 객체가 리턴된다. 하지만 리턴이 객체가 아닌 숫자, 불린, 문자열의 경우에는 무시된다.</p>
+
+<p>참고서적 : 인사이드 자바스크립트 by 송형주, 고현준</p>
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/javascript">javascript</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/javascript/2019/12/10/javascript-1.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(JS 다시 보기) 데이터 타입과 연산자</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/javascript/2019/12/11/javascript-3.html">
+					<span class="page-number">(JS 다시 보기) 자바스크립트의 프로토타입 체이닝</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/javascript/2019/12/10/javascript-2.html',
+    'title': '(JS 다시 보기) 자바스크립트에서의 함수'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

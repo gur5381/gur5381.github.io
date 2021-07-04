@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(BigData Analysis 도전기) Kaggle Pandas Tutorial (2. Indexing, Selecting & Assigning)</title>
+  <meta name="description" content="Introduction">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Introduction" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(BigData Analysis 도전기) Kaggle Pandas Tutorial (2. Indexing, Selecting & Assigning)" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(BigData Analysis 도전기) Kaggle Pandas Tutorial (2. Indexing, Selecting & Assigning)">
+  <meta name="twitter:description" content="Introduction">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D/2019/11/16/pandas-2.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(BigData Analysis 도전기) Kaggle Pandas Tutorial (2. Indexing, Selecting & Assigning)</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">November 16, 2019</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/데이터분석">데이터분석</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="introduction">Introduction</h2>
+
+<blockquote>
+  <ul>
+    <li>Pandas의 Dataframe이나 series에서 특정 값을 가져오는 것은 모든 Data 연산에서 하게 될 일이다.</li>
+    <li>여기서 중요한 것은 너와 관련된 데이터를 어떻게 빠르고 효율적으로 가져올 것인가이다.</li>
+  </ul>
+</blockquote>
+
+<h2 id="naive-accessors">Naive accessors</h2>
+
+<blockquote>
+  <ul>
+    <li>파이썬 자체가 data를 indexing하는 좋은 방법을 제시하고 있다. Pandas는 거기에 추가적인 기능을 제공하고 있다.</li>
+    <li>13000개의 row와 13개의 column을 가지고 있는 Review라는 DataFrame을 생각해보자.</li>
+    <li>파이썬에서는 object의 property에 접근하기 위해서는 attribute 사용하면 됐다. 예를 들어 book이라는 object에 title이라는 attribute가 있다면 book.title로 접근하면 됐다.</li>
+    <li>Pandas도 마찬가지이다. reviews에 있는 contry라는 property에 접근하고 싶다면 다음과 같이 하면 된다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>reviews.country
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>결과값은 다음과 같다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0            Italy
+1         Portugal
+            ...   
+129969      France
+129970      France
+Name: country, Length: 129971, dtype: object
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>python에서 dictionary를 사용할때는 []에 값을 넣어서 indexing하기도 한다. DataFrame에서도 가능하다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>reviews['country']
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>결과는 reviews.country와 동일하다.</li>
+    <li>DataFrame에서 특정 Series를 선택하는 방법은 이렇게 두가지가 있다.</li>
+  </ul>
+</blockquote>
+
+<h2 id="indexing-in-pandas">Indexing in pandas</h2>
+
+<blockquote>
+  <ul>
+    <li>초심자에게 이러한 방법은 사용하기 굉장히 쉬울 수 있다.</li>
+    <li>하지만 pandas는 여기에 추가적인 접근 연산방법을 가지고 있다.(<code class="language-plaintext highlighter-rouge">loc</code>, <code class="language-plaintext highlighter-rouge">iloc</code>)</li>
+    <li>아마 여러분도 이 연산 방법을 사용하게 될 것이다.</li>
+  </ul>
+</blockquote>
+
+<h3 id="index-based-selection">Index-based selection</h3>
+
+<blockquote>
+  <ul>
+    <li>Pandas indexing는 두가지의 패러다임에 의해 작동한다.</li>
+    <li>첫번째는 index-based selection이다.</li>
+    <li>이 방법은 data를 숫자적인 위치에 의해 찾는 것이다.</li>
+    <li>이 방법을 사용한 것이 <code class="language-plaintext highlighter-rouge">iloc</code>이다.</li>
+    <li>DataFrame에서 첫째 record를 가져오고 싶다면 다음과 같이 할 수 있다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>reviews.iloc[0]
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>그 결과는 다음과 같다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>country                                                    Italy
+description    Aromas include tropical fruit, broom, brimston...
+                                    ...                        
+variety                                              White Blend
+winery                                                   Nicosia
+Name: 0, Length: 13, dtype: object
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">loc</code>, <code class="language-plaintext highlighter-rouge">iloc</code> 모두 row-first, column-second이다. 그러므로 파이썬과 살짝 반대인 것을 볼 수 있다.</li>
+    <li>그렇다면 iloc을 써서 column을 가져오려면 어떻게 해야할까?</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>reviews.iloc[:, 0]
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>그냥 <code class="language-plaintext highlighter-rouge">:</code> 연산자를 넣으면 된다. 이것은 everything을 의미한다.</li>
+    <li>이 때 <code class="language-plaintext highlighter-rouge">:</code> 연산자는 범위를 의미하기도 한다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>reviews.iloc[:3, 0]
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>위의 값은 다음과 같이 처음부터 3번까지의 row의 첫 col의 값을 의미한다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0       Italy
+1    Portugal
+2          US
+Name: country, dtype: object
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>또한 list를 전달할 수도 있다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>reviews.iloc[[0, 1, 2], 0]
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>뿐만 아니라 음수값도 사용될 수 있다. 이때는 뒤에서부터 counting이 시작된다.</li>
+    <li>만일 뒤의 5개부터 보여주고 싶다면 다음과 같이 할 수 있다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>reviews.iloc[-5:]
+</code></pre></div></div>
+
+<h3 id="label-based-selection">Label-based selection</h3>
+
+<blockquote>
+  <ul>
+    <li>두번째 패러다임은 label로 찾는 것이다. 이는 <code class="language-plaintext highlighter-rouge">loc</code> 연산자로, 각 원소의 위치가 아닌 index value로 검색하게 된다.</li>
+    <li>다음과 같이 할 수 있다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>reviews.loc[0, 'country']
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>이 때는 0번째 row의 country attribute을 보여주게 된다.</li>
+    <li>또한 다음과 같은 연산이 가능하게 된다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>reviews.loc[:, ['taster_name', 'taster_twitter_handle', 'points']]
+</code></pre></div></div>
+
+<h3 id="choosing-between-loc-and-iloc">Choosing between loc and iloc</h3>
+
+<blockquote>
+  <ul>
+    <li>iloc과 loc은 조금 다른 indexing 방법을 가지고 있다는 걸 기억 해야한다.</li>
+    <li>iloc은 파이썬과 같은 방법을 쓰고 있다. 0:10이면 0~9까지 인덱싱을 하게 되고 loc은 반면에 0:10이면 0~10까지 인덱싱을 한다.</li>
+    <li>0:1000을 통해 1000개의 데이터를 얻고 싶으면 iloc을 1001개를 얻고 싶으면 loc을 사용하면 된다.</li>
+  </ul>
+</blockquote>
+
+<h2 id="manipulatting-the-index">Manipulatting the index</h2>
+
+<blockquote>
+  <ul>
+    <li>label based selection에서 index는 불변하지 않다.</li>
+    <li>index는 우리가 바꿔쓸 수 있다.</li>
+    <li><code class="language-plaintext highlighter-rouge">set_index()</code> 함수를 사용하면 새로운 index가 생성된다.</li>
+  </ul>
+</blockquote>
+
+<h2 id="conditional-selection">Conditional selection</h2>
+
+<blockquote>
+  <ul>
+    <li>여태까지는 우리는 indexing의 방법에 대해서 알아봤다.</li>
+    <li>이 데이터를 가지고 흥미로운 일을 하기 위해서는 조건에 따라 질문할 수 있어야 한다.</li>
+    <li>예를 들어, 와인이 이탈리아 산인지 확인해보도록하자.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>reviews.country == 'Italy'
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>이 질문에 대한 답을 다음과 같은 결과로 얻을 수 있다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0          True
+1         False
+        ...  
+129969    False
+129970    False
+Name: country, Length: 129971, dtype: bool
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>이렇게 bool 형태로 결과값을 얻어낼 수 있게 되는데 이를 loc에 넣어 데이터를 뽑아낼 수도 있다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>reviews.loc[reviews.country == 'Italy']
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>위의 값을 통해서 나라가 italy인 record만 뽑아낼 수 있게 된다.</li>
+    <li>다음과 같이 여러 조건을 동시에 배치 시킬 수도 있다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>reviews.loc[(reviews.country == 'Italy') &amp; (reviews.points &gt;= 90)]
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>
+      <table>
+        <tbody>
+          <tr>
+            <td>또한</td>
+            <td>연산자를 통해서 둘중 하나가 성립한 경우를 다 보여줄수도 있다.</td>
+          </tr>
+        </tbody>
+      </table>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>reviews.loc[(reviews.country == 'Italy') | (reviews.points &gt;= 90)]
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">isin</code> 이라는 것을 이용하면 해당 값을 포함하는 애들만 추출해낼 수도 있다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>reviews.loc[reviews.country.isin(['Italy', 'France'])]
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>그밖에도 <code class="language-plaintext highlighter-rouge">isnull</code>, <code class="language-plaintext highlighter-rouge">notnull</code>과 같은 조건을 통해서 값을 발견할 수도 있다.</li>
+  </ul>
+</blockquote>
+
+<h2 id="assigning-data">Assigning data</h2>
+
+<blockquote>
+  <ul>
+    <li>각 record에 값을 주는 방법은 간단하다.</li>
+    <li>다음과 같이 그냥 constant한 값을 전달해주는 방법이 있고</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>reviews['critic'] = 'everyone'
+
+0         everyone
+1         everyone
+            ...   
+129969    everyone
+129970    everyone
+Name: critic, Length: 129971, dtype: object
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>모두 순환적인 값을 전달해주는 방법이 있다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>reviews['index_backwards'] = range(len(reviews), 0, -1)
+reviews['index_backwards']
+
+0         129971
+1         129970
+        ...  
+129969         2
+129970         1
+Name: index_backwards, Length: 129971, dtype: int64
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>이상으로 두번째 강의 정리를 마치겠다.</li>
+    <li>두번째 강의도 exercise를 통해 배운 내용을 연습해보자!</li>
+    <li><a href="https://www.kaggle.com/kernels/fork/587970">Exercise2</a></li>
+  </ul>
+</blockquote>
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/데이터분석">데이터분석</a>,&nbsp;<a href="/tag/pandas">pandas</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D/2019/11/16/pandas-1.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(BigData Analysis 도전기) Kaggle Pandas Tutorial (1. Creating, Reading and Writing)</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D/2019/11/16/pandas-3.html">
+					<span class="page-number">(BigData Analysis 도전기) Kaggle Pandas Tutorial (3. Summary Functions and Maps)</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D/2019/11/16/pandas-2.html',
+    'title': '(BigData Analysis 도전기) Kaggle Pandas Tutorial (2. Indexing, Selecting & Assigning)'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

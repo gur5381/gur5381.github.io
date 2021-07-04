@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(개인프로젝트 개발 회고) 대학시간 개발기</title>
+  <meta name="description" content="🤓 이 글의 목적">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="🤓 이 글의 목적" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(개인프로젝트 개발 회고) 대학시간 개발기" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(개인프로젝트 개발 회고) 대학시간 개발기">
+  <meta name="twitter:description" content="🤓 이 글의 목적">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/%EB%8C%80%ED%95%99%EC%8B%9C%EA%B0%84/%ED%9A%8C%EA%B3%A0/2021/02/10/college-timetable-development.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(개인프로젝트 개발 회고) 대학시간 개발기</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">February 10, 2021</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/대학시간">대학시간</a>, 
+    
+  
+    
+    <a href="/category/회고">회고</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="-이-글의-목적">🤓 이 글의 목적</h2>
+
+<p>입사하기 전 한달 조금 넘는 기간 동안 개인 프로젝트를 진행했다. 이 프로젝트는 찐 개인 프로젝트로 기획, 디자인, 개발, 홍보, 유지보수까지 다 직접 진행하여 현재 서비스하고 있다. 이 글을 통해 이 프로젝트의 과정과 경험을 나눠보고자 한다.</p>
+
+<h2 id="-대학시간은">🧩 대학시간은..!</h2>
+
+<p>대학시간은 수강신청을 도와주는 웹사이트로, 1월 중순에 배포하여 유지보수를 진행하고 있다.</p>
+
+<p><img src="/assets/college-timetable-0.png" alt="/assets/college-timetable-0.png" /></p>
+
+<ul>
+  <li><a href="http://www.timetable.college/handong">웹사이트 링크</a></li>
+  <li><a href="https://github.com/zoomKoding/college-timetable">깃헙레포 링크</a></li>
+</ul>
+
+<p>감사하게도 2월 7일 현재, 800명이 넘는 분들이 대학시간을 이용해주셨고 아직 새내기 수강신청은 시작하지 않은 상황이라 더 늘어날 걸로 기대하는 중이다!🌝</p>
+
+<p>기술스택은 React, Nodejs(express), MySQL을 사용했다.</p>
+
+<p><img src="/assets/college-timetable-1.png" alt="/assets/college-timetable-1.png" /></p>
+
+<h2 id="-직접-기획하고-디자인하기">🎨 직접 기획하고 디자인하기</h2>
+
+<p>작년 우아한테크캠프에서 만났던 해민이와의 프로젝트 이후에 디자인에 대한 욕심이 생겼고 당시 해민이가 추천해줬던 디자인 레퍼런스 사이트인 <a href="https://dribbble.com/">Dribbble</a>을 활용해서 웹 디자인에 도전하게 되었다.</p>
+
+<h3 id="-디자인-도전기">💅 디자인 도전기</h3>
+
+<p>일단 내 눈을 높여 놓자는 마음으로 이 프로젝트를 기획하는 일주일 동안 Dribbble을 참고해서 눈을 높이는데 집중했다. 그리고 참고할 만한 디자인을 찾아 스크랩하게 되었다.</p>
+
+<p><img src="/assets/college-timetable-2.png" alt="/assets/college-timetable-2.png" /></p>
+
+<p>처음에는 Dribbble에 있는 디자인을 고대로 따라하려 했지만 완전 도일한 서비스가 아니다보니 적용이 쉽지 않았다…ㅎㅎ 결국 계속 부분부분을 참고하며 직접 디자인을 진행하게 되었고 이것저것을 추가해보면서 괜찮다 싶은 디자인을 찾게 되었다. (딱보면 이쁜 건 있는데 막상 만들고 보면 뭔가 아쉽다..ㅋㅋ)</p>
+
+<p>특히 이번 프로젝트에서는 모바일 경험에 집중하게 되었다. 그 이유로 수강신청 준비는 사실 검색과 시간표를 한번에 보는 것이 편리하기 때문에 당연히 컴퓨터를 이용해서 진행할 것이라는 예상과는 달리 사람들은 모바일에 집중했다. 실제로도 Mobile Web 사용자가 훨씬 많았다. 그래서 모바일에서 사용감을 좋은 디자인을 찾기 위해 노력했다.</p>
+
+<p><img src="/assets/college-timetable-3.png" alt="/assets/college-timetable-3.png" /></p>
+
+<h3 id="-첫-디자인">🐥 첫 디자인</h3>
+
+<p>디자인을 진행할 때는 Figma나 Sketch와 같은 툴을 사용하지 않고 바로 CSS 작업을 진행하게 되었다. 아무래도 디자인 툴들은 아직 잘 못 다루다 보니 오히려 CSS를 바로 작업하면서 변화를 직접 관찰하는 편이 편했다. 그렇게 계속해서 조금씩 디자인을 바꾸다 보니 디자인이 조금씩 나아지기(?) 시작했다..! 아래는 CSS로 완성된 첫 디자인결과물이다.</p>
+
+<p><img src="/assets/college-timetable-4.png" alt="/assets/college-timetable-4.png" /></p>
+
+<h3 id="-현재-디자인">🐓 현재 디자인</h3>
+
+<p>고민하고 이것저것을 적용하며 만들어진 최종 디자인의 모습이다.</p>
+
+<center><strong>데스크탑 뷰</strong></center>
+
+<p><img src="/assets/college-timetable-5.png" alt="/assets/college-timetable-5.png" /></p>
+
+<p><br /></p>
+
+<center><strong>모바일 뷰</strong></center>
+
+<p><img alt="/assets/college-timetable-6.png" src="/assets/college-timetable-6.png" style="width: 30%;" /></p>
+
+<p><br /></p>
+
+<h2 id="기술-스택-정하기">📱기술 스택 정하기</h2>
+
+<p><img alt="/assets/college-timetable-7.png" src="/assets/college-timetable-7.png" style="width: 100%;" /></p>
+<h3 id="프론트엔드">프론트엔드</h3>
+
+<p>나는 웹 프론트엔드 개발자로 채용이 되었지만 사실 나는 express와 모바일 앱 프레임워크인 Flutter가 더 친숙하다. 그나마 우아한테크캠프를 통해 바닐라js와는 좀 더 친해진 것 같은데 아직 React와는 어색하다.</p>
+
+<p>그래서 이번 프로젝트의 프론트엔드는 React로 진행하며 조금 친해져보고자 했다. 프로젝트를 진행하며 전 회사의 Web 코드를 많이 참고했다(잘 짜놓으셔서 많이 배웠다!). 회사 코드는 <a href="https://material-ui.com/">Material-UI</a>에서 제공하는 여러 컴포넌트를 많이 활용했는데 기본적으로 컴포넌트들이 커스터마이징이 어렵지 않은듯 해서 이번 기회에 한번 사용해보기로 했다.</p>
+
+<h3 id="백엔드">백엔드</h3>
+
+<p>백엔드는 여러 프로젝트에 지속적으로 사용해 온 express를 활용해서 구성했고, node의 ORM이자 나와 친한 sequelize를 이용해서 DB와 통신하도록 구현하였다.</p>
+
+<p>뿐만 아니라 나는 계속해서 학교의 최신 개설 과목 정보를 받아와야 했기에 Linux의 스케쥴러인 Crontab을 활용하여 주기적으로 DB를 업데이트 해주도록 하였다. 그리고 변동 사항을 확인하여 이삭을 발견하고 Nodemailer를 통해 이메일 알림을 보내게 되었다.</p>
+
+<p>웹서버와 크롤러는 월 20달러짜리 Lightsail instance를 사용하고 있다!(이거 충분히 투자할 가치가 있다 ㅎㅎ)</p>
+
+<p><br /></p>
+
+<h2 id="-프론트엔드-구조-잡기">🤔 프론트엔드 구조 잡기</h2>
+
+<h3 id="models">models</h3>
+
+<p>여러 모델의 내용 뿐만 아니라 관련된 API 함수들도 가지고 있다.</p>
+
+<p>아래는 User 모델의 예시이다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Axios</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../lib/axios</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Timetable</span><span class="p">,</span> <span class="nx">BookmarkedLecture</span><span class="p">,</span> <span class="nx">SpikeLecture</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">.</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">User</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">raw</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="nx">raw</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">email</span> <span class="o">=</span> <span class="nx">raw</span><span class="p">.</span><span class="nx">email</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">timetables</span> <span class="o">=</span> <span class="nx">raw</span><span class="p">.</span><span class="nx">timetables</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span>
+      <span class="p">(</span><span class="nx">timetable</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">Timetable</span><span class="p">(</span><span class="nx">timetable</span><span class="p">,</span> <span class="nx">raw</span><span class="p">.</span><span class="nx">bookmarks</span><span class="p">,</span> <span class="nx">raw</span><span class="p">.</span><span class="nx">spikes</span><span class="p">),</span>
+    <span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">bookmarks</span> <span class="o">=</span> <span class="nx">raw</span><span class="p">.</span><span class="nx">bookmarks</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">lecture</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">BookmarkedLecture</span><span class="p">(</span><span class="nx">lecture</span><span class="p">));</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">spikes</span> <span class="o">=</span> <span class="nx">raw</span><span class="p">.</span><span class="nx">spikes</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">lecture</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">SpikeLecture</span><span class="p">(</span><span class="nx">lecture</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="kd">static</span> <span class="nx">getUser</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">await</span> <span class="nx">Axios</span><span class="p">().</span><span class="kd">get</span><span class="p">(</span><span class="s2">`/user`</span><span class="p">);</span>
+  <span class="kd">static</span> <span class="nx">getAuth</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">await</span> <span class="nx">Axios</span><span class="p">().</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/auth</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="components">components</h3>
+
+<p>컴포넌트는 순수하게 렌더링만 담당하도록 구현하였고 props를 전달 받는 식으로 구현되었다.</p>
+
+<p>우아한테크캠프 마지막 프로젝트인 bmart를 React로 구현하였는데 이때 사용했던 atomic design pattern은 개념은 간단한 듯 하나 실제 구현을 하다보니 컴포넌트의 depth를 정의하는데 조금은 어려움이 있었다. 그래서 이번에는 상위 컴포넌트를 정의하고 그 내부에 여러 컴포넌트가 존재한다면 디렉토리를 생성하여 하위 컴포넌트를 정의하도록 했다.</p>
+
+<p><img src="/assets/college-timetable-8.png" alt="/assets/college-timetable-8.png" /></p>
+
+<h3 id="pages">pages</h3>
+
+<p>이곳은 각 페이지의 렌더를 담당하는 총사령관(Controller)들이 모여있다.</p>
+
+<p>이곳에 정의 되어있는 페이지는 여러 컴포넌트를 조립하고 필요한 데이터를 모델의 함수을 통해 받아 유저에게 보여준다. 뿐만 아니라 유저의 여러 이벤트에 필요한 핸들링은 이곳에 정의 되어 있다.</p>
+
+<p>이 프로젝트의 핵심은 TimetablePage인데 여러 유저와 소통할 수 있는 기능들이 모여있다보니 handler가 상당히 많지만 하나의 함수를 따라가보면 무슨 일이 벌어지고 있는지 알 수 있을 것이다.</p>
+
+<p><a href="https://github.com/zoomKoding/college-timetable/blob/main/client/src/pages/TimetablePage.js">Pages/TimetablePage.js</a></p>
+
+<p><br /></p>
+
+<h2 id="-빠른-첫-배포와-유저-피드백-반영하기">👨‍💻 빠른 첫 배포와 유저 피드백 반영하기</h2>
+
+<p>그렇게 본격적으로 개발을 진행하게 했고, 1월 중순에 v1.0.0을 배포하게 되었다. 첫 배포에 쉽게 피드백을 전달할 수 있는 기능을 넣었다.</p>
+
+<h3 id="user-driven-development">User-Driven Development</h3>
+
+<p><img src="/assets/college-timetable-9.png" alt="/assets/college-timetable-9.png" /></p>
+
+<p>이 부분은 이전에 Picky를 배포하고 성장하는 과정에서 많이 배운 점을 참고한 것이다. 당시 앱을 배포하고 나서 대표님은 만드는 사람이 원하는 게 아니라 <code class="language-plaintext highlighter-rouge">사용자들이 원하는 것을 만들어야 한다</code>는 점을 강조하셨다. 그래서 본인의 감보다는 유저의 행동이나 피드백에 귀를 기울이셨고 거기에 맞춰서 방향을 잡으셨다. 유저의 피드백을 최대한 많이 듣기 위해 피드백 기능을 첫 배포에 추가했고 유저의 피드백과 추가적으로 지인들의 피드백을 수렴해서 서비스를 발전시켜 나갔다.</p>
+
+<p><img src="/assets/college-timetable-10.png" alt="/assets/college-timetable-10.png" /></p>
+
+<p>프로젝트 하는 내내 적극적으로 도움을 줬던 현섭이와 수현이에게 고맙다ㅋㅋㅋ</p>
+
+<p><img src="/assets/college-timetable-11.png" alt="/assets/college-timetable-11.png" /></p>
+
+<p>이를 통해 버그 리포트 뿐만 아니라 기능적인 개선점도 많이 발견했고, 이를 반영해서 지속적으로 배포했다.</p>
+
+<h2 id="-이삭-줍기-알림-개발">🌱 이삭 줍기 알림 개발</h2>
+
+<h3 id="-아이디어와-개발">💡 아이디어와 개발</h3>
+
+<p>어차피 나는 계속해서 개설 시간표를 업데이트하는 상황이었고 이를 위한 Cronjob을 구현하려던 참에 있었다. 만일 이 때 수강 공석이 발견되면 알려주는 건 어떨까 라는 생각에 개발을 진행하게 되었다. 그리고 이메일로 알려주는 방법을 알아봤는데 Nodemailer를 활용하면 그렇게 어렵지 않게 무과금으로 이메일을 전송할 수 있었다.</p>
+
+<p>아래와 같이 Nodemailer를 import하고 아래 함수를 활용하면 인자를 전달해주면 손쉽게 이메일을 보낼 수 있다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">sendEmail</span> <span class="o">=</span> <span class="p">({</span>
+  <span class="nx">user</span><span class="p">,</span>
+  <span class="nx">pass</span><span class="p">,</span>
+  <span class="k">from</span><span class="p">,</span>
+  <span class="nx">bcc</span><span class="p">,</span>
+  <span class="nx">subject</span><span class="p">,</span>
+  <span class="nx">text</span><span class="p">,</span>
+  <span class="nx">html</span><span class="p">,</span>
+  <span class="nx">onError</span><span class="p">,</span>
+  <span class="nx">onSuccess</span><span class="p">,</span>
+<span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">nodemailer</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">nodemailer</span><span class="dl">"</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">transporter</span> <span class="o">=</span> <span class="nx">nodemailer</span><span class="p">.</span><span class="nx">createTransport</span><span class="p">({</span>
+    <span class="na">service</span><span class="p">:</span> <span class="dl">"</span><span class="s2">gmail</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">auth</span><span class="p">:</span> <span class="p">{</span> <span class="nx">user</span><span class="p">,</span> <span class="nx">pass</span> <span class="p">},</span>
+  <span class="p">});</span>
+
+  <span class="kd">const</span> <span class="nx">mailOptions</span> <span class="o">=</span> <span class="p">{</span> <span class="k">from</span><span class="p">,</span> <span class="nx">bcc</span><span class="p">,</span> <span class="nx">subject</span><span class="p">,</span> <span class="nx">html</span><span class="p">,</span> <span class="nx">text</span> <span class="p">};</span>
+
+  <span class="nx">transporter</span><span class="p">.</span><span class="nx">sendMail</span><span class="p">(</span><span class="nx">mailOptions</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="nx">onError</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+    <span class="k">else</span> <span class="nx">onSuccess</span><span class="p">();</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="-홍보-및-알림-모달">🎙 홍보 및 알림 모달</h3>
+
+<p>기능이 잘 돌아가는 것을 어느정도 확인한 후에 제대로 서비스 해보자는 마음으로 기능 소개용 모달도 구현하고 홍보를 진행했다.</p>
+
+<p><img src="/assets/college-timetable-12.png" alt="/assets/college-timetable-12.png" /></p>
+
+<h3 id="-반응">👍 반응</h3>
+
+<p>생각보다 이삭줍기 알림에 대한 반응이 좋았다. 현재까지 약 400개의 알림 메일을 발송했고, 알림 덕에 수강신청을 할 수 있다는 연락을 여럿으로 부터 받았다..! 기쁜 것도 기뻤지만 서비스를 믿고 이용해주신 여러 분들에게 감사했다.</p>
+
+<p><img src="/assets/college-timetable-13.png" alt="/assets/college-timetable-13.png" /></p>
+
+<p><img src="/assets/college-timetable-14.png" alt="/assets/college-timetable-14.png" /></p>
+
+<p><br /></p>
+
+<h2 id="-라이브-서비스하기-기록하기-모니터링">🚀 라이브 서비스하기 (#기록하기 #모니터링)</h2>
+
+<p>라이브 서비스를 안정적으로 운영하기 위해 나 나름의 대비책을 간구했다. 이전 개인프로젝트와 스타트업에서 일하며 여러 아찔한 상황들을 경험해봤다. 물론 다 내가 너무 당연한 것을 간과해서 발생한 문제들이었지만 여전히 내가 모르는 예상치 못한 문제들이 많을 것이므로, 긴장감 속에서 서비스를 계속해서 모니터링하고 만일의 상황에 대비했다.</p>
+
+<h3 id="️-기록하기유저-정보는-소중하니까">✍️ 기록하기(유저 정보는 소중하니까)</h3>
+
+<p>유저의 Authentication 여부에 따라서 API 사용을 제한되지만 내가 알지 못하는 암흑의 경로로 들어와 데이터를 날릴 수 있기에 두가지 대비를 진행했다.  하나는 sequl pro의 export 기능을 활용해서 그냥 데이터베이스의 내용을 sql문으로 저장해놓았다.</p>
+
+<p><img src="/assets/college-timetable-15.png" alt="/assets/college-timetable-15.png" /></p>
+
+<p>뿐만 아니라 Lightsail에서 지원하는 <code class="language-plaintext highlighter-rouge">Automatic snapshot</code>을 활용하면 주기적으로 백업 데이터를 모을 수 있었다!</p>
+
+<p><img src="/assets/college-timetable-16.png" alt="/assets/college-timetable-16.png" /></p>
+
+<p>아직 데이터가 날아간 적은 없지만 혹시 날아간다면 이런 준비를 안해놓은 것을 엄청나게 후회할 것이다…😭</p>
+
+<h3 id="-모니터링하기ga-telegram">👀 모니터링하기(#GA #Telegram)</h3>
+
+<p>유저의 사용량과 서비스의 모니터링 하기 위해 두가지를 사용했다. 먼저 Google Analytics(GA)를 통해 실시간으로 모니터링을 진행했다. 사실 이걸로 큰 도움은 안되지만 유저 수가 지금 어떠한지 보는 맛이 쏠쏠했다.</p>
+
+<p><img src="/assets/college-timetable-17.png" alt="/assets/college-timetable-17.png" /></p>
+
+<p>그리고 주기적으로 개설 과목의 정보를 크롤링해서 DB에 넣기 때문에 문제가 발생하는지 확인하는 방법이 필요했다. 나는 간단하게 <strong><a href="https://core.telegram.org/bots/api">텔레그램의 봇</a></strong>을 활용해서 해서 크롤러의 동작 상황을 전달하게 했다.(무료이며 구현이 매우 간단하기 때문에 이를 활용했다!)</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span> <span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">sendTelegramMessage</span><span class="p">(</span><span class="dl">"</span><span class="s2">[🚨 수강현황 업데이트 실패]</span><span class="se">\n\n</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">err</span><span class="p">);</span>
+	<span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이 방법을 이용해서 아래와 같이 지속적으로 업데이트와 이삭줍기 알림 전송 상황을 확인하며 크롤러가 열일하고 있는지 알 수 있다.</p>
+
+<p><img alt="/assets/college-timetable-18.png" src="/assets/college-timetable-18.png" style="width: 30%;" /></p>
+
+<p><strong>물론 서비스가 잘 돌고 있는지 확인하려는 목적도 있지만 그냥 심심할 때 들어가서 사람들이 잘 쓰고 있는지 보는 맛이 있었다..ㅎㅎ</strong></p>
+
+<h2 id="-후기">🌝 후기</h2>
+
+<h3 id="-의미-있는-프로젝트">👏 의미 있는 프로젝트</h3>
+
+<p>이번 프로젝트는 의미가 있어서 좋았다. 학교에서 배워서 남주자를 강조하며 컴퓨터 공학을 시작했지만 사실 하면서는 점점 나에게 도움이 되는 일, 보상이 확실한 일을 찾기에 관심을 가지게 되었다. 이번 프로젝트는 아무런 보상이 없지만 사람들이 내 서비스에 감사함을 표하고 응원해주는 걸 보면서 느끼는 보람이 매우 컸다. 다음에도 이런 의미 있는 프로젝트를 진행할 수 있는 기회가 있다면 흔쾌히 참여할 것 같다.</p>
+
+<h3 id="-재밌었던-1인극">👨‍🎤 재밌었던 1인극</h3>
+
+<p>뿐만 나디자인부터 개발, 홍보까지 전 과정을 혼자 진행해본 것은 이번이 처음이었다. 사실 혼자 하다보니 많이 서투른 부분도 있었지만 다른 사람들에게 도움도 되고 개발 이외의 분야도 새로이 경험해 봤기에 좋은 기억으로 남을 것 같다. 계속해서 피드백을 주고 응원해 준 분들 모두 감사했다. (특히 바쁜 와중에도 열심히 도와준 유진이에게 특히 고맙다🙏)</p>
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/개인프로젝트">개인프로젝트</a>,&nbsp;<a href="/tag/대학시간">대학시간</a>,&nbsp;<a href="/tag/react">react</a>,&nbsp;<a href="/tag/node">node</a>,&nbsp;<a href="/tag/express">express</a>,&nbsp;<a href="/tag/material-ui">material-ui</a>,&nbsp;<a href="/tag/sequelize">sequelize</a>,&nbsp;<a href="/tag/design">design</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/%ED%9A%8C%EA%B3%A0/2021/02/10/2020-4th-quarter-retrospection.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">2020년 마지막 회고(쉴 줄 모르는 자)</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/%EB%8C%80%ED%95%99%EC%8B%9C%EA%B0%84/%ED%9A%8C%EA%B3%A0/2021/02/10/college-timetable-development.html',
+    'title': '(개인프로젝트 개발 회고) 대학시간 개발기'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

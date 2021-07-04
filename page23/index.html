@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>줌코딩의 코딩일기</title>
+  <meta name="description" content="Zoom in Coding from the Basic.">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Zoom in Coding from the Basic." />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="줌코딩의 코딩일기" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/crewcials.jpeg" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="줌코딩의 코딩일기">
+  <meta name="twitter:description" content="Zoom in Coding from the Basic.">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/crewcials.jpeg">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/page23/">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="home">
+
+<div class="site-header-container has-cover" style="background-image: url(/assets/header_image.jpeg);">
+  <div class="scrim has-cover">
+    <header class="site-header">
+      <h1 class="title">줌코딩의 코딩일기</h1>
+      <p class="subtitle">Zoom in Coding</p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+<ul class="post-list">
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/gitblog/2019/08/18/git-blog-2.html">차근차근 Github 블로그 만들기(2) - Github 블로그 개발 환경 설정하기(Ruby, jekyll bundle 설치하기)</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>이번에는 이전 포스트 통해 내 개인 블로그를 생성해보았다:) 이번 포스팅에서는 나만의 블로그를 만들기 위한 환경인 jekyll bundler 설치법에 대해 정리하려고 한다. 블로그 개발 환경 설정하기 이제 막 블로그를 바꿔보려고 하는데 변동 사항을 확인하는 것을 git에 올려서 웹으로 확인하는 것을 반복해야한다면 어떨까? 변동 사항을 확인하는 것이 매우매우매우 귀찮을 것이다!(이건 내가 경험해봐서...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">August 18, 2019</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/gitblog">Gitblog</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/gitblog/2019/08/15/git-blog-1.html">차근차근 Github 블로그 만들기(1) - Github 블로그 개설 및 테마 설정하기</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>동기 전산 공부를 시작하고 블로그의 여러 장점을 맛보고 있는 사람으로서 다른 이들에게도 이 좋은 방법을 공유하고 싶었다. 모든 사람이 쉽게 자기 자신의 블로그를 만들 수 있기를 바라면서 이 글을 쓴다. 잘 안되는 부분이나 궁금한 점이 있다면 언제든지 댓글로 남겨주면 최대한 알아보고 답을 하겠다! 깃헙 블로그는 깃헙 블로그는 다른 블로그와는 달리...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">August 15, 2019</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/gitblog">Gitblog</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/%EB%B0%B1%EC%A4%80/2019/08/11/baekjoon-9461.html">(백준 알고리즘 문제풀이) 9461번 파도반 수열</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>문제 문제 링크 어떻게 접근할 것인가 이 문제은 디피로 접근할 수 있는 문제이다. 이 문제는 뭔가 규칙이 있는 거 같아서 따라가보니 맞았다. 코드 #include &lt;cstdio&gt; int main(){ long long t, x, n[101]; n[1] = n[2] = n[3] = 1, n[4] = n[5] = 2; for(int i = 6; i &lt;=...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">August 11, 2019</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/백준">백준</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/%EB%B0%B1%EC%A4%80/2019/08/11/baekjoon-2163.html">(백준 알고리즘 문제풀이) 2163번 초콜릿 자르기</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>문제 문제 링크 어떻게 접근할 것인가 이 문제은 디피로 접근할 수 있는 문제이다. 일단 세로든 가로든 자르는 횟수를 모두 찾고 어느걸 먼저 자르는게 더 적은지 비교해서 출력한다. 자르는 횟수는 어레이에 저장하면서 계산한다. 코드 #include &lt;cstdio&gt; int n, m, x[2][301], cnt[2]; int main(){ scanf("%d %d", &amp;n, &amp;m); x[0][n] = 1, x[1][m]...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">August 11, 2019</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/백준">백준</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/%EB%B0%B1%EC%A4%80/2019/08/11/baekjoon-11727.html">(백준 알고리즘 문제풀이) 11727번 2xn 타일링 2</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>문제 문제 링크 어떻게 접근할 것인가 이 문제은 디피로 접근할 수 있는 문제이다. 이 문제는 2를 만들 수 있는 경우의 수가 2가지라는 특징을 가지고 있다. 때문에 2를 이용해서 현재 위치로 온 경우에는 곱하기 2를 해주어야 한다. 코드 #include &lt;cstdio&gt; int main(){ int n, arr[1001]; arr[1] = 1, arr[2] = 3;...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">August 11, 2019</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/백준">백준</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  
+</ul>
+
+<nav class="pagination" role="navigation">
+	<p>
+    
+			
+			<a class="newer-posts" href="/page22">
+				<span class="fa-stack fa-lg">
+					<i class="fa fa-square fa-stack-2x"></i>
+					<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+				</span>
+			</a>
+			
+		
+		<span class="page-number">Page 23 of 62</span>
+		
+		<a class="newer-posts" href="/page24">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-square fa-stack-2x"></i>
+        <i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+		
+	</p>
+</nav>
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/page23/',
+    'title': '줌코딩의 코딩일기'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

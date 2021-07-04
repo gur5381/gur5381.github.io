@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(우아한테크캠프 3기) 캠프의 반환점을 돌며</title>
+  <meta name="description" content="💫 목적">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="💫 목적" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(우아한테크캠프 3기) 캠프의 반환점을 돌며" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(우아한테크캠프 3기) 캠프의 반환점을 돌며">
+  <meta name="twitter:description" content="💫 목적">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/%ED%9A%8C%EA%B3%A0/%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC%EC%BA%A0%ED%94%84/2020/07/26/woowa-tech-camp-mid-term.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(우아한테크캠프 3기) 캠프의 반환점을 돌며</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 26, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/회고">회고</a>, 
+    
+  
+    
+    <a href="/category/우아한테크캠프">우아한테크캠프</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="-목적">💫 목적</h2>
+
+<p><strong>우아한테크캠프(우테캠</strong>)의 중간 즈음 온 시점에서 4주 동안 참여했던 캠프의 과정들에서 경험했던 것들과 배웠던 것들을 돌아보고자 한다. 🤓</p>
+
+<p><img src="/assets/woowa-tech-camp-mid-term.png" alt="/assets/woowa-tech-camp-mid-term.png" /></p>
+
+<p><br /></p>
+
+<h2 id="-시작-전-두려움">🌪 시작 전 두려움</h2>
+
+<p>합격 통보를 받고 퇴사 회고를 쓰며 나름 결의를 다졌지만 막상 7월 1일이 다가오기 앞서서 고민하기 시작했다.</p>
+
+<p>붙으면 완전 신나서 올 줄 알았는데 막상 가려니 어떻게 보면 <strong>배부른 고민(?)</strong>이 생겨났다.😭</p>
+
+<p><br /></p>
+
+<h3 id="-또-다른-경쟁의-시작-우아한형제들입사">♘♞ 또 다른 경쟁의 시작? (#우아한형제들입사)</h3>
+
+<p><img src="/assets/woowa-tech-camp-mid-term-1.png" alt="/assets/woowa-tech-camp-mid-term-1.png" /></p>
+
+<p>사실 우테캠를 시작하기 전에 마음이 굉장히 어려웠다. 온전히 배움에 집중하기 위해 우테캠에 참여하게 됐지만 결국 이 프로그램은 우아한 형제들 신입 채용이 포함되어 있는 과정이라 배움보다 잘하는 걸 보여줘야 하는 또다른 성과의 스트레스 속에 들어가는 게 아닌가 하는 두려움이 있었다.</p>
+
+<p><br /></p>
+
+<h3 id="반복적인-프로젝트-속-공부는-언제-픚플젝플젝프을젝">❓반복적인 프로젝트 속 공부는 언제? (#픚플젝플젝프을젝)</h3>
+
+<p>3기는 교육 기간을 따로 가지지 않고 4번의 짧은 프로젝트로 진행하고 마무리 하는 식으로 진행된다.</p>
+
+<p>지원 전 1기 일정표를 봤는데 1달은 공부 1달은 프로젝트를 진행하는 걸 보고 지원을 했던 나였기에 이 부분이 조금은 당황스러웠다.</p>
+
+<p>나는 웹 프론트엔드 개발 프로젝트를 진행해본 경험이 없고 특히 리액트나 웹 프레임워크는 매우 낯설다. 웹에 대한 기초 공부는 생활코딩 강의를 들었던 것이 전부였던 나였기에 자신감이 없었고 그 두려움은 더더욱 컸다.</p>
+
+<p><br /></p>
+
+<h2 id="-시작과-첫주">🐣 시작과 첫주</h2>
+
+<p>부담감 속에서 잠실행 버스를 타고 출근했다. 첫날에 괜찮겠지 하고 반바지를 입고 출발했는데 막상 가보니 나만 반바지를 입어서 당황했지만 알고보니 우아한 버킷리스트에 다음 내용에 체크가 되어있는 걸 보고 안심했다 ㅋㅋ</p>
+
+<p><img src="/assets/woowa-tech-camp-mid-term-10.png" alt="/assets/woowa-tech-camp-mid-term-2.png" /></p>
+
+<p><br /></p>
+
+<h3 id="-대표님-강의">👨‍🏫 대표님 강의</h3>
+
+<p>어색함 속에 막 받은 맥북을 설정하고 출입증을 목에 걸고 회사의 이쪽저쪽을 소개 받은 뒤에 어색함 속 김범준 대표님의 캠프의 시작을 알리는 강의(?)를 듣게 되었다.</p>
+
+<p>대표님은 이 프로그램의 목적은 채용에 있지 않고 배움에 있으며 이 프로그램을 끝내고 캠프 수료생들에게 듣고 싶은 내용은 <code class="language-plaintext highlighter-rouge">우아한 형제들에 가고 싶다</code> 보다는 <code class="language-plaintext highlighter-rouge">캠프 기간동안 정말 많이 성장했다</code>를 듣고 싶다고 하셨다. (전자는 자연스럽게 따라오는 것 같다.. 😂)</p>
+
+<p>이 캠프의 목적을 들으면서 내 걱정이 조금은 가셨고 참 잘 왔다고 생각했다. 그리고 이번 프로젝트 동안 <strong>많이 배우는데 집중하자</strong>고 마음을 먹었다.</p>
+
+<p><br /></p>
+
+<h3 id="-캠프-사람들과의-만남">🌝 캠프 사람들과의 만남</h3>
+
+<p>첫주 동안 프로젝트와 여러 기회로 사람들을 만나며 이야기를 나눌 수 있었다.</p>
+
+<p>이렇게 나와 비슷한 상황에 있는 개발자를 만나는 건 처음이라 다들 어떻게 지원했는지 이런 저런 것들을 막 물어봤다. 일을 하고 온 사람들도 있었고 개발을 시작하지 않은 사람들도 있었다.(비전공자도 많았다)</p>
+
+<p>각 사람들이 캠프에 참여하는 목적도 다양하고 경험도 다양했지만 <strong>동일했던 부분은 다들 개발에 대한 열정이 있다는 점</strong>이었다.</p>
+
+<p><br /></p>
+
+<h3 id="-크롱님과-호눅스님케미잼">🤼 크롱님과 호눅스님(#케미잼)</h3>
+
+<p>부캠, 우테캠 교육을 몇년간 해오시며 개발자들 성장을 눈앞에서 봐오셨던 두 분이기에 학교의 저명한 교수님을 맞이하는 마음으로 이야기를 들었다. 도대체 어떻게 가르치실까 하는 궁금증도 있었지만 일단 두 분은 매우 유쾌했다. 강의 속에서 두 분의 티키타카를 보는 재미가 쏠쏠했다.</p>
+
+<p>좋았던 부분은 실습 위주의 강의 속에서 스스로 답을 찾을 수 있도록 기회를 제공해주신다는 점이었다. 그리고 궁금한 부분이 생기면 답을 주시기도 하시지만 대부분 답보다는 공부할 방향을 던져주시기도 한다.</p>
+
+<p>그리고 무엇보다 <strong>제대로 알고 하는 코딩과 이유있는 코딩을 강조</strong>하셨다.</p>
+
+<p>프로젝트를 진행하는데 앞서 뭐를 준비해야하나 하는 내 고민을 말씀드렸더니 다음과 같이 말씀해주셨다.</p>
+
+<p><br /></p>
+
+<p><img src="/assets/woowa-tech-camp-mid-term-3.png" alt="/assets/woowa-tech-camp-mid-term-3.png" /></p>
+
+<p><br /></p>
+
+<p><code class="language-plaintext highlighter-rouge">근본이 우선이다</code>를 느낄 수 있는 대목이다. 그렇게 한주동안 엄청나게 방대한 공부할 거리를 받고 한주가 마무리됐다.</p>
+
+<p>그리고 기술 외적인 부분도 많이 이야기를 해주셨다. 격하게 기억이 남았던 이야기는 아래와 같다</p>
+
+<ul>
+  <li><strong>코드 리뷰는 리뷰 퀄리티보다 감정적 교감이 우선되어야 해요!</strong></li>
+  <li>개발자는 개발을 하다보면 <strong>자기 코드와 사랑에 빠져요</strong>(완전 격하게 공감했다.)</li>
+  <li>나는 다른 사람보다 <strong>미래의 나와 협업</strong>하기 위해 코드를 잘 짜야해요.</li>
+  <li><strong>개똥철학(우리만의 개발 철학)</strong>은 매우 중요합니다.</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="-2번의-팀-프로젝트">👊 2번의 팀 프로젝트</h2>
+
+<p>첫주 이후에 두번의 팀 프로젝트를 진행했다. 뭘 만들어야 하는지는 생각보다 단순했다. 웹 개발 기초 튜토리얼에서도 흔히 볼 수 있는 <strong>로그인 페이지</strong>와 <strong>칸반 페이지</strong>였다. 간단해보일 수 있지만 여기서 중요한 점은 <code class="language-plaintext highlighter-rouge">어떻게 만들고 무엇을 배우며 만들 것인가</code>이었다. 그 고민 속에서 파트너와 함께 공부하며 설계하고 개발하는 과정은 전혀 단순하지 않았다. 🤩</p>
+
+<p><br /></p>
+
+<h3 id="-협업--협공">👩‍🎓 협업 ⇒ 협공</h3>
+
+<p>이 프로젝트 기간 동안 나는 나와 개발 경험이 다르고 목적과 배우고 싶은 부분이 다를 수 있는 파트너와 함께 개발을 해야 했다.</p>
+
+<p>이를 위해 서로 이해하기 위해서 이야기를 최대한 많이 했던 것 같다. (그래서 프로젝트 초반이 다른 팀들이 비해서 많이 더뎠던 것 같다)</p>
+
+<p>다행히 두번의 프로젝트에서 만났던 파트너들은 모두 나보다 성격이 훨 좋은 분들이셨다. 그리고 이야기를 할수록 함께 열심히 하고 싶은 생각이 넘쳐났고 함께 성장 할 수 있는 방법에 대해서 잘 조율할 수 있었던 것 같다.</p>
+
+<p>그리고 두 분 모두 성장에 초점을 두고 계신 분들이었다.</p>
+
+<p>두 프로젝트 모두 다음에 <em><code class="language-plaintext highlighter-rouge">많이 성장해서 다음 프로젝트를 맞이하자!</code></em>에 초점을 뒀던 것 같다.</p>
+
+<p><br /></p>
+
+<p><strong>다음은 두번째 프로젝트에서 연호님과 세웠던 개발 목표들이다.(연호님이 이쁘게 정리해주셨다..</strong> 😇)</p>
+
+<p><img src="/assets/woowa-tech-camp-mid-term-4.png" alt="/assets/woowa-tech-camp-mid-term-4.png" /></p>
+
+<p><br /></p>
+
+<h3 id="-계속-고민하기개똥철학">🤔 계속 고민하기(#개똥철학)</h3>
+
+<p>혼자 앱을 개발했던 때나 그 이전 프로젝트에서 내 개발의 주고객층은 서비스를 사용하는 유저들이나 대표님이었기에 나는 <strong>코드보다는 잘 돌아가는 결과물</strong>을 내기 위해 집중했었다.</p>
+
+<p>스타트업을 퇴사하기 2달 전부터 새로운 개발자들이 들어오면서 새로운 개발자들이 내 코드 때문에 함숨 쉬는 개발자를 목격하게 되었다.</p>
+
+<p>이 과정에서 내가 깨달았던 점은 <strong>나의 주된 고객은 사실 미래의 나와 나의 코드와 일하게 될 다른 개발자</strong>이며 결과물도 당연히 중요하지만 코드 자체에 더 관심이 있다는 점이었다.</p>
+
+<p>그런 상황이다 보니 프로젝트 동안 제일 많이 신경썼던 부분은 <strong>내 생각의 흐름이 지배하는 코딩이 아니라 나름의 이유가 있는 코딩</strong>이었다. 이를 위해서 많은 고민이 필요했고 이를 뒷받침할 많은 리서치가 필요했다 했다.</p>
+
+<p>특히 두번째 프로젝트에서는 <strong>프론트엔드 구조와 환경 설정에 대한 조사</strong>에만 한주를 사용했다.</p>
+
+<p>주된 고민의 내용은 <strong>MVC 패턴에 대한 이해</strong>였는데 강의 자료에서 틀만 보여줬던 다음 코드에서 고민이 시작되었다.</p>
+
+<p><br /></p>
+
+<p><img src="/assets/woowa-tech-camp-mid-term-5.png" alt="/assets/woowa-tech-camp-mid-term-5.png" /></p>
+
+<p><br /></p>
+
+<p><strong>❓프론트에서 MVC를 어떻게 쓰지?</strong></p>
+
+<p>결국 이 부분에 대한 이해를 위해 레퍼런스를 엄청 찾아 다녔고 본격 코딩은 주말에야 시작되었다.</p>
+
+<p>어떤 하나의 패턴이 딱 맞다고 결론 내리지는 못했지만 우리가 이해한 수준 속에서 <strong>우리 팀만의 프론트엔드를 위한 개똥 철학</strong>이 생겨났다.</p>
+
+<p><br /></p>
+
+<p>💩<strong>우리만의 프론트엔드 개똥철학</strong></p>
+
+<ul>
+  <li><strong>Model</strong>은 데이터 처리만을 담당하고 <strong>View</strong>는 유저의 액션을 받고 유저에게 보여주는 역할만을 한다.</li>
+  <li><strong>Model</strong>의 <strong>API call</strong>은 한곳에 모아서 처리한다.</li>
+  <li><strong>Controller</strong>는 둘 사이 상호작용을 담당하게 된다.</li>
+  <li>상호작용은 우리가 정의한 <strong>Event</strong> 객체를 활용한다.(Listen, Trigger 가능)</li>
+  <li><strong>View</strong>의 함수는 잘게 쪼개서 사용에 용의하도록 한다.</li>
+  <li>모든 <strong>component</strong>는 <strong>components에 모듈화 해서 사용</strong>한다.</li>
+  <li>component는 <strong>atom부터 작은 단위</strong>로 만들어서 css 중복을 줄인다.</li>
+</ul>
+
+<p>이 과정이 있으니 빡구현이 들어간 2주차에도 부분 부분만 보고도 흐름을 이해하고 변경이 생길 시에도 어려움이 상대적으로 적었다.</p>
+
+<p>결정적으로 데모 전날 밤에 연호님과 밤을 새며 각자 작업한 코드를 연호님이 잠든 상황에서 진행해야 했다. 이 때 연호님의 설명을 듣지 않고도 연호님의 코드의 흐름을 이해하고 수정하고 조금이라도 잠을 잘 수 있었다(연호님이 코드를 잘 짜셔서도 있는 것 같다..ㅋㅋ🦸)</p>
+
+<p><br /></p>
+
+<h3 id="-공부와-결과-그-중간-지점-찾기갈등">👺 공부와 결과, 그 중간 지점 찾기(#갈등)</h3>
+
+<p>두 프로젝트 모두 공부에 초점을 두고 진행했지만 데모를 해야하고 결과물을 내야하는 부담 혹은 욕심을 무시할 수 없었다.</p>
+
+<p>심지어 결과물이 안 나와도 된다고 생각하고 하자고 이야기했지만 데모 일이 다가올수록 생각보다 만들어져 가는 결과물에 대한 욕심이 났다.</p>
+
+<p>특히 칸반 프로젝트에서 그런 느낌이 강했다. 결과가 중요하지 않다고 이야기했던 사람이 나였기에 조바심을 드리고 싶지 않은 마음에 혼자 전전긍긍하다가 데모 이틀 전에 연호님께 내 이런 마음을 조금은 감정적으로 털어놨다.</p>
+
+<p>내 이런 상황을 미리 공유했다면 좀 더 잘 대응했을 것 같은데 연호님에게 시간이 부족한 상황에서 부담감을 드린 것 같아서 너무 죄송했다. 하지만 그래도 연호님이 잘 이해해주셔서 프로젝트 데모까지 잘 마무리 할 수 있었지만 이 부분이 너무 아쉬움으로 남았다.</p>
+
+<p>하지만 여전히 파트너와 함께 적극적으로 서로의 코드를 리뷰해주고 공부한 내용과 고민을 나누는 과정 속에서 많이 성장했다.</p>
+
+<p><strong>부족하지만 나의 의견을 열심히 들어주고 함께 프로젝트를 진행해준 명우님과 연호님께 정말 감사하다!</strong>👍🙏</p>
+
+<p><br /></p>
+
+<h2 id="-배운점">💥 배운점</h2>
+
+<h3 id="️️-함께-공부하는-법">⛹️‍♂️ 함께 공부하는 법</h3>
+
+<p>무엇보다 혼자 공부하는 것이 아니라 같이 공부하고 성장하는 하며 함께 공부하는 좋은 기억이 생기게 되었다.</p>
+
+<p><br /></p>
+
+<p><strong>👨🏻‍🏫 공부하고 나누기</strong></p>
+
+<p>두번의 프로젝트를 통해 개인적으로 공부하는 게 두번의 프로젝트를 진행하면서 파트너와 공부한 내용을 설명하는 과정을 반복했다.</p>
+
+<p>그리고 설명을 제대로 하기 위해서는 공부한 내용을 잘 이해하고 있어야 했기에 깊이 있게 공부해야했다.</p>
+
+<p>첫번째 프로젝트에서 명우님과 위키에 정리했던 공부 글들이다!</p>
+
+<p><img src="/assets/woowa-tech-camp-mid-term-6.png" alt="/assets/woowa-tech-camp-mid-term-6.png" /></p>
+
+<p><br /></p>
+
+<p>두번째 프로젝트에서는 연호님이 웹팩과 바벨를 깊이 있게 공부하고 싶으시다고 하셨고 그 부분에 대해 실제로 많이 공부하시고 많이 나눠주셨다.</p>
+
+<p>연호님은 배운 내용을 문서화 하고 시간이 되실 때 따로 설명해주셨다.(설명을 정말 잘 해주셨고 많이 배웠다고 생각한다.)</p>
+
+<p>이 과정에서 연호님에게 물어보고 내가 이해한 내용을 되뇌이는 과정을 진행하면서 웹팩과 바벨에 대해서 나도 공부할 수 있었던 것 같다.</p>
+
+<p><img src="/assets/woowa-tech-camp-mid-term-7.png" alt="/assets/woowa-tech-camp-mid-term-7.png" /></p>
+
+<p><br /></p>
+
+<p><strong>📝리뷰 열심히 하기</strong></p>
+
+<p>그리고 함께 서로의 코드를 진득하게 봐주는 과정 중에 많이 배울 수 있었던 것 같다. 어떤 부분을 지적하기 위해서는 내가 제안하는 방법에 대한 이해가 있어야 했고 이를 근거할 수 있는 자료가 필요했다. 그리고 내 코드에서 내가 발견하지 못했던 개선점이나 의문점을 알려주기도 했다.</p>
+
+<p>이 과정을 통해서 <strong>좋은 코드가 뭔지 더 고민</strong>할 수 있었고 자연스럽게 공부할 것들이 생겨나게 되었다.</p>
+
+<p><img src="/assets/woowa-tech-camp-mid-term-8.png" alt="/assets/woowa-tech-camp-mid-term-8.png" /></p>
+
+<p>이번 기회를 통해 함께 공부하고 함께 성장하는 방법의 여러 장점에 대해 생각해볼 수 있었다.</p>
+
+<p>아직 많이 부족하지만 이번 기회를 통해 더 많이 배우고 성장했으면 좋겠다 ㅎㅎ</p>
+
+<p><br /></p>
+
+<h3 id="-도구-잡기-전에-근력-키우기">💪 도구 잡기 전에 근력 키우기</h3>
+
+<p>웹은 익숙하지 않았지만 나는 웹 공부를 시작한다고 했으면 리액트 클론 코딩을 먼저 공부하기 시작했을 것 같다. 그래서 이번 캠프를 시작하면서도 프레임워크에 익숙하지 않다는 점에서 염려가 많았다. 하지만 캠프에서 프로젝트를 진행하고 크롱님과 호눅스님의 이야기를 들으며 <strong>도구보다는 언어 자체(근본)와 개똥철학이 중요하다는 것</strong>을 깨달았다.</p>
+
+<p>그리고 구조를 고민하면서 생겨난 아직 많이 부족하지만 나만의 <strong>개똥철학</strong>이 조금씩 생겨나고 있음을 느꼈고 그 과정 자체도 너무 보람차고 즐거웠다. 웹 프레임워크도 아직 써보지는 않았지만 두려움이나 걱정은 많이 사라진 듯 하다.🤠</p>
+
+<p><br /></p>
+
+<h3 id="-평가가-없는-공부">🎺 평가가 없는 공부</h3>
+
+<p>처음에 염려가 많았지만 우테캠은 경쟁에서 성장하도록 진행되지 않는다. 금요일 마다 데모를 하긴 하지만 누가 잘했는지를 가려내는 자리도 아니고 아니고 각자의 공부한 부분을 리스펙하는 분위기이다.</p>
+
+<p>그래서 각 데모가 끝나고 비교로 인한 열등감보다는 또다른 자극이나 보람으로 다음 프로젝트를 진행할 수 있게 되는 것 같다.</p>
+
+<p><br /></p>
+
+<p><code class="language-plaintext highlighter-rouge">설마 진짜 그렇겠어?</code> 라는 마음으로 처음 데모 때는 평가에 대한 스트레스를 받았던 것 같다.</p>
+
+<p>이제는 데모에 대한 두려움 보다는 우리 팀이 고민한 결과물을 보여주고 다른 팀이 만들어낸 개똥철학과 결과물을 보는 기대감이 커졌다.</p>
+
+<p><strong>우테캠</strong>의 이러한 분위기가 함께 성장하는데 초점을 둘 수 있게 도와주는 것 같다.</p>
+
+<p><br /></p>
+
+<h2 id="️-약진-앞으로">🏃‍♀️ 약진 앞으로!</h2>
+
+<p>두번의 완벽하지 않았던 프로젝트를 기반으로 나도 참 많이 성장했던 것 같다. 그리고 처음에 걱정했던 부분들도 성장에 대한 기대감으로 변해갔던 같다.</p>
+
+<p><strong>남은 5주 동안 새로 만나게 될 파트너와도 파이팅이다..!</strong></p>
+
+<p>마지막으로 <strong>첫 주에 작성했던 각오</strong>를 다시 되뇌이고 마무리한다.</p>
+
+<p><img src="/assets/woowa-tech-camp-mid-term-9.png" alt="/assets/woowa-tech-camp-mid-term-9.png" /></p>
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/우아한테크캠프">우아한테크캠프</a>,&nbsp;<a href="/tag/우테캠">우테캠</a>,&nbsp;<a href="/tag/회고">회고</a>,&nbsp;<a href="/tag/중간점검">중간점검</a>,&nbsp;<a href="/tag/웹공부법">웹공부법</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/web/%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC%EC%BA%A0%ED%94%84/2020/07/14/css-layout.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(우아한테크캠프 3기) 어렵지 않게 CSS 레이아웃 잡기</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/%ED%9A%8C%EA%B3%A0/%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC%EC%BA%A0%ED%94%84/2020/10/05/woowa-tech-camp-final.html">
+					<span class="page-number">(우아한테크캠프 3기) 캠프를 마치며</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/%ED%9A%8C%EA%B3%A0/%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC%EC%BA%A0%ED%94%84/2020/07/26/woowa-tech-camp-mid-term.html',
+    'title': '(우아한테크캠프 3기) 캠프의 반환점을 돌며'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

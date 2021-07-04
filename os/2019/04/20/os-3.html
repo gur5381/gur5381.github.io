@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(OS 기본개념 정리) CH3 Process Concept</title>
+  <meta name="description" content="Chapter3. Process Concept">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Chapter3. Process Concept" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(OS 기본개념 정리) CH3 Process Concept" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(OS 기본개념 정리) CH3 Process Concept">
+  <meta name="twitter:description" content="Chapter3. Process Concept">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/os/2019/04/20/os-3.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(OS 기본개념 정리) CH3 Process Concept</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">April 20, 2019</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/os">Os</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="chapter3-process-concept">Chapter3. Process Concept</h2>
+
+<h3 id="31-process-concept">3.1 Process Concept</h3>
+
+<p>프로세스란?</p>
+
+<p>a program that is in execution.</p>
+
+<h4 id="프로세스가-메모리-상에-존재하는-모습">프로세스가 메모리 상에 존재하는 모습</h4>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/os3-1.png" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>text : 코드 + Program Counter + registers</li>
+    <li>stack : temporary data(function parameters, return addresses, and local Variables)</li>
+    <li>data : global variables</li>
+    <li>heap : 동적으로 할당되는 메모리</li>
+  </ul>
+</blockquote>
+
+<p>(나는 이게 계속 헷갈린다.)</p>
+
+<p>위의 이미지처럼 stack에 데이터 같은게 막 쌓이고 내려가고 하고 heap을 동적으로 막 할당하면서 프로세스 진행되는 동안 프로세스 메모리가 꿀렁인다.</p>
+
+<h4 id="process-state">Process State</h4>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/os3-2.png" alt="사진" /></p>
+
+<p>5개의 state가 존재하는데 위와 같은 구조로 왔다리 갔다리 한다.</p>
+
+<h4 id="pcb">PCB</h4>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/os3-3.png" alt="사진" /></p>
+
+<p>Process Control Block의 약자로 프로세스의 정보를 담고 있는 블락이다.
+나중에 Context Switch가 일어날 때 PCB에 저장된 정보를 저장하고 해당 프로세스로 돌아올 때 PCB를 참고한다.</p>
+
+<h3 id="32-process-scheduling">3.2 Process Scheduling</h3>
+
+<h4 id="scheduling-queues">Scheduling Queues</h4>
+
+<p>프로세스가 시스템에 들어오게 되면, job queue에 들어오게 된다. 이때 이 ready queue에 들어오는 애들을 걸러주고 들어온 친구들의 일의 순서를 정해주는 친구가 필요하다.</p>
+
+<p>이런 역할을 해주는 친구가 Scheduler이다.</p>
+
+<p>먼저 job queue에서 I/O bound 와 CPU bound 친구들을 적절히 섞어서 memory에 올려주는 역할을 하는 친구가 long term scheduler이다.</p>
+
+<p>그 memory에 있는 process 중에서 CPU에게 지금 일할 친구를 선택해주는 역할은 short-term scheduler이다.</p>
+
+<h4 id="context-switching">Context Switching</h4>
+
+<p>interrupt가 발생하면 CPU가 다른 process를 감당하도록 해야 한다. 그럼 지금 일하던 친구의 state를 저장하고 다른 process로 switch해야 한다.</p>
+
+<p>이 경우를 Context Switching 이라고 한다.</p>
+
+<p>Context Switching 하는 시간은 하드웨어에 달려있고 이 시간도 꽤나 걸릴 수 있으니 유의해야한다.</p>
+
+<h3 id="33-operations-on-processes">3.3 Operations on Processes</h3>
+
+<h4 id="프로세스-생성">프로세스 생성</h4>
+
+<p>차일드 노드를 생성할 때 
+차일드 노드는 리소스를 오에스에서 직접 가져올 수도 있고 부모 리소스만 공유될 수도 있다.</p>
+<ul>
+  <li>부모 리소스만 쓰는게 overloading을 방지할 수 있다.</li>
+</ul>
+
+<p>새로운 프로세스 생성시 두가지 액션</p>
+
+<ul>
+  <li>부모노드가 같이 일해</li>
+  <li>부모가 자식노드 끝날때까지 기다려(wait())</li>
+</ul>
+
+<p>공간 할당에서 두가지 가능성</p>
+
+<ul>
+  <li>자식노드가 부모프로세스 카피해(fork())</li>
+  <li>자식 노드가 새로운 프로그램 로드해</li>
+</ul>
+
+<p>주로 하나의 노드는 exel한다 이거는 컨트롤 안돌려줘</p>
+
+<p>Exec는 exit이 내부에 있다.</p>
+
+<p>윈도우 식 createprocess 복잡스</p>
+
+<h4 id="프로세스-종료">프로세스 종료</h4>
+
+<p>exit()</p>
+
+<p>중도에 프로세스 중단시킬 수도 있는데 이거는 부모에서만 보통 가능</p>
+
+<ul>
+  <li>차일드가 너무 리소스 많이썼어</li>
+  <li>차일드 태스크 이제 필요없어</li>
+</ul>
+
+<p>차일드 노드가 죽으면 exit status를 리턴해준다.</p>
+
+<p>죽었는데 페런츠가 웨잇안해준 친구들은 다 좀비 프로세스다.</p>
+
+<p>근데 부모가 웨잇도 안하고 죽어버렸어 그럼 orphans라고 한다.</p>
+
+<p>이친구들 입양해주려고 init 때 wait함수를 이용한다.</p>
+
+<h3 id="34-interprocess-communication">3.4 Interprocess Communication</h3>
+<p> 다른 프로세스 영향 안받는 프로세스 = independent</p>
+
+<p>아니면 cooperating해야하는데 이 친구들은 IPC가 필요하다(InterProcess Comunication)!</p>
+
+<p>소통 방법은 shared memory, message passing이 많이 쓰인다.</p>
+
+<p>shared memory는 특정 영역을 쓰고 읽는것을 의미하고</p>
+
+<p>message passing은 데이터 직접 보내고 받는 것이다.</p>
+<ul>
+  <li>작은 데이터에 적합</li>
+  <li>시스콜이기 때문에 shared memory보다 조금 느림</li>
+</ul>
+
+<h4 id="shared-memory-systems">Shared Memory Systems</h4>
+
+<p>여러 원래 같은 파일 내용을 읽고 쓰는거 오에스에서는 별로 안좋아해 그치만 그걸 깼다.</p>
+
+<p>프로듀서와 컨슈머로 설명 가능</p>
+
+<blockquote>
+  <ul>
+    <li>Producer는 consumer process가 소비할 정보를 제공한다.</li>
+    <li>Consumer는 정보 가게를 찾아가서 정보를 가져온다.</li>
+  </ul>
+</blockquote>
+
+<p>일단 이걸 할라면 아이템을 보내줄 버퍼가 공유된 region에 필요하다.</p>
+
+<p>버퍼의 두 종류</p>
+
+<blockquote>
+  <ul>
+    <li>unbounded buffer : 제공자가 언제든지 제공할 수 있어</li>
+    <li>bounded buffer : 버퍼 꽉차면 제공자 기다려야함</li>
+  </ul>
+</blockquote>
+
+<h4 id="message-passing-systems">Message Passing Systems</h4>
+
+<p>직접 Process간에 통신하는 방법이다.</p>
+
+<p>여기의 문제점은</p>
+
+<p>센드와 리시브에는 사이즈 제한이 있으면 프로그램단에서 편한데 임플리멘트하는데 어려움이 있다.</p>
+
+<p><strong>Naming</strong></p>
+
+<p>어디로 보낼 건지 알려줘야 한다.</p>
+
+<p>방법1. 일일이 프로세스 이름으로 네이밍을 하는 방법</p>
+
+<ul>
+  <li>하드코딩이다</li>
+  <li>다른 프로세스에서 오면 어떻게 할건데</li>
+</ul>
+
+<p>방법2. 메일 박스, 포트를 이용하는 방법</p>
+
+<ul>
+  <li>여러 프로세스가 메일박스를 공유한다고 하면</li>
+  <li>리시버를 한명으로 한정지을 수 있게 해야한다.</li>
+  <li>메일 박스를 오에스가 가지고 있어야</li>
+  <li>유저가 가지고 있으면 주인이랑 고객으로 또 나뉘게 된다.</li>
+</ul>
+
+<p><strong>Synchronization</strong></p>
+
+<p>블라킹 센드 - 메세지가 도착할때까지 센딩 블락
+논블라킹 센드 - 그냥 막 보낼 수 있어</p>
+
+<p>블라킹 리시브 - 메세지가 있을 때만 받아
+논빌라킹 리시브 - 널도 받아</p>
+
+<p>두개 혼용해서 쓸수도있어</p>
+
+<h3 id="36-communication-in-client---server-systems">3.6 Communication in Client - Server Systems</h3>
+
+<h4 id="sockets">Sockets</h4>
+
+<p>소켓으로 통신하는 방법</p>
+
+<p>여기서 소켓이란 endpoint for communication을 의미하는데</p>
+
+<p>두 프로세스가 한 쌍의 소켓으로 통신한다.</p>
+
+<p>소켓은 IP+Port로 구성 되어있다.</p>
+
+<h4 id="tcp와-udp-통신의-차이점">TCP와 UDP 통신의 차이점</h4>
+
+<ul>
+  <li>TCP 통신은 Connection oriented 통신 방법으로 Connection이 확인 되었을 때 진행 된다.</li>
+  <li>때문에 훨씬 더 reliable하다 하지만 연결 확인 절차가 필요하므로 조금은 더 costy하다.</li>
+  <li>반면에 UDP 통신은 Connectionless 통신 방법으로 Connection을 확인하지 않고 보낸다.</li>
+  <li>때문에 data가 잘 전해졌는지 여부를 확인할 수 없다. 하지만 확인 절차가 없으므로 훨씬 경제적이다.</li>
+</ul>
+
+<h4 id="rpcremote-procedure-call">RPC(Remote Procedure Call)</h4>
+
+<p>IPC보다 well structured하다.</p>
+
+<p>port 같은 역할을 하는 stub가 존재해서 parameter을 전달한다.</p>
+
+<h4 id="pipe">Pipe</h4>
+
+<ol>
+  <li>Ordinary Pipes</li>
+</ol>
+
+<ul>
+  <li>원래 uni direction하다.</li>
+  <li>parent &amp; child 간에만 소통이 가능했었다.</li>
+</ul>
+
+<ol>
+  <li>Named Pipes</li>
+</ol>
+
+<ul>
+  <li>FIFO를 통해 부모 자식 간이 아닌 다양한 프로세스 간에 통신이 가능하게 됐다.</li>
+  <li>FIFO는 Bidirectional communication을 가능하게 한다.</li>
+</ul>
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/os">os</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/algorithm/2019/04/20/knapsack-2.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(알고리즘) Knapsack 알고리즘 2 Branch and Bound, Heap + 코드</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/2019/04/21/heap-1.html">
+					<span class="page-number">(프로그래머스 코딩테스트 고득점 kit) 힙 Level2 더 맵게</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/os/2019/04/20/os-3.html',
+    'title': '(OS 기본개념 정리) CH3 Process Concept'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

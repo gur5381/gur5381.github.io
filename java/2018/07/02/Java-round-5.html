@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>5라운드. (자바 게임 만들기) 육목게임 만들기!</title>
+  <meta name="description" content="7월 첫날 일요일부터 나는 여전히 뉴턴홀 3층에서 코딩에 전념하고 있다. 몸도 마음도 많이 지쳤지만 이왕 정신 무장된 만큼 끝까지 화이팅 해보자.">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="7월 첫날 일요일부터 나는 여전히 뉴턴홀 3층에서 코딩에 전념하고 있다. 몸도 마음도 많이 지쳤지만 이왕 정신 무장된 만큼 끝까지 화이팅 해보자." />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="5라운드. (자바 게임 만들기) 육목게임 만들기!" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="5라운드. (자바 게임 만들기) 육목게임 만들기!">
+  <meta name="twitter:description" content="7월 첫날 일요일부터 나는 여전히 뉴턴홀 3층에서 코딩에 전념하고 있다. 몸도 마음도 많이 지쳤지만 이왕 정신 무장된 만큼 끝까지 화이팅 해보자.">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/java/2018/07/02/Java-round-5.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">5라운드. (자바 게임 만들기) 육목게임 만들기!</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 2, 2018</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/java">Java</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <p>7월 첫날 일요일부터 나는 여전히 뉴턴홀 3층에서 코딩에 전념하고 있다. 몸도 마음도 많이 지쳤지만 이왕 정신 무장된 만큼 끝까지 화이팅 해보자.</p>
+
+<p>그럼 이번 라운드를 소개하겠다.</p>
+
+<p>육목게임 만들기!</p>
+
+<p>기한 : 7/1 ~ 7/2(밤 9시)</p>
+
+<p>기능 : 게임이 가능케 하라!(해보자!)</p>
+
+<h3 id="일단-로직을-생각해보았다">일단 로직을 생각해보았다!</h3>
+
+<p>이기는 것을 어떻게 구성할까 하다가 그냥 머리에 떠오른 방법이 이것보다 더 좋은 방법이 떠오르지 않아서 아래 방법으로 마무리했다.</p>
+
+<p>먼저 각 플레이어를 위한 2d 배열을 두개 만들어서 돌을 놓을 때마다 해당 플레이어의 돌 좌표값을 1로 바꿔주었다.</p>
+
+<h4 id="1-돌을-놓을-때-다음을-확인하라">1. 돌을 놓을 때 다음을 확인하라.</h4>
+
+<p>돌의 4방향과 4개의 대각선방향으로 1이 아닌 값이 있을 때까지 값을 구    하라.
+반댓편 값이랑 더했을 때 그 값이 6이상이 되면 승리로 판단하라.</p>
+
+<p>조금 더럽지만 8방향을 모두 확인해주려고 어쩔 수 없이 저렇게 구성하였다ㅎㅎ 양해 바란다.</p>
+
+<p>그리하여 나온 결과물!!</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round5/1.png" alt="사진" />
+<em>첫화면</em></p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round5/2.png" alt="사진" />
+<em>게임화면</em></p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round5/3.png" alt="사진" />
+<em>결과화면</em></p>
+
+<p>이번에는 GUI를 특별히 신경써서 했다. 로직 자체는 어렵지 않는데 GUI구성이 조금 더 어려웠던 것 같다.</p>
+
+<h2 id="이제-각-기능과-방법에-대한-설명을-진행해보겠다">이제 각 기능과 방법에 대한 설명을 진행해보겠다!</h2>
+
+<h3 id="1-화면-변경-방법jframe에-jpanel-바꾸기"><strong>1. 화면 변경 방법!(JFrame에 JPanel 바꾸기)</strong></h3>
+
+<p>나는 프레임을 하나 구성해주었다. 일단 프레임을 하나 구성 해놓고 여러개의 JPanel을 만들어서 바꿔끼워주는 방법을 이용했다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>frame.remove(resultPanel); //원래 있던 패널을 없애주고
+frame.add(main);//새로운 패널을 추가해주고
+frame.revalidate();//그리고 다시 그려
+frame.repaint();//주면 된다!!
+</code></pre></div></div>
+
+<h3 id="2-jpanel에-bufferedimage-올리기"><strong>2. JPanel에 bufferedImage 올리기!</strong></h3>
+
+<p>JPanel은 각각 클래스를 따로만들어서 그 안에 paintComponent를 이용해서 BufferedImage를 그려줬다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class MainPanel extends JPanel{
+    MainPanel(){
+    }
+    public void paintComponent(Graphics g) {
+        g.drawImage(imageF, 0, 0, null);
+    }
+}
+</code></pre></div></div>
+
+<h3 id="3-마우스-액션-리스너">3. 마우스 액션 리스너</h3>
+
+<p>게임판 패널에 마우스 액션 리스너를 add해서 클릭 할 수 있게 해주었다.</p>
+
+<p>mouseClicked시에는 Array의 해당 좌표를 1로 바꿔주고 그 돌의 정보를 가지고 있는 클래스를 하나 만들어주어서 그 클래스를 담는 stack 에 넣어주었다.</p>
+
+<p>그리고 repaint()를 진행해서 stack에 있는 모든 내용을 꺼내어 그려주도록 만들었다.</p>
+
+<p>mouseMove시에는 stack에 넣지 않은 채로 이미지를 그려줄 수 있도록 설정해주었다!</p>
+
+<p>아래 코드를 보면서 이해해보자!</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round5/4.png" alt="사진" />
+<em>바둑판 JPanel</em></p>
+
+<p>마우스리스너 클래스에서는 마우스의 x,y 좌표를 바로 array의 행열 값으로 받을 수 있도록 해주었다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round5/5.png" alt="사진" />
+<em>마우스클릭시</em></p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round5/6.png" alt="사진" />
+<em>마우스무브시</em></p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round5/7.png" alt="사진" />
+<em>돌 담는 클래스</em></p>
+
+<p><strong>이렇게 하면 마우스를 움직이면서 클릭 시 지점을 미리 볼 수 있게 된다.</strong></p>
+
+<p>이미지는 여러개를 넣었는데 이것은 getScaledInstance 메소드를 크기를 설정해주었다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>BufferedImage image;
+image = ImageIO.read(new File(filePath[7]));
+resizedImage = image.getScaledInstance(1440, 900, Image.SCALE_SMOOTH);
+imageC = new BufferedImage(1440, 900, BufferedImage.TYPE_INT_ARGB);
+Graphics g2 = imageC.getGraphics();
+g2.drawImage(resizedImage, 0, 0, null);
+</code></pre></div></div>
+
+<p>참고로 TYPE_INT_ARGB를 해줘야 배경이 안나온다:)</p>
+
+<p>이미지는 https://www.flaticon.com/에서 받아왔다.</p>
+
+<p>모든 과정은 github에 올라가 있으니 참고하길 바란다!</p>
+
+<p><a href="https://github.com/gur5381/JavaStudy18-1">https://github.com/gur5381/JavaStudy18-1</a></p>
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/자바게임">자바게임</a>,&nbsp;<a href="/tag/자바육목게임만들기">자바육목게임만들기</a>,&nbsp;<a href="/tag/자바GUIBufferedImage">자바GUIBufferedImage</a>,&nbsp;<a href="/tag/자바JFrameJLabel바꾸기">자바JFrameJLabel바꾸기</a>,&nbsp;<a href="/tag/자바게임만들기">자바게임만들기</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/java/2018/07/01/Java-round-4.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">4라운드. (자바 Image Processing) 포토샵 만들기!</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/java/2018/07/10/Java-round-6.html">
+					<span class="page-number">6라운드. (자바 네트워크) 육목게임 네트워크 연결하기!</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/java/2018/07/02/Java-round-5.html',
+    'title': '5라운드. (자바 게임 만들기) 육목게임 만들기!'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Codeforces Round 600 (Div. 2) 후기 및 문제 풀이 (블루 등극!!!!)</title>
+  <meta name="description" content="후기">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="후기" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="Codeforces Round 600 (Div. 2) 후기 및 문제 풀이 (블루 등극!!!!)" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Codeforces Round 600 (Div. 2) 후기 및 문제 풀이 (블루 등극!!!!)">
+  <meta name="twitter:description" content="후기">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/codeforces/2019/11/17/codeforces-600.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">Codeforces Round 600 (Div. 2) 후기 및 문제 풀이 (블루 등극!!!!)</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">November 17, 2019</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/codeforces">Codeforces</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="후기">후기</h2>
+
+<blockquote>
+  <ul>
+    <li>블루의 문턱에 가까워지고 있음을 느끼며 쳤던 시험..</li>
+    <li>등록하는 걸 깜빡해서 추가 신청하고 허둥지둥 시험을 쳐버렸다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="/assets/codeforces-600.png" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>결과는… 4문제를 풀어 3373점으로 역대 최고점…!!!!</li>
+    <li>블루 넘나 싶었는데 아니나 다를까 이번 휴학의 하나의 목표인 <strong>코드포스 블루</strong>를 찍어버렸다!!ㅎㅎㅎ</li>
+  </ul>
+</blockquote>
+
+<p><img src="/assets/codeforces-600-blue.png" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>간단하게 문제 풀이를 해보도록 하겠다!</li>
+  </ul>
+</blockquote>
+
+<h2 id="a-single-push">A. Single Push</h2>
+
+<p><a href="https://codeforces.com/contest/1253/problem/A">문제 링크</a></p>
+
+<blockquote>
+  <ul>
+    <li>이 문제는 차이가 같은 구간이 1개 이하로 있다면 YES 아니면 NO를 출력하면 되는 문제이다.</li>
+    <li>마음이 급하다 보니 간단한 구현 문제인데도 허둥지둥했다.</li>
+    <li>다행히 10분만에 제출한 게 정답이 됐다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;cstdio&gt;
+int k, n, a[100001], b[100001];
+int main(){
+    scanf("%d", &amp;k);
+    while(k--){
+        int dif = 0, valid = 1, start = 0, end = 0;
+        scanf("%d", &amp;n);
+        for(int i = 0; i &lt; n; i++)scanf("%d", &amp;a[i]);
+        for(int i = 0; i &lt; n; i++)scanf("%d", &amp;b[i]);
+        for(int i = 0; i &lt; n; i++){
+            if(start == 0 &amp;&amp; dif != a[i] - b[i]){
+                start = 1;
+                dif = a[i] - b[i];
+                if(dif &gt; 0){
+                    valid = 0;
+                    break;
+                }
+            }
+            else if(start == 1 &amp;&amp; a[i] - b[i] == 0){
+                end = 1;
+                dif = 0;
+            }
+            else if(start == 1 &amp;&amp; a[i] - b[i] != dif){
+                valid = 0;
+                break;
+            }
+        }
+        if(valid)printf("YES\n");
+        else printf("NO\n");
+    }
+}
+</code></pre></div></div>
+
+<h2 id="b-silly-mistake">B. Silly Mistake</h2>
+
+<p><a href="https://codeforces.com/contest/1253/problem/B">문제 링크</a></p>
+
+<blockquote>
+  <ul>
+    <li>이 문제도 어떻게 보면 현재 오피스에 오늘 사람들이 한번만 들어왔다가 잘 나갔는지 확인해주면서 사무실에 아무도 없을 때 날짜를 바꿔버리면 되는 구현 문제이다.</li>
+    <li>근데 문제는 구현하면서 또 마음이 급하니까 실수가 많아진다는 것이다. 문제 제목대로 silly mistake가 많아진다.</li>
+    <li>다 돌았는데도 오피스에 사람이 있다면 그건 안되는 상황인데 처리를 안해줘서 두번 제출해버렸다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;cstdio&gt;
+#include &lt;vector&gt;
+using namespace std;
+int n, arr[1000001], cur, date = 1, valid = 1, office[1000001], day[1000001];
+vector&lt;int&gt; v;
+int main(){
+
+    scanf("%d", &amp;n);
+    for(int i = 0; i &lt; n; i++)scanf("%d", &amp;arr[i]);
+    for(int i = 0; i &lt; n; i++){
+        int who = 0;
+        if(arr[i] &lt; 0){
+            who = -arr[i];
+            if(office[who] == 0){
+                valid = 0;
+                break;
+            }
+            cur--;
+            office[who]--;
+            if(cur == 0){
+                v.push_back(i);
+                date++;
+            }
+        }
+        else{
+            who = arr[i];
+            if(office[who] == 1){
+                valid = 0;
+                break;
+            }
+            if(day[who] == date){
+                valid = 0;
+                break;
+            }
+            office[who]++;
+            day[who] = date;
+            cur++;
+        } 
+    }
+    if(cur != 0)valid = 0;
+    if(valid){
+        printf("%lu\n", v.size());
+        printf("%d ", v[0] + 1);
+        for(int i = 1; i &lt; v.size(); i++){
+            printf("%d ", v[i] - v[i - 1] );
+        }
+    }
+    else printf("-1");
+}
+</code></pre></div></div>
+
+<h2 id="c-sweets-eating">C. Sweets Eating</h2>
+
+<p><a href="https://codeforces.com/contest/1253/problem/C">문제 링크</a></p>
+
+<blockquote>
+  <ul>
+    <li>일단 이 문제를 이해하는데 10분이 걸렸다.. 영어는 너무 힘들다ㅠㅠㅠㅠ</li>
+    <li>k일때의 값을 가장 작게 하기 위해서는 일단 sorting한 다음에 k번째부터 1번까지 순서대로 먹어줘야 한다.</li>
+    <li>왜냐하면 날이 갈 수록 당도가 날수 만큼 곱해진다고 했기 때문에 더 작은 값에 곱을 해서 먹는게 penalty가 적을 것이기 때문이다.</li>
+    <li>이 때, 이걸 미리 i번째 까지의 sum을 arr[i]에 저장해놓고 각 최소 값을 담은 ans[i]에다가 i-m번째에서 구해놓은 답을 이용해 arr[i] + ans[i - m] 값을 저장해줬다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+long long n, m, arr[200001], ans[200001];
+int main(){
+    scanf("%lld %lld", &amp;n, &amp;m);
+    for(int i = 0; i &lt; n; i++)scanf("%lld", &amp;arr[i]);
+    sort(arr, arr + n);
+    for(int i = 1; i &lt; n; i++)arr[i] += arr[i - 1];
+    for(int i = 0; i &lt; m; i++)ans[i] = arr[i];
+    for(int i = m; i &lt; n; i++)ans[i] = arr[i] + ans[i - m];
+    for(int i = 0; i &lt; n; i++)printf("%lld ", ans[i]);
+}
+</code></pre></div></div>
+
+<h2 id="d-harmonious-graph">D. Harmonious Graph</h2>
+
+<blockquote>
+  <ul>
+    <li>이 문제까지 오는데 걸린 시간 1시간… 1시간 잡고 있으면 어떻게든 풀지 않을까하고 집중하고 풀기로 했다.</li>
+    <li>문제는 보고 disjoint set이 떠올랐다. union-find를 이용해서 부모를 찾아 저장해주면 되지 않을까 했다 ㅎㅎ</li>
+    <li>근데 여기서 문제는 우리가 원하는 거는 각 set에 있는 제일 큰 값을 알아야 한다.</li>
+    <li>그래야 각 set을 연결할 필요가 있는지 없는지 알 수 있기 때문이다.</li>
+    <li>먼저 들어오는 edge로 set을 만들어준다. 이 때 par에 저장되는 값은 제일 큰 값이다.</li>
+    <li>모든 edge에서 set을 만든 후에 1번 노드부터 n번 노드까지 돌면서 현재까지 발견된 par값중에 제일 큰 값을 cmp에 저장한다.</li>
+    <li>cmp보다 현재 index가 크면 그냥 현재 par[i]를 cmp에 저장한다.</li>
+    <li>현재 index가 cmp보다 작으면 i가 속한 set의 최대값을 px에 저장하고 아래 과정을 진행한다.</li>
+    <li>cmp가 현재 px과 같으면 패쓰, 다른데 cmp보다 작으면 par[px] = cmp로 바꿔주고 edge를 하나 추가해준다.</li>
+    <li>cmp보다 px가 크면 par[cmp]를 px로 바꿔준다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int n, m, par[200001], cmp, ans;
+int find(int x) {
+    if (x == par[x])return x;
+    return par[x] = find(par[x]);
+}
+int main(){
+    scanf("%d %d", &amp;n, &amp;m);
+    for(int i = 1; i &lt;= n; i++)par[i] = i;
+    for(int i = 0; i &lt; m; i++){
+        int v1, v2;
+        scanf("%d %d", &amp;v1, &amp;v2);
+        int p1 = find(v1), p2 = find(v2);
+        if(p1 == p2)continue;
+        if(p1 &lt; p2)swap(p1, p2);
+        par[p2] = p1;
+    }
+    cmp = find(1);
+    for(int i = 2; i &lt;= n; i++){
+        int px = find(i);
+        if(i &gt; cmp)cmp = px;
+        
+        else{
+            if(px == cmp){
+                continue;
+            }
+            else if(px &lt; cmp){
+                ans++;
+                par[px] = cmp;
+            }
+            else {
+                ans++;
+                par[cmp] = px;
+                cmp = px;
+            }
+        }
+    }
+    printf("%d", ans);
+    
+}
+</code></pre></div></div>
+
+<h2 id="느낀점">느낀점</h2>
+
+<blockquote>
+  <ul>
+    <li>드디어 블루다… 이렇게 빨리 도달할지는 몰랐지만 너무 기분이 좋다!!ㅎㅎㅎ</li>
+    <li>당분간은 PS는 좀 쉬면서 인턴 준비에 박차를 가해야겠다!! 고생했다!</li>
+  </ul>
+</blockquote>
+
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/codeforces">codeforces</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D/2019/11/16/pandas-3.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(BigData Analysis 도전기) Kaggle Pandas Tutorial (3. Summary Functions and Maps)</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D/2019/11/17/pandas-4.html">
+					<span class="page-number">(BigData Analysis 도전기) Kaggle Pandas Tutorial (4. Grouping and Sorting)</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/codeforces/2019/11/17/codeforces-600.html',
+    'title': 'Codeforces Round 600 (Div. 2) 후기 및 문제 풀이 (블루 등극!!!!)'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

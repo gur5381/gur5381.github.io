@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(JS 다시 보기) 데이터 타입과 연산자</title>
+  <meta name="description" content="자바스크립트 재공부 이유와 목적">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="자바스크립트 재공부 이유와 목적" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(JS 다시 보기) 데이터 타입과 연산자" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(JS 다시 보기) 데이터 타입과 연산자">
+  <meta name="twitter:description" content="자바스크립트 재공부 이유와 목적">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/javascript/2019/12/10/javascript-1.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(JS 다시 보기) 데이터 타입과 연산자</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">December 10, 2019</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/javascript">Javascript</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="자바스크립트-재공부-이유와-목적">자바스크립트 재공부 이유와 목적</h2>
+
+<p>나는 자바스크립트를 에러없이 코딩할 수 있다. 방학 프로젝트 때 처음으로 자바스크립트를 처음 접하고 쓰면서도 문법적인 오류가 없이 코드가 돌아가는데 초점을 뒀었고 뭐가 잘못됐고 부족했고를 느끼지 못했다.</p>
+
+<p>이런 내가 자바스크립트를 다시 공부하게 된 계기는 크게 3가지가 있다.</p>
+
+<ol>
+  <li>네이버 핵데이에서 멘토님의 내 코드 리뷰: “자바스크립트를 처음 쓰시는게 느껴졌어요.”</li>
+  <li>하조은 선배님의 특강: “자바스크립트에 대한 이해 없이 프레임워크를 바로 공부하면 안되요.”</li>
+  <li><strong>마지막으로 갑자기 시작된 스타트업 프론트엔드 개발 인턴</strong></li>
+</ol>
+
+<p>원래 다시 공부하려고 마음 먹은 찰나에 좋은 인턴 기회가 생겨서 프론트엔드 개발인턴 일을 시작하게 되었고 다음주 본격 출근 전에 공부를 다시 해보려고 한다.</p>
+
+<p><strong>이 공부의 목적</strong>은 자바스크립트를 사용해본 경험을 넘어선 <strong>자바스크립트의 특성과 원리를 이해하는 것</strong>이다.
+<em>Inside Javascript</em>라는 책을 읽으며 배운 내용을 정리해보자.</p>
+
+<p><br /></p>
+
+<h2 id="객체--참조-타입">객체 == 참조 타입</h2>
+
+<p>자바스크립트에서는 기본 타입인 숫자, 문자열, 불린값, null, undefined를 제외한 모든 값은 객체로 취급된다. 이러한 객체는 자바스크립트에서는 <strong>참조 타입</strong>으로 불려진다. 그 이유는 객체의 모든 연산이 실제 값이 아닌 참조값으로 처리되기 때문이다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var objA = {
+    val : 40
+};
+var objB = objA;
+objB.val = 50;
+</code></pre></div></div>
+
+<h3 id="객체-비교">객체 비교</h3>
+
+<p>이 때 objA.val의 값은 얼마일까? 40이라고 생각할 수 있지만 objA와 objB는 <strong>같은 객체를 참조</strong>하고 있기 때문에 50이 된다.</p>
+
+<p>두개의 객체의 비교 연산을 진행할 때는 객체의 실제 값이 얼마인지를 비교하는 것이 아닌 객체의 참조값이 같은지 비교한다.(기본 타입 비교 시는 실제값을 비교한다.)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var objA = { val: 100}
+var objB = { val: 100}
+var objC = objB;
+
+console.log(objA == objB); //false
+console.log(objB == objC); //true
+</code></pre></div></div>
+
+<h3 id="참조에-의한-함수-호출-방식">참조에 의한 함수 호출 방식</h3>
+
+<p>기본 타입은 함수를 호출할 때 실제 값을 복사해서 넘겨주는 Call by value 방식으로 진행된다. 하지만 참조 타입은 값을 복사하지 않고 참조값이 전달된다. 다음 코드를 보면 이해가 빠를 것이다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var a = 100;
+var objA = { value: 100};
+
+function changeArg(num, obj){
+    num = 200;
+    obj.value = 200;
+}
+
+changeArg(a, objA);
+
+console.log(a); //100
+console.log(objA); //{ value: 200 }
+</code></pre></div></div>
+
+<p>함수 내에서 num과 obj의 value를 변경해줬지만 num은 a의 복사값을 바꿨으므로 a의 값은 변경되지 않고 objA는 참조값을 전달했으므로 값이 바뀌게 된다.</p>
+
+<p><br /></p>
+
+<h2 id="프로토타입">프로토타입</h2>
+
+<p>모든 객체는 자신의 부모 역할을 하는 객체와 연결되어 있다. 이러한 부모 객체를 <strong>프로토타입</strong>이라고 한다.
+다음 예제에서 보듯이 우리는 toString()이라는 함수를 정의하지 않았음에도 toString()이라는 함수를 사용할 수 있다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var objA = { name : 'foo', age : 30};
+objA.toString();
+</code></pre></div></div>
+
+<p>이러한 함수는 Object.prototype에 있는 함수 중 하나로 object 생성시 자연스럽게 상속받게 된다.
+<strong>모든 객체는 자신의 프로토타입을 가지는 [[Prototype]]라는 내부 프로퍼티</strong>를 가진다(크롬에서는 이를 __proto__로 표기하고 있다.)</p>
+
+<p><br /></p>
+
+<h2 id="배열">배열</h2>
+
+<p>배열은 배열 리터럴을 통해 생성될 수도 있고, 객체가 동적으로 프로퍼티를 추가할 수 있듯이, 요소를 추가할 수도 있다. 이때 값을 순차적으로 넣을 필요 없이 아무 인덱스에나 동적으로 추가도 가능하다.</p>
+
+<p>값이 없는 위치에는 undefined가 출력된다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var arr = [];
+arr[0] = 100;
+arr[3] = 'Yes';
+arr[7] = true;
+console.log(arr); // [100, undefined * 2, 'Yes', undefined * 3, true]
+</code></pre></div></div>
+
+<h3 id="배열의-length">배열의 length</h3>
+
+<p>이것은 배열의 원소의 개수가 아닌 배열의 가장 큰 인덱스에 1을 더한 값이다.</p>
+
+<h3 id="배열-표준-메서드와-length">배열 표준 메서드와 length</h3>
+
+<p>push를 할 시에는 arr.length가 가르키는 인덱스에 해당하는 위치에 원소를 추가한다.</p>
+
+<h3 id="배열과-객체의-프로토타입-차이">배열과 객체의 프로토타입 차이</h3>
+
+<p>객체의 프로토타입은 Object.prototype이라고 앞서 말했다.</p>
+
+<p>배열의 프로토타입은 Array.prototype인데 Array.prototype의 프로토타입이 Object.prototype이다. 때문에 배열은 Array와 Object의 표준 함수를 모두 사용할 수 있다.</p>
+
+<p>배열도 객체이기 때문에 다음과 같이 객체의 프로퍼티를 추가할 수 있다. 이 경우 length는 변하지 않는다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var arr = [1, 2, 3];
+arr.name = 'number_array';
+</code></pre></div></div>
+
+<h3 id="배열의-요소-삭제">배열의 요소 삭제</h3>
+
+<p>배열의 요소를 삭제할 수 있다.<br />
+<strong>delete</strong>를 사용한다면 해당 위치의 값을 undefined로 바꾸게 된다.
+<strong>splice()</strong> 함수를 사용하면 아예 원소 자체를 삭제 할 수 있다.</p>
+
+<h3 id="기본-타입과-표준-메서드">기본 타입과 표준 메서드</h3>
+
+<p>기본 타입 같은 경우에는 object가 아닌데 표준 메서드를 어떻게 이용할까?<br />
+기본 타입에서 표준 메서드 호출 시 해당 값이 객체로 변환된 다음에 메서드를 호출하고 다시 기본값으로 복귀한다.</p>
+
+<p><br /></p>
+
+<h2 id="연산자">연산자</h2>
+
+<p>덧셈의 경우 숫자와 숫자 연산인 경우만 결과가 숫자로 남고 나머지 경우는 모두 문자열 연결 연산이 이주어 진다.</p>
+
+<p>null, 배열, 객체의 typeof 연산자 결과는 ‘object’이다.</p>
+
+<h3 id="와--연산자">==와 === 연산자</h3>
+
+<p>==는 타입이 다른 경우에 타입 변환 과정을 거친 다음에 비교를 진행한다.</p>
+
+<p>===는 타입이 다른 경우에는 타입을 변경하지 않고 비교한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>console.log(1 == '1'); //true
+console.log(1 === '1'); //false
+</code></pre></div></div>
+
+<p><strong>타입 변환에 따른 잘못된 결과를 얻을 수 있으므로 자바스크립트 코딩 가이드에서는 == 연산자로 비교하는 것을 추천하지 않는다.</strong></p>
+
+<h3 id="-연산자">!! 연산자</h3>
+
+<p>!!는 값을 boolean 값으로 변환시켜준다.</p>
+
+<p>숫자인 경우, !!0만 false<br />
+문자인 경우, !!’‘만 false<br />
+null, undefined는 무조건 false<br />
+object는 무조건 true</p>
+
+<p>이상으로 3장 데이터 타입과 연산자 정리를 마치겠다.</p>
+
+<p>참고서적 : 인사이드 자바스크립트 by 송형주, 고현준</p>
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/javascript">javascript</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/%ED%9A%8C%EA%B3%A0/2019/12/05/how-to-algo.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">나의 비효율적이지만 효율적인 알고리즘 공부법 (코딩테스트를 준비하는 이들에게)</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/javascript/2019/12/10/javascript-2.html">
+					<span class="page-number">(JS 다시 보기) 자바스크립트에서의 함수</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/javascript/2019/12/10/javascript-1.html',
+    'title': '(JS 다시 보기) 데이터 타입과 연산자'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

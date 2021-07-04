@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>2020년 마지막 회고(쉴 줄 모르는 자)</title>
+  <meta name="description" content="🤓 이 글의 목적">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="🤓 이 글의 목적" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="2020년 마지막 회고(쉴 줄 모르는 자)" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="2020년 마지막 회고(쉴 줄 모르는 자)">
+  <meta name="twitter:description" content="🤓 이 글의 목적">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/%ED%9A%8C%EA%B3%A0/2021/02/10/2020-4th-quarter-retrospection.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">2020년 마지막 회고(쉴 줄 모르는 자)</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">February 10, 2021</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/회고">회고</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="-이-글의-목적">🤓 이 글의 목적</h2>
+
+<p>정말 오랜만에 글을 쓴다. 이 글을 통해 복학과 동시에 시작된 혼돈의 시간와 지금을 되돌아 보려 한다.</p>
+
+<h2 id="-혼돈의-카오스-그리고-알게된-소중한-시간">🤯 혼돈의 카오스 그리고 알게된 소중한 시간</h2>
+
+<h3 id="-복학-조기-취업-그리고-취업계">🎓 복학, 조기 취업 그리고 취업계</h3>
+
+<p>Picky와 우아한테크캠프(우테캠)를 거치며 여러 훌륭한 사람들을 많이 만났다. 그리고 내가 꿈꾸는 개발자로서 미래의 <strong>이상적인 모습</strong>을 어렴풋이 그리게 되었다. 그 모습을 향해 적극적으로 달려보고 싶었지만, 아직 대학교라는 큰 산을 마무리하지 못한 상황이기에 나는 다시 포항으로 돌아가야만 했다.</p>
+
+<p>학교는 배우는 기관이니 가서 열심히 배우고 돌아오겠다는 마음으로 마음을 다잡고 포항으로 돌아왔다. 하지만 아무래도 오랜만에 겪는 강의식 학습과 평가, 그리고 학교 커리큘럼에 대한 적응은 쉽지 않았고 마음을 다 잡지 못하고 계속 방황하게 되었다.</p>
+
+<p>이 와중에 우테캠의 연장선으로 채용 면접 과정을 진행하게 되었는데 너무 감사하게도 기대하지 않았던 캠프로 주어진 채용 기회를 잡게 되었다. (많이 부족하지만 성장 가능성을 보고 나에게 기회를 준 우아한형제들은 정말 멋진 회사이다.)</p>
+
+<p><img alt="/assets/2020-4th-retrospection-0.png" src="/assets/2020-4th-retrospection-0.png" style="width: 30%;" /></p>
+
+<p><br /></p>
+
+<p>다만 1년을 학교를 다니며 취업 준비를 하려 했던 나에게 졸업까지 기다려줄 수 없는 상황임을 채용팀으로 부터 전해 듣게 되었다. 갑자기 듣는 청천병력 같은 이야기에 너무 당황했지만 급하게 방법을 찾아 입사 예정 시기를 6월이 아닌 3월로 변경하게 되었다.</p>
+
+<p><img alt="/assets/2020-4th-retrospection-1.png" src="/assets/2020-4th-retrospection-1.png" style="width: 30%;" /></p>
+
+<p><br /></p>
+
+<p>갑자기 당겨진 입사 시기 속에서 나는 성장에 대한 조바심을 느끼기 시작했다. 캠프를 함께 진행한 사람들은 각자의 상황에 맞게 성장하고 있었고, 사실 나는 지금 졸업을 위해 학업을 마무리하는 과정만으로도 버거운 상황이 있었다.</p>
+
+<p>아래 카톡은 내 상황을 들은 양진혁형이 보내준 메시지이다ㅠㅠ 형은 진짜 최고다.</p>
+
+<p><img alt="/assets/2020-4th-retrospection-2.png" src="/assets/2020-4th-retrospection-2.png" style="width: 50%;" /></p>
+
+<p>그렇게 회사에서 혹은 취준을 하며 열심히 자신의 일을 하고 있는 사람들 속에서 정체되어 있는 느낌 속에서 애써 나를 다잡고 겨우겨우 마지막 학기를 보내게 되었다.</p>
+
+<p><br /></p>
+
+<h3 id="-휴식을-포기하려-했던-입사-전-두달">🧳 휴식을 포기하려 했던 입사 전 두달</h3>
+
+<p>학기를 마치고, 입사 예정인 3월까지 남은 2달 좀 넘는 시간 동안 무엇을 할지 고민하기 시작했다.</p>
+
+<p>사실 쉬려고 했지만 쉬는 중에도 계속해서 조급함이 나를 괴롭혔다. 때마침 1,2월 두달간 내가 너무 존경하는 개발자 밑에서 일할 수 있는 기회를 얻게 되었다. 주변에서는 일하려는 나를 이해하지 못하겠다는 눈치였지만 어차피 제대로 쉬지도 못할꺼 차라리 일을 하고 지금 느끼는 조바심을 없애는게 낫겠다는 생각에 일정을 잡고 직접 회사를 방문하기로 했다.</p>
+
+<p>나는 이왕 하는거 빡세게 해보자 라는 마음으로 캐리어를 끌고 상경을 강행했다. 집을 구하려고 여러군데 연락을 해놓고 회사를 방문했다. 담담하게 들어갔지만 막상 회사의 분위기를 본 나는 너무 당황했다. 회사에 대한 대표님의 소개를 듣고 나니 ‘이거 너무 좋은데?’ 라는 생각이 들었고 무엇보다 회사 분위기는 그야말로 핫했다. 다들 열정과 끈끈함 속 뭔가 설명할 수 없는 강력한 무언가에 취해 있는 걸 보았다.</p>
+
+<p>이전 같으면 이런 회사와 분위기에 당연히 끌렸을 나있지만 2달간 함께 취해 미친듯이 일할 나의 모습을 그리다가 점점 몸이 경직되기 시작했다. 그리고 그렇게 2달을 열심히 달리고 3월부터 다시 달리기 시작할 생각을 하니 아찔한 생각이 들었다. 생각을 다 잡으려 했지만 몸과 정신이 말을 듣지 않았다.</p>
+
+<p>고민을 하던 끝내 그날 밤 기회를 주려 했던 개발자님과 대표님께 너무나도 죄송하게도 회사와 함께 하지 못하겠다는 이야기를 전달드렸다.(정말 너무 갑작스러운 결정에 나의 행동을 이해해주셨던 두분께 너무 죄송하고 감사하다.)</p>
+
+<h2 id="-결국-선택한-나만의-시간">👴🏻 결국 선택한 나만의 시간</h2>
+
+<p>일하기를 포기하고 나서야 이 시간이 얼마나 소중한지 확실히 깨닫게 되었다. 그동안 조바심 때문에 포기하려 했던 다시 돌아오지 않을 이 시간을 후회없이 보내야겠다는 생각이 또렷해졌다. 계속해서 나를 힘들게 했던 조바심은 내가 왜 붙들고 있었지 기억이 나지 않을 정도로 머리 속에서 사라지게 되었다.</p>
+
+<h3 id="-뭐하고-놀지">🌝 뭐하고 놀지?</h3>
+
+<p>머리 속에는 쉬고 놀자는 생각이 가득했지만 코로나 때문에 여행, 만남에 대한 제약이 많았다. 그래서 진짜 쉼을 추구하자는 마음으로 혼자 놀기를 기획하게 되었다. 그동안 억제하고 잊고 살았던 게임과 기타연습도 해보기로 마음을 먹었다. 무엇보다 쉼이 목표였기에 쉬기를 쉼을 방해하는 일들을 제거하고 평화롭게 살기 위해 룰도 정했다.</p>
+
+<p><img src="/assets/2020-4th-retrospection-3.png" alt="/assets/2020-4th-retrospection-3.png" /></p>
+
+<h3 id="-놀면-뭐해-프로젝트-하지">🤓 놀면 뭐해? 프로젝트 하지</h3>
+
+<p>동시에 2년전에 진행헀던 웹 프로젝트인 <strong>HisTime 프로젝트를 대학시간이라는 이름으로 재개발</strong>하게 되었다.</p>
+
+<p>HisTime 프로젝트는 <strong>한동대</strong> <strong>수강신청 도우미 웹으로</strong> 나는 백엔드 개발자로 참여해서 베타 버전을 출시하고 한 학기 서비스했고 나름 괜찮은 반응을 얻었다. 하지만 당시에 이제 막 공부하고 배포를 하다보니 서비스 중에 문제가 생기지 않을까 불안함이 컸다. 결국 그렇게 해당 프로젝트는 한학기 후 마무리 됐고 뭔가 결국 그렇게 HisTime은 나에게 아쉬움으로 남아 있었다.</p>
+
+<p><img src="/assets/2020-4th-retrospection-4.png" alt="/assets/2020-4th-retrospection-4.png" /></p>
+
+<p>쉬면서 이 프로젝트를 다시 진행해보는 것도 재밌겠다는 생각에 빠르게 깃헙 레포를 파고 프로젝트를 시작했다. 그리고 너무 잘어울리는 도메인도 저렴한 가격에 구매하게 되었다!ㅎㅎㅎ</p>
+
+<p><img src="/assets/2020-4th-retrospection-5.png" alt="/assets/2020-4th-retrospection-5.png" /></p>
+
+<p>내가 하고 싶은 때와 시간에 맞춰서 융통성 있게 프로젝트를 진행하기 위해서 개인 프로젝트로 진행하게 되었다. 그리고 캠프 후기에도 남겼지만 해민이를 보면서 디자인에 대한 욕심이 생겨 이번 프로젝트에는 디자인도 내가 직접 해보기로 마음 먹었고 본격적으로 프로젝트를 시작했다.</p>
+
+<h2 id="️-그렇게-1월이-지나고">🧚‍♀️ 그렇게 1월이 지나고…</h2>
+
+<h3 id="--가족-기타-카러플-챌린저">🎸  가족, 기타, 카러플 챌린저</h3>
+
+<p>그렇게 1월을 지나 이제 마지막 한달을 앞두고 있다. 매일 부모님과 식사하고 예능 보고, 주말에 동생이 오면 가족끼리 즐겁게 시간을 보내게 되었다.(집이 좋다..) 이전에는 가족과의 시간을 보내는 중에도 조급함이 있었는데 오랜만에 여유있게 가족과 함께 할 수 있었다.</p>
+
+<p><img src="/assets/IMG_6170.jpg" alt="/assets/IMG_6170.jpg" /></p>
+
+<p>그리고 완전히 녹슬었던 기타줄도 갈았다. 카포도 사서 집에서 틈틈이 기타 연습을 했다.(아직 많이 부족하지만 적재가 비긴어게인에서 불렀던 두사람의 연주를 열심히 연습하고 있다.) 그리고 오랜만에 게임에 푹 빠져서 살아봤다. 목표로 했던 챌린저에 도달하고 카오스를 얻기 위해 과금을 하려던 찰나에 정신을 차리고 결국 하산(삭제)했다ㅎㅎㅎㅎ 카러플 진짜 재밌다…</p>
+
+<p><img src="/assets/2020-4th-retrospection-6.png" alt="/assets/2020-4th-retrospection-6.png" /></p>
+
+<h3 id="-개인-프로젝트는">👨‍💻 개인 프로젝트는..?</h3>
+
+<p>결국 현재 배포하고 꾸준히 서비스를 하는 중에 있다. 개발의 자세한 내용은 <a href="https://zoomkoding.github.io/%EB%8C%80%ED%95%99%EC%8B%9C%EA%B0%84/%ED%9A%8C%EA%B3%A0/2021/02/10/college-timetable-development.html">(개인프로젝트 개발 회고) 대학시간 개발기</a>를 참고하길 바란다.</p>
+
+<ul>
+  <li><a href="http://www.timetable.college/handong">웹사이트 링크</a></li>
+  <li><a href="https://github.com/zoomKoding/college-timetable">깃헙레포 링크</a></li>
+</ul>
+
+<p>처음에는 그냥 재밌게 개발하고 하고 싶은 때 개발을 하자고 마음을 먹었는데 사실 여기에 제일 시간을 많이 쏟은 것 같다. 결국 욕심을 한껏 부려서 계속 고민하고 피드백을 받으며 새로운 기능을 배포하고 있다.</p>
+
+<p><img alt="/assets/2020-4th-retrospection-7.png" src="/assets/2020-4th-retrospection-7.png" style="width: 30%;" /></p>
+
+<p>이번 프로젝트 같은 경우는 여러 레퍼런스를 참고하며 디자인도 직접하고, 자신 없었던 리액트로 개발을 진행하다보니 뭔가 나의 영역을 넓히는 느낌에 즐거움이 컸다. 두 영역 모두 내가 공부할 것들이 많이 있지만 충분히 도전해 볼 가치가 있다 느낄 만큼 흥미로웠다.</p>
+
+<p><img alt="/assets/2020-4th-retrospection-8.png" src="/assets/2020-4th-retrospection-8.png" style="width: 100%;" /></p>
+
+<p><br /></p>
+
+<p>서비스를 확장하는데 코드 퀄리티가 걸림돌이 되지 않게 좋은 코드에 대한 고민도 프로젝트 내내 이어졌다. 개발을 진행하면서 그동안 거의 내 방 벽지처럼 존재했던 클린코드를 꺼내서 읽기 시작했는데 첫 장을 읽고 뼈를 맞았다.</p>
+
+<p>그리고 그들이 제시한 추상적인 원칙들을 내가 이해한 선에서 내 코드에 적용 시키려 몇일을 쓰기도 했다.(아직 많이 부족하지만 그때 고민한 덕을 지금 좀 보고 있다 ㅎㅎ)</p>
+
+<p>그리고 무엇보다 내 서비스라고 생각하고 진행하다보니 귀찮을 법한 SSL 달기, 피드백 받기, 홍보글 작성하기, 이런 것들도 열심히 하게 되었다. 그리고 계속해서 유저의 피드백을 듣기도 하고, 만들어줘서 고맙다는 얘기를 들으면서 서비스를 확장하다보니 보람도 컸다.</p>
+
+<p><img alt="/assets/2020-4th-retrospection-9.png" src="/assets/2020-4th-retrospection-9.png" style="width: 30%;" /></p>
+
+<p>누가 예전에 나에게 개발자는 유저수가 많은 게 중요한 게 아니라 실질적으로 내 개발 결과물로 인해 고마워하는 사람들의 이야기를 듣는 게 중요하다는 이야기를 해줬다. 이 말에 정말 많이 공감한다. 여러 경로를 통해서 나한테 감사함을 표현해주는 사용자 분들 덕에 이 프로젝트를 더 즐겁고 보람차게 진행하고 있다.</p>
+
+<p><img src="/assets/2020-4th-retrospection-10.png" alt="/assets/2020-4th-retrospection-10.png" /></p>
+
+<h2 id="-느낀점">🤔 느낀점</h2>
+
+<p>사실 1월에서야 이 시간의 소중함을 알게 되었기 때문에 스트레스 속에 보냈던 지난 학기에 대한 아쉬움이 남았다. 만일 내가 더 일찍 지금 시간들의 소중함을 알았더라면 조바심에 갇히지 않고 그 시간을 잘 보낼 수 있었을 텐데 하고 말이다.</p>
+
+<p>아쉽지만 그렇기 때문에 지금 이 시간이 너무 소중하고 더 많이 아낌없이 누리고 싶다. 남은 한달은 이것 저것 준비할 것들로 바쁘겠지만 행복 코딩과 짧은 휴식을 최대한 누리기 위해 부단히 노력해야겠다</p>
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/졸업">졸업</a>,&nbsp;<a href="/tag/조바심">조바심</a>,&nbsp;<a href="/tag/휴식">휴식</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/codingtest/2020/10/11/2020-ACM-ICPC-1.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">2020 ACM ICPC 예선 참가 후기 및 문제 풀이 (5 Solved)</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/%EB%8C%80%ED%95%99%EC%8B%9C%EA%B0%84/%ED%9A%8C%EA%B3%A0/2021/02/10/college-timetable-development.html">
+					<span class="page-number">(개인프로젝트 개발 회고) 대학시간 개발기</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/%ED%9A%8C%EA%B3%A0/2021/02/10/2020-4th-quarter-retrospection.html',
+    'title': '2020년 마지막 회고(쉴 줄 모르는 자)'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(워드프레스-2) 도메인 변경과 Ubuntu에 Wordpress로 웹페이지 개설하기</title>
+  <meta name="description" content="1. DNS란 무엇인가? (약어 및 설명)">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="1. DNS란 무엇인가? (약어 및 설명)" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(워드프레스-2) 도메인 변경과 Ubuntu에 Wordpress로 웹페이지 개설하기" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(워드프레스-2) 도메인 변경과 Ubuntu에 Wordpress로 웹페이지 개설하기">
+  <meta name="twitter:description" content="1. DNS란 무엇인가? (약어 및 설명)">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/wordpress/2018/05/14/Wordpress-tutorial.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(워드프레스-2) 도메인 변경과 Ubuntu에 Wordpress로 웹페이지 개설하기</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">May 14, 2018</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/wordpress">Wordpress</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="1-dns란-무엇인가-약어-및-설명">1. DNS란 무엇인가? (약어 및 설명)</h2>
+
+<p>DNS는 Domain Name System의 약어로 사람이 이해하기 쉬운 도메인 이름을 숫자로 된 IP주소로 변환한 것을 의미한다.</p>
+
+<h2 id="2-브라우저에서-dns-방식">2. 브라우저에서 DNS 방식</h2>
+
+<p>www.naver.com이라는 URL을 입력했을 상황을 가정해보자!</p>
+
+<p>a. 먼저 Cache에 www.naver.com이 있는지 확인하고 있으면 접속한다.<br />
+b. hosts 파일에 있는지 확인하고 있으면 접속한다.
+c. Local DNS에 URL을 요청하고 정보 없으면 Root DNS에 요청한다.
+d. Root DNS에  정보가 없다면 local DNS에 com DNS 정보를 제공한다.
+e. Local DNS에 com DNS에 요청하는데 이때도 없다면 local DNS에 naver.com DNS 정보를 제공한다.
+f. naver.com DNS에 www.naver.com을 요청한다.
+g. naver.com DNS는 Local DNS에 www.naver.com 도메인에 대한 IP 정보를 준다.
+h. Local DNS는 사용자에게 네이버 도메인에 대한 IP 정보를 준다.
+i. 사용자는 Web Browser에 www.naver.com 사이트를 접속한다.</p>
+
+<h2 id="3도메인을-도메인서버에-등록하지-않고-현재-리눅스-서버에-있는-가상-도메인을-접속하기-위해서-해야하는-작업은">3.도메인을 도메인서버에 등록하지 않고 현재 리눅스 서버에 있는 가상 도메인을 접속하기 위해서 해야하는 작업은?</h2>
+
+<p>도메인을 도메인 서버에 등록하지 않고 가상 도메인을 이용해서 접속하려면 hosts 파일을 수정해주면 된다. 
+hosts 파일이란 각 OS에서 간단히 DNS의 설정을 제공해주는 파일로 호스트 이름을 IP주소에 맵핑할 때 사용하는 파일이다.</p>
+
+<p>내용을 보면 일반적인 text파일로 되어있는데 관리자 권한으로 실행하여야 수정이 가능한데</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/1.png" alt="사진" /></p>
+
+<p>다음과 같은 텍스트 파일에 원하는 가상 도메인 정보를 입력하여 준다.
+나는 127.0.1.2 라는 ip주소에 jin.ya.ho라는 도메인 정보를 입력해주었다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/2.png" alt="사진" /></p>
+
+<p>firefox에 해당 ip주소로 접속해보면 원하는 도메인의 내용이 출력되었음을 볼 수 있다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/3.png" alt="사진" /></p>
+
+<h2 id="4-내-컴퓨터의-os-및-hosts-파일은-어디에-있는가">4. 내 컴퓨터의 OS 및 hosts 파일은 어디에 있는가?</h2>
+
+<h4 id="a-windows인-경우에는">a. Windows인 경우에는</h4>
+<p>windows/System32/drivers/etc에 hosts파일이 존재한다.</p>
+
+<h4 id="b-mac-os인-경우에는">b. Mac OS인 경우에는</h4>
+<p>/private/etc에 존재한다.</p>
+
+<p>hosts file을 수정하려면 hosts파일을 관리자 권한으로 실행해야한다!</p>
+
+<h2 id="5-virtualhost는-무엇인가">5. VirtualHost는 무엇인가?</h2>
+
+<p>VirtualHost는 하나의 서버에서 한 개의 사이트 말고 여러 개의 웹 사이트를 서비스할 수 있도록 해주는 역할을 한다.</p>
+
+<h2 id="6-virtualhost-설정하는-방법-두-가지는-무엇인가">6. VirtualHost 설정하는 방법 두 가지는 무엇인가?</h2>
+
+<p>설정하는 방법은 크게 두가지로 나뉜다.</p>
+
+<p>a. Named-based Virtual Host
+일명 이름 기반의 가상 호스트라고 불리는데 하나의 ip주소에 여러 개의 이름을 가지게 하는 방식이다.</p>
+
+<p>예를 들면,
+192.168.0.1 이라는 ip 주소에 
+helloworld1.com, 
+helloworld2.com
+라는 두개의 이름을 설정하는 것이다.</p>
+
+<p>b. IP-based Virtual Host
+일명 IP address 기반의 가상 호스트라고 불리는데, 각 웹 사이트 마다 다른 IP address나 port를 가지는 방식이다.</p>
+
+<p>(1)IP address를 달리하는 방법
+helloworld1.com -&gt; 192.168.0.1,
+helloworld2.com -&gt; 192.168.0.2 
+로 설정하는 방법이다.
+(2)port를 달리하는 방법
+helloworld1.com -&gt; 192.168.0.1:80
+helloworld2.com -&gt; 192.168.0.1:8080 
+로 설정하는 방법이다.</p>
+
+<h2 id="7-기존에-있는-사이트-외에-새로운-도메인으로-virtualhost-설정을-위한-steps">7. 기존에 있는 사이트 외에 새로운 도메인으로 VirtualHost 설정을 위한 Steps</h2>
+
+<p>새로 등록하려는 도메인명 : 192.168.56.101
+새로 등록하는 사이트 홈디렉터리 : jin.ya.ho</p>
+
+<p>먼저 새 웹사이트를 위한 디렉토리를 구성한다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/4.png" alt="사진" /></p>
+
+<p>디렉토리 내에 index.html을 생성하고 그 내용을 다음과 같이 설정해준다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/5.png" alt="사진" /></p>
+
+<p>다음은 새 사이트를 위한 Virtual Host를 설정해준다. 
+/etc/pache2/sites-available 속에 있는  000-default.conf 파일을 복사하여 jin.ya.ho.conf 파일을 생성한다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/6.png" alt="사진" /></p>
+
+<p>그리고 해당 파일 내용 속 ServerName, DocumentRoot를 설정하고 싶은 home directory명과 index.html 파일이 있는 디렉토리로 입력해준다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/7.png" alt="사진" /></p>
+
+<p>이제 새로운 Virtual Host 설정파일을 등록해주는데 이것은 /etc/apache2/sites-enabled에 등록해준다.
+a2ensite 명령을 이용하면 손쉽게 등록이 가능해진다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/8.png" alt="사진" /></p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/9.png" alt="사진" /></p>
+
+<p>a2ensite 명령을 이용하면 자동으로 site-enabled 디렉토리에 conf파일이 생성된다.</p>
+
+<p>그리고 마지막으로 /etc/hosts를 수정해준다.
+내가 원하는 도메인명과 홈디렉토리명을 입력해준다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/10.png" alt="사진" /></p>
+
+<p>그리고 제대로 생성 됐는지 확인해준다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/11.png" alt="사진" />
+<img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/12.png" alt="사진" /></p>
+
+<p>짜잔! 도메인과 홈디렉토리명을 내가 설정하여 웹사이트를 구성해보았다!</p>
+
+<h2 id="8-내-컴퓨터에서-dns-server에-등록되지-않은-도메인을-실행시키기-위해-작업해야-하는-것이-무엇인지-설명하시오">8. 내 컴퓨터에서 DNS Server에 등록되지 않은 도메인을 실행시키기 위해 작업해야 하는 것이 무엇인지 설명하시오.</h2>
+
+<p>DNS Server에 등록되지 않은 도메인을 수행하기 위해서</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/13.png" alt="사진" /></p>
+
+<p>내 mac 아래에 있는 hosts 파일을 수정해준다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/14.png" alt="사진" /></p>
+
+<p>그럼 내 피씨에서도 해당 ip주소를 입력 시에 웹페이지가 열린다!</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/15.png" alt="사진" /></p>
+
+<h2 id="9-우분투에서-사용자를-추가하는-방법에-대해-쓰시오">9. 우분투에서 사용자를 추가하는 방법에 대해 쓰시오.</h2>
+<p>사용자를 추가하는 명령어로 두가지가 있다.</p>
+<ul>
+  <li>adduser : 이 명령어는 user를 생성하고 user에 해당하는 비밀번호와 각종 정보를 입력 받는다.</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/16.png" alt="사진" /></p>
+
+<ul>
+  <li>useradd : 이 명령어는 user를 생성하지만 비밀번호나 다른 정보는 입력 받지 않는다.</li>
+  <li>userdel : 이 명령어는 생성했던 user를 삭제한다.</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/17.png" alt="사진" /></p>
+
+<ol>
+  <li>Wordpress 설치하는 방법에 대해 단계별로 설명하시오(화면캡처 제출)</li>
+</ol>
+
+<p>먼저 새로 생성된 계정의 홈 디렉토리로 이동한다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/18.png" alt="사진" /></p>
+
+<p>이동한 후에 최신 위드프레스를 다운로드하고 압축을 푼다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/19.png" alt="사진" /></p>
+
+<p>풀고 난후 압축 파일을 삭제한다!</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/20.png" alt="사진" /></p>
+
+<p>위드프레스 설정 파일을 복사하고 내용을 수정한다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/21.png" alt="사진" /></p>
+
+<p>그리고 내 MySQL에 로그인 한 후 
+위드프레스용 DB를 생성하고 
+DB계정 생성하고 
+모든 DB 및 테이블에 접근 권한을 설정하고 
+설정한 권한을 적용한 후 종료한다!</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/22.png" alt="사진" /></p>
+
+<p>이제 wordpress의 소유자와 권한을 변경해주고 apache를 다시 시작한다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/23.png" alt="사진" /></p>
+
+<p>Firefox를 이용하여 접속하면 웹사이트를 개설하라는 메세지가 뜨는데 여기를 따라서 완료하면!</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/24.png" alt="사진" /></p>
+
+<p>나만의 웹사이트가 열린다!</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Wordpress/25.png" alt="사진" /></p>
+
+<p>워드프레스 계정 id: 21500670
+홈디렉터리 : wordpress.ya.ho/wordpress</p>
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/DNS">DNS</a>,&nbsp;<a href="/tag/도메인바꾸기">도메인바꾸기</a>,&nbsp;<a href="/tag/Wordpress설치">Wordpress설치</a>,&nbsp;<a href="/tag/웹개설">웹개설</a>,&nbsp;<a href="/tag/워드프레스설치">워드프레스설치</a>,&nbsp;<a href="/tag/Web개설">Web개설</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/wordpress/linux/2018/05/08/Apache-php-mysql.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(워드프레스-1) APT 명령어, APM 설치하기(apache2, php7, mysql)</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/java/2018/06/26/Java-round-1.html">
+					<span class="page-number">1라운드. (자바 GUI 활용) 계산기 만들기!</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/wordpress/2018/05/14/Wordpress-tutorial.html',
+    'title': '(워드프레스-2) 도메인 변경과 Ubuntu에 Wordpress로 웹페이지 개설하기'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

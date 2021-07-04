@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>2라운드. (자바 Graphics) 그림판 만들기!</title>
+  <meta name="description" content="1라운드를 마치자 마자 나온 2라운드 과제는 나만의 그림판을 만드는 것이다.">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="1라운드를 마치자 마자 나온 2라운드 과제는 나만의 그림판을 만드는 것이다." />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="2라운드. (자바 Graphics) 그림판 만들기!" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="2라운드. (자바 Graphics) 그림판 만들기!">
+  <meta name="twitter:description" content="1라운드를 마치자 마자 나온 2라운드 과제는 나만의 그림판을 만드는 것이다.">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/java/2018/06/26/Java-round-2.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">2라운드. (자바 Graphics) 그림판 만들기!</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">June 26, 2018</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/java">Java</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <p>1라운드를 마치자 마자 나온 2라운드 과제는 나만의 그림판을 만드는 것이다.</p>
+
+<h3 id="그림판-과제">그림판 과제</h3>
+
+<p>기한 : 기한 : 6/21(오후8시) ~ 6/25(오후8시)</p>
+
+<p>1.그림판(최소 4가지)
+-선, 사각형, 원, Polyline, Sketch(Pen), Spray, Pattern
+2.속성(최소 2가지)
+-굵기, 색, Style, 채우기
+3.부가기능(최소 2가지)
+-drag &amp; drop, resize, rotate, undo/redo, 지우기, 저장/불러오기, 복사/붙여넣기, grouping/ungrouping</p>
+
+<p>5일동안 코드를 몇번 엎고 다시 짜고를 반복한 결과 다음과 같은 결과물을 얻어냈다:)</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round2/1.png" alt="사진" /></p>
+
+<h2 id="구현해낸-기능은-다음과-같다">구현해낸 기능은 다음과 같다.</h2>
+
+<p>가)    미리보기 기능</p>
+
+<p>A.      툴바 가장 왼쪽에 위치한 미리보기는 도형을 그리기 위해서 설정한 선과 도형의 색상이 어떻게 그려질지 미리 보여주는 역할을 한다. 
+B.      이는 그리기 앞서서 선과 도형의 조합을 미리 볼 수 있도록 해준다.</p>
+
+<p>나)     그리기 기능</p>
+
+<p>A.      이 그리기 툴에서는 직선, 사각형, 원, 폴리라인, 스케치 기능을 제공한다.
+B.      각각의 기능은 모두 툴바에 있는 버튼을 누르면 그릴 수 있게 되고 여러 회 그릴 수 있다.
+C.      해당 도형을 그만 그리고 싶다면 선택한 도형 버튼을 다시 클릭하거나 마우스 오른쪽 버튼을 클릭하면 DEFAULT모드로 다시 돌아갈 수 있다.
+D.      점을 선택한 후 다음 점을 선택할 때까지 잔상이 남도록 하였다. 다음 점을 선택하지 않는다면 그려지지 않는다.</p>
+
+<p>i.          직선 그리기</p>
+
+<ul>
+  <li>직선이 그려진 이 버튼을 클릭하면 캔버스 상에 직선을 그릴 수 있다.</li>
+  <li>시작점에 마우스를 누른 후 드래그 하여 끝점에서 마우스를 놓게 되면 직선이 그려지게 된다.</li>
+</ul>
+
+<p>ii.          사각형 그리기</p>
+
+<ul>
+  <li>사각형이 그려진 버튼을 선택한 후 시작점에서 마우스를 누른 후 드래그 하면 임의의 사각형이 그려진다.</li>
+  <li>끝점에서 마우스를 놓게 되면 사각형이 하나 그려진다.</li>
+</ul>
+
+<p>iii.          원 그리기</p>
+
+<ul>
+  <li>원이 그려진 버튼을 선택한 후 한 점에서 마우스를 누른 후 드래그 하면 임의의 원이 그려진다.</li>
+  <li>끝점에서 마우스를 놓게 되면 시작점부터 끝점까지의 임의의 사각형을 채우는 원(타원)이 그려지게 된다.</li>
+</ul>
+
+<p>iv.          폴리라인 그리기</p>
+
+<ul>
+  <li>‘&gt;’ 모양이 그려진 버튼을 선택하면 굴곡진 선을 그릴 수 있다.</li>
+  <li>시작점에서 마우스를 클릭하고 꺾고 싶은 점에서 마우스를 왼쪽 마우스를 클릭해주고 마지막 점에서 오른쪽 마우스를 클릭하면 하나의 폴리라인이 만들어진다.</li>
+</ul>
+
+<p>v.          스케치 그리기</p>
+
+<ul>
+  <li>‘⌇’ 모양이 그려진 버튼을 클릭하면 원하는 대로 그림이나 글씨를 쓸 수 있다.</li>
+  <li>마우스를 드래그하면 마우스를 따라 선이 그려지게 된다.</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round2/2.png" alt="사진" />
+<em>도형 그리기 버튼을 이용하여 그린 도형</em></p>
+
+<p>다)    Undo &amp; Redo 기능</p>
+
+<p>A.      도형 그리기 옆에는 방금 작업한 내용으로 돌아갈 수 있는 undo 버튼과 undo한 내용을 되돌릴 수 있는 redo 버튼이 있다.</p>
+
+<p>B.      Undo를 한 후에 무언가 그려지게 되면 undo 내용을 redo할 수 없으니 유의하기 바란다.</p>
+
+<p>C.      도형을 움직이고 undo를 하게 되면 움직이기 전 상황으로 돌아가며 그 외에는 바로 앞선 도형이 그려지기 전 캔버스로 돌아가게 된다.</p>
+
+<p>라)    지우개 &amp; 지우기 기능</p>
+
+<p>A.      지우개 버튼을 선택하면 지우개 사이즈를 선택할 수 있는 프레임이 뜨게 된다. 지우개는 버튼을 누른 후 드래그 하게 되면 동그란 지우개가 보여지며 지우개는 캔버스 배경과 같은 흰색으로 그려지게 되며 앞서 그린 도형들을 가리는 것이 가능하다.</p>
+
+<p>B.      지우기 버튼은 캔버스 상에 있는 모든 그림을 지워준다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round2/3.png" alt="사진" />
+<em>지우개 크기를 선택하는 창</em></p>
+
+<p>C.      둘 다 undo와 redo가 가능하다.</p>
+
+<p>마)    펜, 채우기 색, 굵기 선택 기능
+A.      펜, 색을 선택하게 되면 색 선택 창이 뜨게 되는데 이 창에서 색을 골라주면 선택에 따라 도형이나 선을 그릴 수 있게 된다.
+B.      선택한 색에 따라 미리보기 도형이 변하게 된다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round2/4.png" alt="사진" />
+<em>펜과 채우기 색을 고르는 창</em></p>
+
+<p>바)    도형 움직이기 기능
+A.      DEFAULT인 상태에서 마우스로 그려진 도형을 선택 한 후에 옮기게 되면 도형을 원하는 곳으로 옮길 수 있다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round2/5.png" alt="사진" />
+<img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round2/6.png" alt="사진" />
+<em>움직이기 기능을 이용하여 도형을 움직인 모습</em></p>
+
+<p>사)    현재 상태 표시 기능
+A.      좌측 하단에 보면 현재 마우스의 좌표와 현재 상태를 보여주는 패널이 있다. 
+B.      현재 작업 모드가 무엇인지 볼 수 있다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round2/7.png" alt="사진" />
+<em>현재 작업 중인 마우스 좌표와 모드를 볼 수 있는 패널</em></p>
+
+<h3 id="그럼-어떻게-짰는지를-다음의-과정을-통해서-보자">그럼 어떻게 짰는지를 다음의 과정을 통해서 보자!!</h3>
+
+<p>이 프로그램은 자바 언어를 이용해서 개발되었다. 자바 내에 있는 패키지를 이용해서 작성하였는데 그래픽을 제공한 패키지로는 awt와 그림을 그리는 환경에는 swing 패키지가 사용되었다.</p>
+
+<p>A.     환경 구성
+a.      Swing에서 제공하는 JFrame 창에 메뉴바를 보여주는 JMenubar과 그림을 그리는 판인 JPanel을 이용하여 추가하여 환경을 설정하였다.
+b.     JMenubar에는 여러 버튼을 추가하여서 도형과 기능 선택이 가능하도록 하였다.
+c.      이 프로그램은 여러 자바 파일을 생성하지 않고 하나의 자바 파일에 subclass들을 두어서 하나의 JFrame에서 같은 필드를 공용할 수 있도록 하였다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round2/8.png" alt="사진" />
+<img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round2/9.png" alt="사진" /></p>
+
+<p>d.     프레임 안에 넣을 요소들을 인스턴스화 하여서 위와 같이 add명령을 이용해서 추가하고 각각의 요소들의 Location, Size, Background을 설정하였다.</p>
+
+<p>B.     툴바 설정</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round2/10.png" alt="사진" /></p>
+
+<p>a.      툴바를 설정 해준 후에 미리 보기 기능을 하는 사각형을 그리기 위해 JLabel을 추가해 줬다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round2/11.png" alt="사진" /></p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round2/12.png" alt="사진" /></p>
+
+<p>b.     툴바의 그림을 그리는 역할을 하는 버튼인 optionbtn을 추가해주었다. 
+i.      이 그림 그리는 역할을 하는 버튼에 ButtonAction을 감지하는ActionListener를 추가해주었는데 버튼이 선택됨을 감지해주는 역할을 한다.
+c.      그리고 기능을 하는 버튼들에도 똑같이 setbtn에도 actionlistener을 추가해줬다.
+d.     두께를 설정하기 위해서는 spinner를 이용하였다. 
+i.      스피너란 위와 아래 버튼이 있는 수치를 설정할 수 있게 해주는 도구이다. 이것을 통해서 글자 두께를 설정해주었다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round2/13.png" alt="사진" /></p>
+
+<p>ii.      여기에도 changeListener를 연결해주어서 spinner가 값이 바뀔 때 마다 두께가 바뀔 수 있도록 설정해주었다. 
+iii.      다음은 버튼이 눌렸을때를 위한 ActionListener이다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round2/14.png" alt="사진" />
+<img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round2/15.png" alt="사진" /></p>
+
+<p>D.      이 코드를 보면 버튼에 해당하는 문자열을 받게 되면 option을 바꿔주는 것으로 되어있다. 옵션을 위한 값들이 다음과 같이 public static final int로 위치하고 있다.
+E.       지우개 버튼을 누를 시에는 JSlider가 추가되어 지우개의 크기는 slider를 통해서 받을 수 있다.</p>
+
+<p>F.       그리고 undo 와 redo를 위해서 각 undo한 도형을 담아 놓을 수 있는 redoshape stack을 만들어 놓고 그려진 도형이 담겨져있는 shape라는 stack에 넣고 빼고 할 수 있도록 하였다. 
+i.          Undo 버튼을 클릭시에는 Stack shape에 저장되어있는 가장 최근 원소를 pop()하고 pop()한 원소를 Stack redoshape에 저장해놓는 것으로 진행하였다.
+ii.          Redo 버튼 클릭시에는 stack redoshape을 pop()해서 stack shape에 저장한 후 canvas의 repaint()를 진행해주었다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round2/16.png" alt="사진" />
+<img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round2/17.png" alt="사진" />
+<img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round2/19.png" alt="사진" /></p>
+
+<p>C.     도형 저장소 설정</p>
+
+<p>a.      도형을 담을 수 있는 클래스를 하나 생성하여서 그 안에 각 도형의 정보를 담아주었다.
+b.      각 과정에서 이 클래스를 이용한 인스턴스를 만들어서 stack에 저장하는 과정을 반복했다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Java-Project/Round2/18.png" alt="사진" /></p>
+
+<p>D.     캔버스 설정</p>
+
+<p>a.      생성자에 마우스 리스너를 추가해서 마우스의 좌표를 가져오거나 마우스의 움직임을 받을 수 있도록 하였다.
+b.      캔버스는 JPanel로 repaint()시 자동으로 paintComponent(Graphics g){} 메소드가 실행된다. 그 점을 이용하여서 마우스 리스너에서 여러 값들을 받아서 그림을 그려야 할 떄가 오면 repaint를 진행하여 주었다.
+c.      색상을 선택하고 그리는 데에는 Graphics g라는 패러미터가 사용되었는데 이 g는 일종의 펜 같은 역할을 한다. 더 나아가 2DGraphics 는 두께와 채우기 색상까지 고를 수 있게 되어있어서 이 기능을 이용하여서 paintComponent(Graphics g)를 수행했다.</p>
+
+<p>E.      paintComponent 구성</p>
+
+<p>a.      paintComponent는 두가지로 나누어져있는데 매번 stack shape에 있는 저장되어있는 object를 하나씩 꺼내서 그려주는 역할을 하는 부분과 드래그 시의 상황을 그려주는 잔상 그리기 부분으로 나누어져있다. 
+b.      Repaint가 진행되면 먼저 shape에서 꺼낸 object에 저장된 myfillcolor, thick 정보를 이용하여 Graphics의 색상과 두께를 정하고 각 케이스 마다 fill, draw를 진행한다. 이 과정을 stack 끝까지 반복한다.
+c.      그 후에 마우스가 드래그 될 때마다 계속 repaint() 되면서 보내지는 정보를 이용해서 잔상을 그려주는 것을 진행한다.</p>
+
+<p>F.      마우스 리스너 구성</p>
+
+<p>a.      MyMouseListener는 MouseAdapter라는 부모 함수를 두고 MouseMotionListener를 implement해서 abstract method(mouseDragged와 mouseMoved)를 override해주었다.</p>
+
+<p>b.      먼저 mouse가 pressed 상태가 되면 현재 option이 무엇인지에 따라 다음 과정이 진행된다.
+i.          option이 DEFAULT라면 도형 움직이기가 가능해지는데 이 때 마우스 프레스된 지점에 도형이 있다면 그 중 가장 최근 도형의 정보를 tempshape이라는 object에 저장한다. 그리고 dragged 상태가 되면 마우스 움직인 정도 만큼 도형이 움직일 수 있도록 구성하였다. 
+ii.          option이 도형 중 하나라면 newshape이라는 object를 생성해서 필요한 정보를 드레그와 프레스 과정을 통해 담을 수 있도록 하였다.
+c.      도형 그리는 과정은 다음과 같이 하였다. 각 과정은 마우스 pressed시 newshape이라는 object가 생성되고 모든 과정이 끝난 후에는 newshape을 stack shape에 넣어주도록 설정하였다.
+i.          라인은 pressed 될 때를 start로 하고 released 되는 지점을 end가 되게 하였고 drawline method를 이용해서 그렸다.
+ii.          사각형과 원은 pressed 될 때 start로 하고 released 되는 지점을 end로 하였다. 근데 end 값이 start보다 작으면 width와 height가 음수가 되기 때문에 start점을 네 모퉁이 중에 가장 왼쪽 상단 점으로 하고 width와 height를 math.abs를 이용해서 정해주었다. 그릴 때 사용한 메소드는 drawRect, drawOval이다.
+iii.          폴리라인은 매번 프레스 될 때 마다 point를 저장하고 마지막에 마우스 오른쪽 버튼을 프레스를 하면  끝이 난다. 사용한 메소드는 drawPolyline이다.
+iv.          Sketch는 드레그를 이용해서 진행하였다. 드레그 할 때마다 점들의 정보를 받아와서 매번 drawLine을 진행하여 주었다.</p>
+
+<p>단 시간 내에 프로그램을 만들다 보니 아직 구현 못한 기능들이 많다. 그룹핑, 복사/붙여넣기, 저장/불러오기 기능도 추가해보고 싶었는데 못하게 되어 아쉽지만 일단 처음으로 graphics를 이용하여 어느 정도 완성도 있는 프로그램을 만들어 봤다는 사실에 만족한다. 콘솔 창이 아닌 프레임이 생성되는 것도 신기했는데 프레임에 내가 도구를 추가해서 사용 가능한 기능을 갖춘 프로그램을 만들었다는 사실에 굉장히 보람차다. 다음 번에도 GUI를 이용한 무엇인가를 만들어보라고 하면 막막함만 있지는 않을 것 같다.</p>
+
+<p>코드는 github에 게시해놨다.</p>
+
+<p><a href="https://github.com/gur5381/JavaStudy18-1">https://github.com/gur5381/JavaStudy18-1</a></p>
+
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/자바">자바</a>,&nbsp;<a href="/tag/Graphics자바">Graphics자바</a>,&nbsp;<a href="/tag/자바그래픽스활용">자바그래픽스활용</a>,&nbsp;<a href="/tag/자바그림판만들기">자바그림판만들기</a>,&nbsp;<a href="/tag/자바라인그리기">자바라인그리기</a>,&nbsp;<a href="/tag/자바도형드래그">자바도형드래그</a>,&nbsp;<a href="/tag/자바JButton활용">자바JButton활용</a>,&nbsp;<a href="/tag/자바마우스리스너활용">자바마우스리스너활용</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/java/2018/06/26/Java-round-1.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">1라운드. (자바 GUI 활용) 계산기 만들기!</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/java/2018/06/28/Java-round-3.html">
+					<span class="page-number">3라운드. (자바 Mysql 연동 DB) 로그인 프로그램 만들기!</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/java/2018/06/26/Java-round-2.html',
+    'title': '2라운드. (자바 Graphics) 그림판 만들기!'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(Crest 활용 테스팅) Crest의 정의 및 사용법</title>
+  <meta name="description" content="Crest란  a concolic test generation tool for C programs          symbolic한 실행과 concrete 실행을 함께 사용하는 기술      주어진 소스코드를 기반으로 높은 커버리지를 달성하는 테스트 케이스를 자동으로 생성하는 테스...">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Crest란  a concolic test generation tool for C programs          symbolic한 실행과 concrete 실행을 함께 사용하는 기술      주어진 소스코드를 기반으로 높은 커버리지를 달성하는 테스트 케이스를 자동으로 생성하는 테스..." />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(Crest 활용 테스팅) Crest의 정의 및 사용법" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(Crest 활용 테스팅) Crest의 정의 및 사용법">
+  <meta name="twitter:description" content="Crest란  a concolic test generation tool for C programs          symbolic한 실행과 concrete 실행을 함께 사용하는 기술      주어진 소스코드를 기반으로 높은 커버리지를 달성하는 테스트 케이스를 자동으로 생성하는 테스...">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/se/2019/06/08/crest-1.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(Crest 활용 테스팅) Crest의 정의 및 사용법</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">June 8, 2019</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/SE">Se</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="crest란">Crest란</h2>
+<ul>
+  <li>a concolic test generation tool for C programs
+    <ul>
+      <li>symbolic한 실행과 concrete 실행을 함께 사용하는 기술</li>
+      <li>주어진 소스코드를 기반으로 높은 커버리지를 달성하는 테스트 케이스를 자동으로 생성하는 테스팅 기법</li>
+      <li><strong>쉽게 말해 코드에 있는 조건문을 최대한 방문하면서 문제가 있는지 없는지 보는 테스팅 방법이다</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="symbolic-execution과-그-한계">Symbolic execution과 그 한계</h2>
+<ul>
+  <li>각 path를 알아내기 위해 인풋을 실제 값이 아닌 Symbol로 넣어서 테스트를 하며 각 path의 condition을 업데이트한다.</li>
+  <li>그리고 Constraint solver를 통해 path의 컨디션을 풀어 input을 생성한다.</li>
+  <li>이 방법의 문제점은 실제로 풀기 전에 얘가 갈 수 있는 길인지 알 수 없다</li>
+</ul>
+
+<h2 id="concolic-execution">Concolic execution</h2>
+<ul>
+  <li>symbolic하게 input을 발견한다</li>
+  <li>그리고 다음 path를 찾기 위해서 실제 concrete한 input을 대입해서 path를 symbolic하게 다시 찾는다.</li>
+  <li>이 과정을 concolic이라고 한다.</li>
+</ul>
+
+<p>## 예제코드</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/* Copyright (c) 2008, Jacob Burnim (jburnim@cs.berkeley.edu)
+ *
+ * This file is part of CREST, which is distributed under the revised
+ * BSD license.  A copy of this license can be found in the file LICENSE.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See LICENSE
+ * for details.
+ */
+
+#include &lt;crest.h&gt;
+#include &lt;stdio.h&gt;
+
+int main(void) {
+  int a = 0 , b = 0, c = 0 ;
+
+  CREST_int(a) ; fprintf(stderr, "%d\n", a) ;
+  CREST_int(b) ; fprintf(stderr, "%d\n", b) ;
+
+  c = 3 * a + b ;
+
+  if (a &lt; 0) {
+    printf("@L0") ;
+  }
+  else {
+      if (b &gt; 8) {
+          printf("@L1") ;
+      } 
+      else {
+          if (c &gt; 0) {
+              printf("@L2") ;
+          }
+          else {			  
+              if (a + b &lt; 10) {
+                  printf("@L3") ;
+              }
+              else {
+                  printf("@L4") ;
+              }
+          }
+      }
+  }
+  printf("\n") ;
+  return 0;
+}
+</code></pre></div></div>
+
+<h2 id="crest-진행-과정">Crest 진행 과정</h2>
+
+<blockquote>
+  <ul>
+    <li>위 예제 코드에 대해서 Crest를 통해서 path를 찾아내고 input을 생성하는 방법을 확인해보자!</li>
+    <li>CREST_int() 함수를 통해서 a와 b의 값이 symbolic하게 주어질 예정이다.</li>
+    <li>전 과정을 통해 발견한 condition path와 input은 다음 표를 통해 알 수 있다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/crest-1.png" alt="사진" /></p>
+
+<h2 id="실제-버그-찾아보기">실제 버그 찾아보기</h2>
+
+<p>아래의 heapsort.c 파일에 실제로 버그가 존재한다. 버그를 Crest를 사용해서 찾고 수정하라.</p>
+
+<h3 id="heapsortc-코드">heapsort.c 코드</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;stdio.h&gt; 
+#include &lt;crest.h&gt;
+
+void swap(int *x, int *y)
+{
+    int _x = *x ;
+    *x = *y ;
+    *y = _x ;
+}
+
+void heapify(int arr[], int n, int i) 
+{ 
+    int largest = i;
+    int l = 2*i + 1; 
+    int r = 2*i + 2; 
+
+    if (l &lt; n &amp;&amp; arr[l] &gt; arr[largest]) 
+        largest = l; 
+
+    if (r &lt; n &amp;&amp; arr[r] &gt; arr[largest]) 
+        largest = r; 
+
+    if (largest != i) 
+    { 
+        swap(&amp;(arr[i]), &amp;(arr[largest])); 
+        heapify(arr, n, largest); 
+    } 
+} 
+
+void heapSort(int arr[], int n) 
+{ 
+    for (int i = n / 2 - 1; i &gt; 0; i--)
+        heapify(arr, n, i); 
+
+    for (int i=n-1; i &gt;= 0; i--) 
+    { 
+        swap(&amp;(arr[0]), &amp;(arr[i])) ; 
+        heapify(arr, i, 0); 
+    } 
+} 
+
+void printArray(int arr[], int n) 
+{ 
+    for (int i=0; i&lt;n; ++i) 
+    printf("%d ", arr[i]) ;
+    printf("\n") ;
+} 
+
+int main() 
+{ 
+    int arr[] = {12, 11, 13, 5, 6, 7}; 
+    int n = 6 ;
+    heapSort(arr, n); 
+
+    printArray(arr, n); 
+} 
+</code></pre></div></div>
+
+<h3 id="1-crest-사용을-위해-heapsortc-파일-복사하기">1. crest 사용을 위해 heapsort.c 파일 복사하기</h3>
+
+<blockquote>
+  <ul>
+    <li>crest로 프로그램을 검토하기 위해 heapsort.c 를 heapsort.crest.c 로 복사한다.</li>
+  </ul>
+</blockquote>
+
+<h3 id="2-crest-테스트-환경-더하기">2. crest 테스트 환경 더하기</h3>
+
+<ol>
+  <li>crest_int로 어레이 원소들을 설정해준다.</li>
+  <li>실제 솔팅 결과가 옳은지 확인하기 위해서 checkArray라는 함수를 만든다.</li>
+</ol>
+
+<p><strong>코드</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;stdio.h&gt; 
+#include &lt;crest.h&gt;
+
+void swap(int *x, int *y)
+{
+    int _x = *x ;
+    *x = *y ;
+    *y = _x ;
+}
+
+void heapify(int arr[], int n, int i) 
+{ 
+    int largest = i;
+    int l = 2*i + 1; 
+    int r = 2*i + 2; 
+
+    if (l &lt; n &amp;&amp; arr[l] &gt; arr[largest]) 
+    largest = l; 
+
+    if (r &lt; n &amp;&amp; arr[r] &gt; arr[largest]) 
+    largest = r; 
+
+    if (largest != i) 
+    { 
+        swap(&amp;(arr[i]), &amp;(arr[largest])); 
+        heapify(arr, n, largest); 
+    } 
+} 
+
+void heapSort(int arr[], int n) 
+{ 
+    for (int i = n / 2 - 1; i &gt; 0; i--) 
+    heapify(arr, n, i); 
+
+    for (int i=n-1; i &gt;= 0; i--) 
+    { 
+        swap(&amp;(arr[0]), &amp;(arr[i])) ; 
+        heapify(arr, i, 0); 
+    } 
+} 
+
+void printArray(int arr[], int n) 
+{ 
+    for (int i=0; i&lt;n; ++i) 
+    printf("%d ", arr[i]) ;
+    printf("\n") ;
+} 
+
+void checkArray(int arr[], int n){
+    for(int i=1; i&lt;n; i++){
+        if(arr[i] &lt; arr[i-1]) {
+            printf("failed\n");
+            break;
+        }
+    }
+}
+
+int main() 
+{ 
+    int arr[] = {12, 11, 13, 5, 6, 7}; 
+    int n = 6 ;
+    for(int i = 0; i &lt; n; i++){
+        CREST_int(arr[i]) ; fprintf(stderr, "%d\n", arr[i]) ;
+    }
+    heapSort(arr, n); 
+
+    printArray(arr, n); 
+    checkArray(arr, n);
+} 
+</code></pre></div></div>
+
+<h3 id="3-crest-돌리기">3. Crest 돌리기</h3>
+
+<blockquote>
+  <ul>
+    <li>먼저 crestc로 백그라운드에서 dynamic symbolic analysis를 하면서 실행가능한 파일을 만든다.</li>
+    <li>그리고 dfs 방법을 이용해 iteration을 1000번 진행시킨다.</li>
+    <li>명령어는 밑에 있다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>crestc heapsort.crest.c
+./heapsort.crest 1000 -pdfs
+</code></pre></div></div>
+
+<h3 id="4-버그-찾기">4. 버그 찾기</h3>
+
+<blockquote>
+  <ul>
+    <li>돌리고 나서 결과를 확인해보니 sorting이 실패하는 친구들이 있었다.</li>
+    <li>그리고 그 친구들의 공통점은 첫번째 원소만 sorting이 잘 안된다는 것이다.</li>
+    <li>Ex) {12. 11, 13, 5, 6, 7}-&gt;{5, 6, 7, 11, 13, 12}, {0, -1, 0, 0, -2, 1}-&gt;{-2, -1, 0, 0, 1, 0}</li>
+  </ul>
+</blockquote>
+
+<h3 id="5-버그-수정하기">5. 버그 수정하기</h3>
+
+<blockquote>
+  <ul>
+    <li>안되는 input을 따라가면서 버그를 발견한다.</li>
+    <li>버그를 확인해보니 등호 하나를 빼먹으면서 발생하는 문제 였다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for (int i = n / 2 - 1; i &gt; 0; i--) 
+-&gt; 
+for (int i = n / 2 - 1; i &gt;= 0; i--) 
+</code></pre></div></div>
+
+<h3 id="6-crest-다시해보고-결과-확인하기">6. Crest 다시해보고 결과 확인하기</h3>
+
+<blockquote>
+  <ul>
+    <li>실패하는 경우 없이 모두 잘돌아 간다!</li>
+    <li>이상으로 Crest 활용 종료!!</li>
+  </ul>
+</blockquote>
+
+<h2 id="느낀점">느낀점</h2>
+<blockquote>
+  <ul>
+    <li>프로그램이 제대로 작동하고 예외 상황에도 문제 없다는 것을 증명하는데 좋은 툴이 될 것 같다.</li>
+    <li>내 육목코드에도 엄청난 if 문이 있는데 이를 해결해 줄 수도 있지 않을까 하고 조심스럽게 기대하게 된다.</li>
+  </ul>
+</blockquote>
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/crest">crest</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/2019/06/01/binary-1.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(프로그래머스 코딩테스트 고득점 kit) 이분탐색 Level3 예산</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/python/2019/06/18/python-1.html">
+					<span class="page-number">(Python 입문기) 파이썬 특이점 정리 1 (자료형, 제어문)</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/se/2019/06/08/crest-1.html',
+    'title': '(Crest 활용 테스팅) Crest의 정의 및 사용법'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

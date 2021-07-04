@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(BigData Analysis 도전기) Kaggle Geospatial Analysis Tutorial (3. Interactive Maps)</title>
+  <meta name="description" content="Introduction">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Introduction" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(BigData Analysis 도전기) Kaggle Geospatial Analysis Tutorial (3. Interactive Maps)" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(BigData Analysis 도전기) Kaggle Geospatial Analysis Tutorial (3. Interactive Maps)">
+  <meta name="twitter:description" content="Introduction">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D/2019/11/18/GA-3.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(BigData Analysis 도전기) Kaggle Geospatial Analysis Tutorial (3. Interactive Maps)</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">November 18, 2019</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/데이터분석">데이터분석</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="introduction">Introduction</h2>
+
+<blockquote>
+  <ul>
+    <li>이제 3개 남았다 좀만 힘내자.</li>
+    <li>이번 튜토리얼에서는 folium package를 이용해서 interactive한 맵을 만드는 방법에 대해 배워볼 것이다.</li>
+    <li>Boston의 범죄 데이터를 이용해서 시각화 해볼 예정이다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import folium
+from folium import Choropleth, Circle, Marker
+from folium.plugins import HeatMap, MarkerCluster
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">embed_map()</code>이라는 함수를 만들어서 interactive map을 만드는데 사용해보자.</li>
+    <li>이 함수는 두개의 parameter를 받는데 하나는 map의 이름이고 하나는 저장될 html이름이다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Function for displaying the map
+def embed_map(m, file_name):
+    from IPython.display import IFrame
+    m.save(file_name)
+    return IFrame(file_name, width='100%', height='500px')
+</code></pre></div></div>
+
+<h2 id="your-first-interactive-map">Your first interactive map</h2>
+
+<blockquote>
+  <ul>
+    <li>일단 <code class="language-plaintext highlighter-rouge">folium.Map()</code>이라는 함수에서 시작해보자.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Create a map
+m_1 = folium.Map(location=[42.32,-71.0589], tiles='openstreetmap', zoom_start=10)
+
+# Display the map
+embed_map(m_1, 'm_1.html')
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>이 함수를 진행하면 다음과 같은 맵이 생성될 것이다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="/assets/GA-3-1.png" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>folium.Map에는 parameter를 받아서 map의 형태를 정해주는 방법이 있다.</li>
+    <li><code class="language-plaintext highlighter-rouge">location</code>은 지도의 중심점을 잡아준다.</li>
+    <li><code class="language-plaintext highlighter-rouge">tiles</code>는 지도의 스타일을 정한다.</li>
+    <li><code class="language-plaintext highlighter-rouge">zoom_start</code>는 얼마나 줌인된 상태로 시작할지 정하는 것이다.</li>
+  </ul>
+</blockquote>
+
+<h2 id="the-data">The data</h2>
+
+<blockquote>
+  <ul>
+    <li>이제 우리는 범죄 정보를 map에다가 추가해 볼 것이다.</li>
+    <li>여태까지 파일 받는 방법에 대해서는 많이 배워봤기 때문에 이 과정은 스킵하도록 하겠다.</li>
+    <li>하지만 일단 crimes는 2018년도 이후 범죄 정보가 담긴 GeoDataFrame이다.</li>
+  </ul>
+</blockquote>
+
+<h2 id="plotting-points">Plotting points</h2>
+
+<blockquote>
+  <ul>
+    <li>일단 너무 데이터를 많이 주지 않기 위해서 낮시간에 일어난 범죄만 추려보겠다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>daytime_robberies = crimes[((crimes.OFFENSE_CODE_GROUP == 'Robbery') &amp; \(crimes.HOUR.isin(range(9,18))))]
+</code></pre></div></div>
+
+<h3 id="foliummarker">folium.Marker</h3>
+
+<blockquote>
+  <ul>
+    <li>이제 <code class="language-plaintext highlighter-rouge">folium.Marker()</code>라는 함수를 이용해서 지도에 범죄의 위치를 표시해보겠다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Create a map
+m_2 = folium.Map(location=[42.32,-71.0589], tiles='cartodbpositron', zoom_start=13)
+
+# Add points to the map
+for idx, row in daytime_robberies.iterrows(): 
+    Marker([row['Lat'], row['Long']]).add_to(m_2)
+
+# Display the map
+embed_map(m_2, 'm_2.html')
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>그러면 이제 맵에 하나씩 다음과 같이 표시되게 된다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="/assets/GA-3-2.png" alt="사진" /></p>
+
+<h3 id="foliumpluginsmarkercluster">folium.plugins.MarkerCluster</h3>
+
+<blockquote>
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">folium.plugins.MarkerCluster()</code>를 이용하면 묶어줄 수 있다.</li>
+    <li>각각의 marker를 MarkerCluster object에 추가시켜줄 수 있다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Create the map
+m_3 = folium.Map(location=[42.32,-71.0589], tiles='cartodbpositron', zoom_start=13)
+
+# Add points to the map
+mc = MarkerCluster()
+for idx, row in daytime_robberies.iterrows():
+    if not math.isnan(row['Long']) and not math.isnan(row['Lat']):
+        mc.add_child(Marker([row['Lat'], row['Long]]))
+m_3.add_child(mc)
+
+# Display the map
+embed_map(m_3, 'm_3.html')
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>위의 코드를 통해 비슷한 지역에 있는 애들을 묶어줄 수 있도록 cluster에 넣어준다.</li>
+    <li>그럼 다음과 같은 결과를 얻을 수 있다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="/assets/GA-3-3.png" alt="사진" /></p>
+
+<h3 id="bubble-maps">Bubble maps</h3>
+
+<blockquote>
+  <ul>
+    <li>map에다가 점들을 추가하고 싶다면 다음과 같은 코드를 진행하면 된다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Create a base map
+m_4 = folium.Map(location=[42.32,-71.0589], tiles='cartodbpositron', zoom_start=13)
+
+def color_producer(val):
+    if val &lt;= 12:
+        return 'forestgreen'
+    else:
+        return 'darkred'
+
+# Add a bubble map to the base map
+for i in range(0,len(daytime_robberies)):
+    Circle(
+        location=[daytime_robberies.iloc[i]['Lat'], daytime_robberies.iloc[i]['Long']],
+        radius=20,
+        color=color_producer(daytime_robberies.iloc[i]['HOUR'])).add_to(m_4)
+
+# Display the map
+embed_map(m_4, 'm_4.html')
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>위의 코드를 진행하면 12시 이전 값들에 대해서는 초록원, 이후 값들은 빨간원이 생기는 것을 볼 수 있다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="/assets/GA-3-4.png" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>이때 주의할 점은 <code class="language-plaintext highlighter-rouge">folium.Circle()</code>은 여러개의 값을 받는다는 점이다.</li>
+    <li><code class="language-plaintext highlighter-rouge">location</code>은 점의 위치, <code class="language-plaintext highlighter-rouge">radius</code>는 원의 반지름, <code class="language-plaintext highlighter-rouge">color</code>은 색의 종류을 의미한다.</li>
+    <li>이때, 값을 지정해주지 않고 위의 코드와 같이 함수를 이용해서 지정해줄 수도 있다.</li>
+  </ul>
+</blockquote>
+
+<h3 id="heatmaps">Heatmaps</h3>
+
+<blockquote>
+  <ul>
+    <li>이번에는 heatmap이다.</li>
+    <li>각 지역의 범죄 빈번도를 나타내기 위해서 heatmap을 사용할 수도 있다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Create a base map
+m_5 = folium.Map(location=[42.32,-71.0589], tiles='cartodbpositron', zoom_start=12)
+
+# Add a heatmap to the base map
+HeatMap(data=crimes[['Lat', 'Long']], radius = 10).add_to(m_5)
+
+# Display the map
+embed_map(m_5, 'm_5.html')
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>이를 통해 다음과 같은 맵을 만들어 낼 수 있다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="/assets/GA-3-5.png" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>heatmap의 <code class="language-plaintext highlighter-rouge">data</code>는 location의 정보가 담긴 DataFrame을 의미하고 <code class="language-plaintext highlighter-rouge">radius</code>는 smoothness를 의미한다.</li>
+  </ul>
+</blockquote>
+
+<h3 id="choropleth-maps">Choropleth maps</h3>
+
+<blockquote>
+  <ul>
+    <li>범죄가 경찰 관리 영역별로 어떻게 다른지 보고 싶다면 choropleth map을 활용하면 된다.</li>
+    <li>먼저 District별로 Geometry를 가지고 있는 GeoDataFrame을 만들어보자</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>districts_full = gpd.read_file('../input/geospatial-learn-course-data/Police_Districts/Police_Districts/Police_Districts.shp')
+districts = districts_full[["DISTRICT", "geometry"]].set_index("DISTRICT")
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>그리고 value_counts함수를 이용해서 각 DISTRICT의 범죄 개수를 확인해보자.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plot_dict = crimes.DISTRICT.value_counts()
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>그 후 Choropleth 함수를 이용해서 구현하면 결과를 확인할 수 있다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Create a base map
+m_6 = folium.Map(location=[42.32,-71.0589], tiles='cartodbpositron', zoom_start=12)
+
+# Add a choropleth map to the base map
+Choropleth(geo_data=districts.__geo_interface__, 
+        data=plot_dict, 
+        key_on="feature.id", 
+        fill_color='YlGnBu', 
+        legend_name='Major criminal incidents (Jan-Aug 2018)'
+        ).add_to(m_6)
+
+# Display the map
+embed_map(m_6, 'm_6.html')
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">folium.Choropleth()</code> 함수는 여러개의 인자를 받는다.</li>
+    <li><code class="language-plaintext highlighter-rouge">geo_data</code>는 <code class="language-plaintext highlighter-rouge">GeoJSON FeatureCollection</code>이라는 각 지역의 경계 값을 가지고 있는 데이터를 받고</li>
+    <li><code class="language-plaintext highlighter-rouge">data</code>는 각 지역별 값을 제공한다.</li>
+    <li><code class="language-plaintext highlighter-rouge">key_on</code>은 항상 feature.id란다.</li>
+    <li><code class="language-plaintext highlighter-rouge">fill_color</code>은 채우고 싶은 색의 범주를 의미한다.</li>
+    <li><code class="language-plaintext highlighter-rouge">legend_name</code>는 이 맵의 이름을 오른쪽 사단에 표시한다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="/assets/GA-3-6.png" alt="사진" /></p>
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/데이터분석">데이터분석</a>,&nbsp;<a href="/tag/geospatial_analysis">geospatial_analysis</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D/2019/11/18/GA-2.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(BigData Analysis 도전기) Kaggle Geospatial Analysis Tutorial (2. Coordinate Reference Systems)</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D/2019/11/18/GA-4.html">
+					<span class="page-number">(BigData Analysis 도전기) Kaggle Geospatial Analysis Tutorial (4. Manipulating Geospatial Data)</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D/2019/11/18/GA-3.html',
+    'title': '(BigData Analysis 도전기) Kaggle Geospatial Analysis Tutorial (3. Interactive Maps)'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(강화학습 입문) 4. 강화학습 심화:딥살사(Deep SALSA)</title>
+  <meta name="description" content="5장 강화학습 심화 1: 그리드월드와 근사함수">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="5장 강화학습 심화 1: 그리드월드와 근사함수" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(강화학습 입문) 4. 강화학습 심화:딥살사(Deep SALSA)" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(강화학습 입문) 4. 강화학습 심화:딥살사(Deep SALSA)">
+  <meta name="twitter:description" content="5장 강화학습 심화 1: 그리드월드와 근사함수">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/%EA%B0%95%ED%99%94%ED%95%99%EC%8A%B5/2019/08/07/RL-4.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(강화학습 입문) 4. 강화학습 심화:딥살사(Deep SALSA)</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">August 7, 2019</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/강화학습">강화학습</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="5장-강화학습-심화-1-그리드월드와-근사함수">5장 강화학습 심화 1: 그리드월드와 근사함수</h2>
+
+<p>이번 장부터 내용이 매우 심화되어서 이해하는데 어려움을 겪었다. 내가 공부한 내용을 정리해보고자 한다.</p>
+
+<h3 id="근사함수">근사함수</h3>
+
+<h4 id="몬테카를로-살사-큐러닝의-한계">몬테카를로, 살사, 큐러닝의 한계</h4>
+
+<blockquote>
+  <ul>
+    <li>앞서 보았듯이 다이내믹 프로그래밍과 다르게 위 3가지 방법은 모델 프리하게 학습할 수 있다.</li>
+    <li>하지만 경우의 수가 우주의 원자 수보다 많은 환경에서 발생하는 <strong>계산 복잡도</strong>와 <strong>차원의 문제</strong>라는 두가지 큰 문제는 해결할 수 없다.</li>
+    <li>이를 위해 큐함수를 <strong>테이블이 아닌 매개변수로 근사화 함</strong>으로 이를 해결했다.</li>
+  </ul>
+</blockquote>
+
+<h4 id="근사함수를-통한-가치함수의-매개변수화">근사함수를 통한 가치함수의 매개변수화</h4>
+
+<blockquote>
+  <ul>
+    <li>무수히 많은 점이 있는 그래프에서 정확하지는 않지만 위의 점들을 근사할 수 있는 함수를 만들어 낼 수 있다면 이는 매우 효율적일 것이다.</li>
+    <li>이러한 함수를 <strong>근사함수</strong>라 부르며 가장 많이 쓰이는 근사함수는 <strong>인공신경망</strong>이다.</li>
+  </ul>
+</blockquote>
+
+<h3 id="인공신경망">인공신경망</h3>
+
+<h4 id="인공신경망-1-인공신경망의-개념">인공신경망 1: 인공신경망의 개념</h4>
+
+<blockquote>
+  <ul>
+    <li>뇌를 구성하는 신경세포인 뉴런에서 영감을 받아 만든 수학적 모델이다.</li>
+    <li>아래 그림과 같이 각 뉴런은 신호를 받아 신호의 임계치가 일정 수준을 넘기면 신호를 다른 뉴런에게 전달한다.</li>
+    <li>이를 본따서 Node를 만들었는데 노드에는 Input이 들어오며, 이는 일정한 가중치를 곱해져서 더해지게 된다.</li>
+    <li>이 더해진 값은 활성함수(Activation Function)을 통해 다른 노드에 전달되게 된다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Activation Function의 input = sum of (input) * (weight) + bias
+</code></pre></div></div>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/RL4-1.png" alt="사진" /></p>
+
+<h4 id="인공신경망-2-노드와-활성함수">인공신경망 2: 노드와 활성함수</h4>
+
+<blockquote>
+  <ul>
+    <li>노드는 일종의 계층 구조를 만들게 되는데 아래 그림과 같이 입력층(Input Layer), 은닉층(Hidden Layer), 출력층(Output Layer)로 나눠져 있게 된다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/RL4-2.png" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>노드는 입력을 받아서 활성함수를 통해 다음 층으로 결과를 전달하게 되는데 인공신경망에서는 ReLU, Tanh, Sigmoid가 주로 활성함수로 쓰인다.</li>
+    <li>가장 대표적인 <strong>Sigmoid</strong>는 어떤값이 들어오든 출력 값을 0과 1 사이로 만들어주는 함수이다.</li>
+    <li><strong>ReLU</strong>는 0보다 작은 값이 들어오면 0, 0보다 큰 값들은 고대로 출력해주는 함수이다.</li>
+    <li>굳이 선형함수를 사용하지 않고 비선형 함수를 사용할까?</li>
+    <li><strong>그 이유는 여러 층이 쌓여있다고 하더라도 선형 함수의 경우에는 층이 하나인 것과 다름이 없다. 하지만 비선형 함수인 경우 층이 쌓일 수록 함수가 새로운 형태로 변형된다.</strong></li>
+    <li>이렇게 2개 이상의 은닉층을 가진 인공신경망을 <strong>심층신경망(Deep Neural Network)</strong>이라고 부른다.</li>
+  </ul>
+</blockquote>
+
+<h4 id="인공신경망-3-딥러닝">인공신경망 3: 딥러닝</h4>
+
+<blockquote>
+  <ul>
+    <li>심층신경망의 장점은 알아서 인간이 어떤 특징(Feature)을 찾아주는 것이 아니라 신경망이 알아서 추상화를 통해 특징을 추출해준다는 것이다.</li>
+    <li>기존의 머신러닝은 특징을 사람이 의도하는 대로 추출해서 그것을 학습에 사용했다.</li>
+    <li>하지만 딥러닝에서는 <strong>각 노드가 각자 다른 특징을 추출</strong>한다.</li>
+  </ul>
+</blockquote>
+
+<h4 id="인공신경망-4-신경망의-학습">인공신경망 4: 신경망의 학습</h4>
+
+<blockquote>
+  <ul>
+    <li>딥러닝에서 <strong>학습은 결국 weight(가중치)와 bias(편향)을 학습</strong>하는 것이다.</li>
+    <li><strong>입력이 심층 신경망을 통과해서 나온 출력</strong>을 <strong>예측</strong>이라고 한다.</li>
+    <li>이 출력이 다가가야하는 정답을 타깃이라고 하는데 이 타깃과 출력의 오차를 계산해야 한다.</li>
+    <li>그 역할을 하는 것이 <strong>Loss Function(오차함수)</strong>이다.</li>
+    <li>대표적인 오차함수로는 Mean Square Error(MSE)가 있다.</li>
+    <li>이 함수에서 오차는 <strong>(타깃 - 예측)^2</strong>으로 나타낼 수 있다.</li>
+    <li>이처럼 발견된 오차를 최소화하도록 심층신경망의 가중치와 편향을 업데이트 해주는 과정을 학습이라고 한다.</li>
+  </ul>
+</blockquote>
+
+<p><strong>어떻게 편향과 가중치를 업데이트 할까?</strong></p>
+
+<blockquote>
+  <ul>
+    <li>Back-Propagation(역전파) 알고리즘을 이용하면 이것이 가능하다.</li>
+    <li>오차를 계산한 후에 각 노드의 가중치와 편향이 오차에 기여한 바를 계산해서 업데이트 시켜준다.</li>
+    <li>즉, <strong>업데이트 값은 오차 * 오차 기여도에 비례</strong>한다.</li>
+  </ul>
+</blockquote>
+
+<p><strong>그렇다면 오차 기여도는 어떻게 구하나?</strong></p>
+
+<blockquote>
+  <ul>
+    <li>오차 기여도는 오차에 대한 편미분값으로 계산한다….</li>
+    <li><strong>편미분값이란 각 가중치 혹은 편향을 조금 증가시키거나 감소시켰을 때 오차가 어떻게 변하는지를 수치로 표현</strong>한 것이다.</li>
+    <li>즉, 편미분값을 통해 얻을 수 있는 정보는 <strong>오차를 최소화하기 위해 가중치나 편향을 증가시켜야하는지 감소시켜야하는지</strong>이다.</li>
+    <li>대표적인 업데이트 방법으로는 <strong>Gradient descent(경사 하강법)</strong>가 있다.</li>
+    <li>경사하강법에는 SGD, RMSprop, Adam과 같은 방법이 있다.</li>
+    <li>이들의 공통적인 특징은 <strong>한번에 얼마나 업데이트 할 것인지 결정하는 계수인 Learning Rate(학습속도)</strong>가 존재한다.</li>
+  </ul>
+</blockquote>
+
+<h3 id="딥살사">딥살사</h3>
+
+<h4 id="딥살사-이론">딥살사 이론</h4>
+
+<blockquote>
+  <ul>
+    <li>만약 기존의 그리드 문제와 달리 장애물이 움직인다고 이야기해보자. 이 문제는 그냥 살사로는 풀기 어렵다.</li>
+    <li>이를 위해서 살사 알고리즘을 사용하되 큐함수를 인공신경망으로 근사할 수 있다.</li>
+  </ul>
+</blockquote>
+
+<p><strong>큐함수 까먹은 나를 위해서 다시 짚고 넘어간다.</strong></p>
+
+<p>큐함수란 <strong>상태 s에서 행동 a를 했을 때 얻게되는 반환값의 기대값</strong>이다.</p>
+
+<blockquote>
+  <ul>
+    <li>이 큐함수를 인공신경망으로 근사하는 알고리즘을 <strong>DeepSALSA(딥살사)</strong>라고 한다.</li>
+    <li>또 이 인공신경망을 업데이트할 때는 <strong>경사하강법을 사용</strong>한다.</li>
+    <li>경사하강법을 이용하려면 오차함수를 정의해야하는데 오차함수는 살사의 큐함수 업데이트식에서 가져올 수 있다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/RL4-3.png" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>큐함수를 업데이트할 때는 원하는 결과인 “정답”과  현재 큐함수를 “예측”한 것과의 오차를 계산해서 곱해주게 되는데 이를 이용해서 오차함수를 만들 수 있다.</li>
+    <li>결국 딥살사에서의 오차함수는 다음과 같다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/RL4-4.png" alt="사진" /></p>
+
+<h4 id="딥살사-코드-설명">딥살사 코드 설명</h4>
+
+<p>그럼 이제 본격적으로 코드를 분석해보자.</p>
+
+<blockquote>
+  <ul>
+    <li>기존 살사는 현재 상태에서 각 행동에 대한 큐함수를 가져오면 탐욕 정책으로 행동을 선택한다.</li>
+    <li>하지만 딥살사에서는 큐함수 테이블 대신 인공신경망을 사용한다</li>
+    <li>각 상태가 입력으로 들어가면 각 행동에 대한 큐함수인 인공신경망 모델이 출력된다.</li>
+  </ul>
+</blockquote>
+
+<p>인공 신경망을 생성하는 함수의 코드는 다음과 같다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def build_model(self):
+    model = Sequential()
+    model.add(Dense(30, input_dim=self.state_size, activation='relu'))
+    model.add(Dense(30, activation='relu'))
+    model.add(Dense(self.action_size, activation='linear'))
+    model.summary()
+    model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
+    return model
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>sequential 모델을 생성하고 모델에 여러층을 추가 했다.</li>
+    <li>2개의 은닉층이 존재하고 각 은닉층은 relu를 활성함수로 사용한다.</li>
+    <li>출력층의 활성함수가 linear인 이유는 큐함수의 값이 0과 1 사이가 아니기 때문이다.</li>
+    <li>오차함수는 mse를 사용한다.</li>
+    <li>위 함수는 에이전트 생성시 한번 호출되어 model이라는 변수에 저장되어있는다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    self.model = self.build_model()
+</code></pre></div></div>
+
+<p>다음으로 액션을 가져오는 함수를 보자.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def get_action(self, state):
+    if np.random.rand() &lt;= self.epsilon:
+        # 무작위 행동 반환
+        return random.randrange(self.action_size)
+    else:
+        # 모델로부터 행동 산출
+        state = np.float32(state)
+        q_values = self.model.predict(state)
+        return np.argmax(q_values[0])
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>이 함수는 탐욕법에 의해서 행동을 선택하게 된다.</li>
+    <li>무작위가 아닌 경우 모델로부터 행동을 산출해서 현재 함수에서 가장 높은 큐함수 위치를 반환하게 된다.</li>
+  </ul>
+</blockquote>
+
+<p>이번엔 모델을 학습시키는 함수를 보자.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def train_model(self, state, action, reward, next_state, next_action, done):
+    if self.epsilon &gt; self.epsilon_min:
+        self.epsilon *= self.epsilon_decay
+
+    state = np.float32(state)
+    next_state = np.float32(next_state)
+    target = self.model.predict(state)[0]
+    # 살사의 큐함수 업데이트 식
+    if done:
+        target[action] = reward
+    else:
+        target[action] = (reward + self.discount_factor *
+                          self.model.predict(next_state)[0][next_action])
+
+    # 출력 값 reshape
+    target = np.reshape(target, [1, 5])
+    # 인공신경망 업데이트
+    self.model.fit(state, target, epochs=1, verbose=0)
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>get_action에서 사용된 epsilon은 시간이 지남에 따라 감소하게 된다.</li>
+    <li>그 이유는 탐험을 시간이 지남에 따라 줄이고 예측한 대로 움직이게 하기 위해서 이다.</li>
+    <li>각 액션의 타깃값은 동일하되 5개의 액션 중에서 실제 취한 액션에 해당하는 예측만 업데이트한다.</li>
+    <li>model.fit을 통해서 자동으로 설정한 오류함수를 감소시키는 방향으로 인공신경망을 업데이트한다.</li>
+  </ul>
+</blockquote>
+
+<h4 id="딥살사의-실행-및-결과">딥살사의 실행 및 결과</h4>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/RL4-5.png" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>딥살사가 진행되는 동안 장애물은 계속해서 움직이게 된다.</li>
+    <li>샘플 하나인 SARSA가 진행되면 그것을 이용해서 인공신경망을 학습시킨다.</li>
+    <li>위의 과정을 통해서 학습된 모델은 초기에는 랜덤한 액션을 택하기에 점수가 낮을 확률이 높으나</li>
+    <li>점차 학습이 진행됨에 따라 점수가 높게 나오는 것을 볼 수 있다.</li>
+  </ul>
+</blockquote>
+
+<p><strong>학습 초기!</strong></p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/RL4-6.png" alt="사진" /></p>
+
+<p><strong>에피소드 200이후!</strong></p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/RL4-7.png" alt="사진" /></p>
+
+<h4 id="나름의-정리">나름의 정리</h4>
+
+<blockquote>
+  <ul>
+    <li>모델에 현재 상태를 넣어주면 행동 하나가 도출된다.</li>
+    <li>이 때 모델이 행동을 선택하는 기준은 이전과 같이 큐함수가 아닌 심층신경망에서 나온 최고의 값이다.</li>
+    <li>그것을 통해서 다음 상태를 구하고 이를 이용해서 다시 모델을 학습시킨다.</li>
+  </ul>
+</blockquote>
+
+<h2 id="궁금증">궁금증</h2>
+
+<blockquote>
+  <ul>
+    <li>이해가 완벽히 된 것 같지는 않다. 의문점이 생기는 것들이 있다.</li>
+    <li>각 은닉층의 유닛은 왜 30개이고 각 유닛의 역할은 무엇인가?</li>
+    <li>백트레킹은 언제하는거지?</li>
+    <li>이 방법의 확실한 장점은 무엇인가?</li>
+  </ul>
+</blockquote>
+
+<h2 id="느낀점">느낀점</h2>
+
+<blockquote>
+  <ul>
+    <li>엄청 적은 양의 데이터인것 같은데 어떻게 200번의 에피소드만에 발전이 있을 수 있는지 신기하다.</li>
+    <li>스코어가 점차 나아지는 것은 랜덤하게 가는 횟수가 줄어들어서 적어도 초록색에 부딪히면 안된다는 판단을 해서 인 것 같다.</li>
+    <li>200번 진행했어도 여전히 최단 경로로 이동하지는 않는 걸로 보아 그냥 초록색을 부딪히면 안된다 정도의 정보만 알고 아직은 많이 멍청한 듯하다ㅎㅎ..</li>
+    <li>암튼 딥러닝에 대해서 조금은 알게된 것 같아서 기분이 좋다. 여전히 완전 기초적인 질문을 하고 있는 것 같지만 그래도 오늘 완벽히 이해할 수 없을테니까 다음을 기약하면서 재밌게 하자!ㅎㅎ</li>
+  </ul>
+</blockquote>
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/강화학습">강화학습</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/%EB%B0%B1%EC%A4%80/2019/08/07/baekjoon-11404.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(백준 알고리즘 문제풀이) 11404번 플로이드</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/%EA%B0%95%ED%99%94%ED%95%99%EC%8A%B5/2019/08/07/RL-5.html">
+					<span class="page-number">(강화학습 입문) 5. 강화학습 심화:폴리시 그레이디언트(Policy Gradient)</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/%EA%B0%95%ED%99%94%ED%95%99%EC%8A%B5/2019/08/07/RL-4.html',
+    'title': '(강화학습 입문) 4. 강화학습 심화:딥살사(Deep SALSA)'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

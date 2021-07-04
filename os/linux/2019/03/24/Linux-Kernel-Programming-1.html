@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(리눅스 시스템 프로그래밍) LKM + C 예제코드</title>
+  <meta name="description" content="들어가기 앞서">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="들어가기 앞서" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(리눅스 시스템 프로그래밍) LKM + C 예제코드" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(리눅스 시스템 프로그래밍) LKM + C 예제코드">
+  <meta name="twitter:description" content="들어가기 앞서">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/os/linux/2019/03/24/Linux-Kernel-Programming-1.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(리눅스 시스템 프로그래밍) LKM + C 예제코드</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">March 24, 2019</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/os">Os</a>, 
+    
+  
+    
+    <a href="/category/linux">Linux</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="들어가기-앞서">들어가기 앞서</h2>
+
+<p>이번 학기 OS를 공부하면서 처음으로 프로그래밍 과제가 나왔다.</p>
+
+<p>학기 시작하고 2주간 어색한 OS 개념들을 어렴풋이 이해해왔는데 이번 기회를 통해서 좀 더 실질적으로 이해할 수 있기를 바란다.</p>
+
+<h2 id="첫-목표">첫 목표</h2>
+
+<p><strong>Create a Linux kernel module (LKM) that works as an agent in kernel space for your commands</strong></p>
+
+<ol>
+  <li><strong>Log the names of files that a user has accessed</strong></li>
+  <li><strong>Prevent a kill to a specified process</strong></li>
+  <li><strong>Hide the dogdoor module from the module list</strong></li>
+</ol>
+
+<h2 id="lkm이란">LKM이란?</h2>
+
+<blockquote>
+  <ul>
+    <li>Loadable kernel module, <strong>LKM</strong></li>
+    <li>하드웨어 내부구조 이해없이 하드웨어에 접근할 수 있게 해주는 interface이다</li>
+    <li><a href="https://ko.wikipedia.org/wiki/%EC%9A%B4%EC%98%81_%EC%B2%B4%EC%A0%9C">운영 체제</a>에서 실행 중인 <a href="https://ko.wikipedia.org/wiki/%EC%BB%A4%EB%84%90_(%EC%BB%B4%ED%93%A8%ED%8C%85)">커널</a>을 확장하는 코드를 포함하는 목적 파일이다.</li>
+    <li>insmod로 load 됐다가 rmmod로 unload할 수 있다</li>
+  </ul>
+</blockquote>
+
+<p><strong>LKM이 없다면?</strong></p>
+
+<blockquote>
+  <ul>
+    <li>리눅스 커널은 드라이브를 다 수용해야하기 때문에 엄청 커야한다.</li>
+    <li>하드웨어가 추가되거나 드라이버가 업데이트 될 때마다 커널을 리빌드 해야한다.</li>
+  </ul>
+</blockquote>
+
+<p><strong>LKM의 단점은?</strong></p>
+
+<blockquote>
+  <ul>
+    <li>파일을 드라이버에서 각각 관리해야한다.</li>
+  </ul>
+</blockquote>
+
+<h2 id="lkm을-위한-환경설정하기">LKM을 위한 환경설정하기</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  $ sudo apt-get update
+  $ apt-cache search linux-headers-$(uname -r)
+  linux-headers-4.15.0-041500-generic - Linux kernel headers for version 4.15.0 on 64 bit x86 SMP
+  $ sudo apt-get install (헤더명)
+  $ cd /usr/src/(헤더명)
+  $ ls
+</code></pre></div></div>
+
+<p>이때 주의할 점은 자신한테 맞는 header를 설치해야 한다.</p>
+
+<p><strong>apt-cache search linux-headers-$(uname -r)</strong> 명령어를 통해 나온 header를 써야한다</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  **jinhyeok@CRA230**:**~**$   apt-cache search linux-headers-$(uname -r)
+  linux-headers-4.15.0-041500-generic - Linux kernel headers for version 4.15.0 on 64 bit x86 SMP
+</code></pre></div></div>
+
+<h2 id="module-code시-주의할-점">Module Code시 주의할 점</h2>
+<blockquote>
+  <ol>
+    <li>순서대로 동작하지 않는다. (Event Driven과 같다)</li>
+    <li>allocate된거는 반드시 release되어야 한다.</li>
+    <li>printf() 함수가 없다. (printk()를 이용해라)</li>
+    <li>interrupt가 있을 수 있기 때문에 이에 대한 대비도 해야한다.</li>
+    <li>Kernel Module에 우선적으로 CPU cycle이 할당되므로 조심해서 코딩해야한다.</li>
+    <li>Floating Point 모드가 존재하지 않는다.</li>
+  </ol>
+</blockquote>
+
+<h2 id="lkm-예제-코드-the-hello-world">LKM 예제 코드 The Hello World</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> /**
+ * @file    hello.c
+ * @author  Jinhyeok Jeong
+ * @date    24 March 2019
+ * @version 0.1
+ * @brief  An introductory "Hello World!" loadable kernel module (LKM) that can display a message
+ * in the /var/log/kern.log file when the module is loaded and removed. The module can accept an
+ * argument when it is loaded -- the name, which appears in the kernel log files.
+ * @see http://www.derekmolloy.ie/ for a full description and follow-up descriptions.
+*/
+
+#include &lt;linux/init.h&gt;             // Macros used to mark up functions e.g., __init __exit
+#include &lt;linux/module.h&gt;           // Core header for loading LKMs into the kernel
+#include &lt;linux/kernel.h&gt;           // Contains types, macros, functions for the kernel
+
+MODULE_LICENSE("GPL");              ///&lt; The license type -- this affects runtime behavior
+MODULE_AUTHOR("Derek Molloy");      ///&lt; The author -- visible when you use modinfo
+MODULE_DESCRIPTION("A simple Linux driver for the BBB.");  ///&lt; The description -- see modinfo
+MODULE_VERSION("0.1");              ///&lt; The version of the module
+
+static char *name = "world";        ///&lt; An example LKM argument -- default value is "world"
+module_param(name, charp, S_IRUGO); ///&lt; Param desc. charp = char ptr, S_IRUGO can be read/not changed
+MODULE_PARM_DESC(name, "The name to display in /var/log/kern.log");  ///&lt; parameter description
+
+/** @brief The LKM initialization function
+ *  The static keyword restricts the visibility of the function to within this C file. The __init
+ *  macro means that for a built-in driver (not a LKM) the function is only used at initialization
+ *  time and that it can be discarded and its memory freed up after that point.
+ *  @return returns 0 if successful
+ */
+static int __init helloBBB_init(void){
+   printk(KERN_INFO "EBB: Hello %s from the BBB LKM!\n", name);
+   return 0;
+}
+
+/** @brief The LKM cleanup function
+ *  Similar to the initialization function, it is static. The __exit macro notifies that if this
+ *  code is used for a built-in driver (not a LKM) that this function is not required.
+ */
+static void __exit helloBBB_exit(void){
+   printk(KERN_INFO "EBB: Goodbye %s from the BBB LKM!\n", name);
+}
+
+/** @brief A module must use the module_init() module_exit() macros from linux/init.h, which
+ *  identify the initialization function at insertion time and the cleanup function (as
+ *  listed above)
+ */
+module_init(helloBBB_init);
+module_exit(helloBBB_exit);
+</code></pre></div></div>
+
+<ul>
+  <li>16번째줄 - MODULE_LICENSE(“GPL”)은 모듈의 라이센스 정보를 제공하는 것이다</li>
+  <li>21번째줄 - hello를 static  char*으로 저장했다.
+    <ul>
+      <li>커널모드에서는 글로벌 변수 사용하면 안됌(커널에서 다 돌꺼기 때문에) 반드시 <strong>static</strong>으로 제한해야한다.</li>
+    </ul>
+  </li>
+  <li>22번째줄 - module_param(name, type, permissions);
+    <ul>
+      <li>파라미터 3개, 이름, 파라미터 타입, 접근 권한 이렇게 세개를 받는다.</li>
+      <li>charp : char pointer</li>
+      <li>S_IRUGO : user/group/others에게 읽기 권한 제공</li>
+    </ul>
+  </li>
+  <li>31, 40번째줄 - 함수는 아무이름으로 해도된다
+    <ul>
+      <li>대신 48, 49번째 줄과 같이 module_init()과 module_exit()으로 꼭 보내져야 함</li>
+    </ul>
+  </li>
+  <li>31번째줄 - printk는 printf와 유사하다
+    <ul>
+      <li>다른 점은 log level 적어보내야 한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="예제코드-빌드하기">예제코드 빌드하기</h2>
+
+<ul>
+  <li>
+    <p>커널 모듈을 빌드하기 위해서는 반드시 makefile이 필요하다.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  obj-m += hello.o
+  all:
+          make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+  clean:
+          make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+</code></pre></div>    </div>
+  </li>
+  <li>1번째줄 - 이 makefile의 목표를 정의한다.</li>
+  <li>나머지는 보통 makefile과 유사하다
+    <ul>
+      <li>-C는 kernel directory로 switch시켜주는 용도</li>
+      <li>M=$(PWD)는 프로젝트 파일이 실제 존재하는 위치를 make에 알려주는 용도</li>
+      <li>$(shell uname -r)은 현재 kernel build 버전을 전해주는 용도이다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>빌드 결과 모습</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jinhyeok@CRA230:~/Linux_Kernel_Programming$ make
+make -C /lib/modules/4.15.0-041500-generic/build M=/home/jinhyeok/Linux_Kernel_Programming modules
+make[1]: 디렉터리 '/usr/src/linux-headers-4.15.0-041500-generic' 들어감
+  CC [M]  /home/jinhyeok/Linux_Kernel_Programming/hello.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/jinhyeok/Linux_Kernel_Programming/hello.mod.o
+  LD [M]  /home/jinhyeok/Linux_Kernel_Programming/hello.ko
+make[1]: 디렉터리 '/usr/src/linux-headers-4.15.0-041500-generic' 나감
+jinhyeok@CRA230:~/Linux_Kernel_Programming$ ls
+Makefile        hello.c   hello.mod.c  hello.o
+Module.symvers  hello.ko  hello.mod.o  modules.order
+</code></pre></div></div>
+
+<p>hello.<strong>ko</strong> 파일이 바로 loadable kernel module이다!!</p>
+
+<h2 id="lkm-테스트하기">LKM 테스트하기</h2>
+<blockquote>
+  <ul>
+    <li>insmode와 rmmod로 LKM을 로드하고 언로드할 수 있다.</li>
+    <li>그리고 로그의 결과물은 kern.log에 있어서 tail이라는 명령어를 통해 확인 가능하다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//로드하기
+sudo insmode hello.ko
+
+//언로드하기
+sudo rmmod hello.ko
+</code></pre></div></div>
+
+<p>더블 탭으로 실시간으로 로그가 찍히는 것을 확인할 수 있다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jinhyeok@CRA230:/var/log$ cd /var/log
+jinhyeok@CRA230:/var/log$ sudo tail -f kern.log
+Mar 24 17:08:08 CRA230 kernel: [141413.098009] EBB: Hello world from the BBB LKM!
+Mar 24 17:13:07 CRA230 kernel: [141711.746656] EBB: Goodbye world from the BBB LKM!
+</code></pre></div></div>
+
+<h2 id="lkm을-파라미터를-줘서-테스트하기">LKM을 파라미터를 줘서 테스트하기</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jinhyeok@CRA230:~/Linux_Kernel_Programming$ sudo insmod hello.ko name=jinhyeok
+jinhyeok@CRA230:~/Linux_Kernel_Programming$ sudo rmmod hello.ko
+</code></pre></div></div>
+
+<p>뿐만 아니라 <strong>proc</strong>를 이용해서도 확인이 가능하다.</p>
+
+<h2 id="proc-interfaceprocfsproc-이란">Proc Interface(procfs/proc) 이란?</h2>
+
+<blockquote>
+  <ul>
+    <li>Virtual file system where files act as agents for a kernel data structure or kernel module to interact with user-level programs</li>
+    <li>내부 커널 정보 및 디바이스 정보를 <strong>파일형태</strong>로 유저에게 제공</li>
+    <li>LKM이 로드된 정보가 /proc에도 표시된다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jinhyeok@CRA230:/proc$ cd /proc
+jinhyeok@CRA230:/proc$ cat modules|grep hello
+hello 16384 0 - Live 0x          (null) (OE)
+</code></pre></div></div>
+
+<p><strong>파라미터는 /sys/module에서 확인이 가능하다</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jinhyeok@CRA230:~$ cd /sys/module/hello/parameters/
+jinhyeok@CRA230:/sys/module/hello/parameters$ cat name
+jinhyeok
+</code></pre></div></div>
+
+<ul>
+  <li>hello라는 디렉토리 밑에 있는 parameter에 name의 정보가 들어있는 것을 볼 수 있다.</li>
+</ul>
+
+<h2 id="정리">정리</h2>
+<blockquote>
+  <ul>
+    <li>LKM은 썼다 안썼다가 가능한 kernel의 보조장치 같은 역할인 듯 하다.</li>
+    <li>본격적으로 나도 한번 모듈을 짜보자.</li>
+  </ul>
+</blockquote>
+
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/linux">linux</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/2019/03/23/hash-3.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(프로그래머스 코딩테스트 고득점 kit) 해시 Level2 위장</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/2019/03/26/sorting-1.html">
+					<span class="page-number">(프로그래머스 코딩테스트 고득점 kit) 정렬 Level1 K번째수</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/os/linux/2019/03/24/Linux-Kernel-Programming-1.html',
+    'title': '(리눅스 시스템 프로그래밍) LKM + C 예제코드'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(우아한테크캠프 3기) 어렵지 않게 CSS 레이아웃 잡기</title>
+  <meta name="description" content="🤔 목적">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="🤔 목적" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(우아한테크캠프 3기) 어렵지 않게 CSS 레이아웃 잡기" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(우아한테크캠프 3기) 어렵지 않게 CSS 레이아웃 잡기">
+  <meta name="twitter:description" content="🤔 목적">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/web/%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC%EC%BA%A0%ED%94%84/2020/07/14/css-layout.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(우아한테크캠프 3기) 어렵지 않게 CSS 레이아웃 잡기</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 14, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/web">Web</a>, 
+    
+  
+    
+    <a href="/category/우아한테크캠프">우아한테크캠프</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="-목적">🤔 목적</h2>
+
+<p>css를 진짜 많이 얕봤다.. flutter를 이용해서 UI 구현해내는 일에 이제 익숙해졌기 때문에 스타일링 하는 것은 진짜 가볍게 여겼다가  큰코 다쳤다. 이번에 겸손한 마음으로 css 기초부터 반응형으로 레이아웃을 잡는 여러 좋은 방법들에 대해 조사해봤고 마지막으로 간단하게 github project를 따라하며 실습을 진행했다.</p>
+
+<p><br /></p>
+
+<h2 id="-참고-자료">📗 참고 자료</h2>
+
+<p><a href="https://poiemaweb.com/">poiemaweb 튜토리얼</a></p>
+
+<p><a href="https://d2.naver.com/helloworld/8540176">flex box로 만들 수 있는 10가지 레이아웃(네이버 D2)</a></p>
+
+<p><br /></p>
+
+<h2 id="-box-sizing">📦 Box Sizing</h2>
+
+<p><img src="/assets/css-layout-1.png" alt="css-layout-1.png" /></p>
+
+<p>브라우저는 박스모델의 정보를 근거로 렌더링을 진행한다.</p>
+
+<p>여기서 <strong>width와 height는 박스의 전체 사이즈를 말하는 것이 아니라 파란색 영역인 contents 영역의 너비와 높이만을 의미</strong>한다.</p>
+
+<p>이 말인 즉슨 만일 width 100%를 주고 padding이나 border 값을 주면 <code class="language-plaintext highlighter-rouge">width = 100% + padding, border 값</code>이 되어 box가 예상했던 공간 밖으로 삐져나오게 된다.</p>
+
+<p>이 상태에서 박스의 사이즈를 제대로 측정하려면  contents 너비 + 양쪽 padding 값 + 양쪽 border 값을 구해야 한다… 이걸 계산해서 레이아웃을 잡기란 쉽지 않다. 😭</p>
+
+<p><br /></p>
+
+<p><strong>❓ 그렇다면 박스를 이용해서 레이아웃을 잡으려면 어떻게 해야할까?</strong></p>
+
+<p>이럴 때 사용하면 좋은게  <strong>border-box</strong> 이다!</p>
+
+<p>contents의 size만으로 width를 설정했던 box-sizing은 content-box로 box-sizing의 default 값이다.</p>
+
+<p><br /></p>
+
+<p><strong>border-box는 아래 그림과 같이 박스의 margin을 제외한 양쪽 border 값 + 양쪽 padding 값 + contents  너비를 width로 표현하기 때문에 박스끼리의 레이아웃을 잡기 상당히 편하다.</strong> 🍏</p>
+
+<p><img src="/assets/css-layout-2.png" alt="css-layout-2.png" /></p>
+
+<p>그래서 웹에서 다음과 같이 default box-sizing을 border-box로 바꿔놓기도 한다.<strong>(github도 마찬가지이다.</strong>🐙<strong>)</strong></p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">*</span> <span class="p">{</span>
+  <span class="nl">box-sizing</span><span class="p">:</span> <span class="n">border-box</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h2 id="-flex-box">💪 Flex Box</h2>
+
+<p><strong>❓ 만일 3개의 박스를 웹 페이지의 너비에 맞춰서 1:1:1 비율로 띄우고 싶다면?</strong></p>
+
+<p>이 때 block, float 이런 애들을 사용하면 생각보다 구현이 쉽지 않을지도 모르겠다.</p>
+
+<p><strong>이럴 때 쓸 수 있는게 바로바로 Flex Box이다.</strong></p>
+
+<p><br /></p>
+
+<p><strong>Flex box</strong>는 실제 width와 height를 주지 않고도 비율로 layout을 구성할 수 있기 때문에 동적으로 페이지를 보여주고 싶은 레이아웃에서 아주 유용하게 사용된다.</p>
+
+<p>flex는 크개 두가지로 구성되어 있다. 바로 비율로 이루어진 <strong>Flex Item</strong>과 이들을 포함하고 있는 <strong>Flex-container</strong>이다.</p>
+
+<p><img src="/assets/css-layout-3.png" alt="css-layout-3.png" /></p>
+
+<p>이미지 출처: <a href="http://book.mixu.net/css/4-flexbox.html">http://book.mixu.net/css/4-flexbox.html</a></p>
+
+<p><br /></p>
+
+<h3 id="-flex-container">🐓 Flex Container</h3>
+
+<p>flex Container은 flex item을 담는 container이다.</p>
+
+<p>이 친구 사용하는 방법은 다음과 같다.</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.flex_container</span> <span class="p">{</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+  <span class="nl">flex-direction</span><span class="p">:</span> <span class="n">column</span><span class="p">;</span> <span class="c">/* 방향 */</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>display를 flex로 설정해주고 flex-direction에서 flex의 방향을 정해준다.</p>
+
+<p><br /></p>
+
+<h3 id="-flex-item">🐥 Flex Item</h3>
+
+<p>flex-item은 flex container가 품고 있는 block이다.</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.flex-item</span> <span class="p">{</span>
+  <span class="nl">flex-grow</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span> <span class="c">/* 주어진 공간에 따라 커질꺼야 말꺼야 (x &gt; 0 ? 커져 : 고정) */</span>
+  <span class="nl">flex-shrink</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span> <span class="c">/* 주어진 공간에 따라 줄어들꺼야 말거야 (x &gt; 0 ? 줄어들어 : 고정) */</span>
+  <span class="nl">flex-basis</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>flex-grow, shrink는 주어진 flex container에 따라 줄어들지 늘어날지를 결정하는 값이다.</p>
+
+<p>flex-basis는 기존 사이즈를 어떻게 할지 정하는 것으로 flex-base를 0으로 하면 무조건 비율로, auto이면 각 flex item의 contents 너비에 맞춰 사이즈를 달리한다.</p>
+
+<p><img src="/assets/css-layout-4.png" alt="css-layout-4.png" /></p>
+
+<p>이미지 출처: <a href="https://d2.naver.com/helloworld/8540176">https://d2.naver.com/helloworld/8540176</a></p>
+
+<p><br /></p>
+
+<p>이 때 flex 자체를 특정 정수로 주면 그 값은 flex-grow의 값이 되고 flex-shrink는 1, flex-basis는 0이 된다.</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.flex-item</span> <span class="p">{</span>
+  <span class="nl">flex</span><span class="p">:</span> <span class="m">3</span><span class="p">;</span> <span class="c">/* flex-grow : 3, flex-shrink: 1, flex-basis: 0 */</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>그리고 만일 사이즈가 고정되야 하는 친구에게는 none을 주고 그 옆 오른쪽 끝에 다음 item이  딱 붙게 할 수도 있다. (header나 footer에 많이 쓰인다!)</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.flex-container</span> <span class="p">{</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.flex-item</span> <span class="p">{</span>
+  <span class="nl">flex</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+  <span class="c">/* flex: 0 0 auto */</span>    
+<span class="p">}</span>
+
+<span class="nc">.flex-item-right</span> <span class="p">{</span>
+  <span class="nl">margin-left</span><span class="p">:</span> <span class="nb">auto</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h2 id="viewport--media-query">📱viewport &amp; media query</h2>
+
+<p><strong>❓html에 다음과 같은 메타태그는  무슨 역할을 할까?</strong></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<p>viewport는 사용자에게 보여지는 영역을 말한다. 웹을 모바일 기기에 렌더하게 되면 사이즈가 다른 웹의 내용을 제대로 전달할 수가 없다. 이를 해결하기 위해서 위와 같은 설정을 통해 실제 렌더링되는 영역과 뷰포트의 크기를 조절할 수 있다.</p>
+
+<p>위와 같이 width=device-width를 추가함으로써 전체적인 웹 페이지의 width가 설정되고 media query를 사용하면 width의 범위에 따라 css가 적용되어 결과적으로 반응형 웹을 만들 수 있다.</p>
+
+<p><br /></p>
+
+<p><strong>❓사이즈에 따라 어떻게 반응하게 만들까?</strong></p>
+
+<p>다음과 같이 width가 max-width를 넘어가지 않으면 즉 모바일에서 볼때 css를 달리하도록 코드를 작성 한다.</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@media</span> <span class="p">(</span><span class="n">max-width</span><span class="p">:</span> <span class="m">544px</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nc">.task-columns</span> <span class="p">{</span>
+        <span class="nl">flex-direction</span><span class="p">:</span> <span class="n">column</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nc">.task-column</span> <span class="p">{</span>
+        <span class="nl">margin-right</span><span class="p">:</span> <span class="m">0px</span><span class="p">;</span>
+        <span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">16px</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h2 id="github-project-page-클론하기">github project page 클론하기</h2>
+
+<p>그럼 깃헙 프로젝트 페이지를 여때까지 공부한 방법을 이용해서 layout을 잡아보자.</p>
+
+<p><img src="/assets/css-layout-5.png" alt="css-layout-5.png" /></p>
+
+<p>일단 css를 <a href="http://meyerweb.com/eric/tools/css/reset/">http://meyerweb.com/eric/tools/css/reset/</a>를 참고해서 초기화 해줬고, 이어서 간단하게 페이지를 구현했다.</p>
+
+<p>간단하게 따라 구현한 결과 페이지이다.</p>
+
+<p><img src="/assets/css-layout-6.png" alt="css-layout-6.png" /></p>
+
+<p><br /></p>
+
+<p><strong>페이지 너비에 따라 다음과 같이 반응하기도 한다.</strong> 👏</p>
+
+<p><img src="/assets/css-layout-7.png" alt="css-layout-7.png" /></p>
+
+<p><br /></p>
+
+<h2 id="회고">회고</h2>
+
+<p>물론 아직 많이 미숙하지만 지난주 겪었던 css 울렁증을 조금 극복한 것 같아 만족스럽다. 😄</p>
+
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/web">web</a>,&nbsp;<a href="/tag/css">css</a>,&nbsp;<a href="/tag/우아한테크캠프">우아한테크캠프</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/nodejs/%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC%EC%BA%A0%ED%94%84/2020/07/12/express-middleware-log-in.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(우아한테크캠프 3기) Express 미들웨어 제대로 사용하기 + 로그인 구현하기</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/%ED%9A%8C%EA%B3%A0/%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC%EC%BA%A0%ED%94%84/2020/07/26/woowa-tech-camp-mid-term.html">
+					<span class="page-number">(우아한테크캠프 3기) 캠프의 반환점을 돌며</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/web/%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC%EC%BA%A0%ED%94%84/2020/07/14/css-layout.html',
+    'title': '(우아한테크캠프 3기) 어렵지 않게 CSS 레이아웃 잡기'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

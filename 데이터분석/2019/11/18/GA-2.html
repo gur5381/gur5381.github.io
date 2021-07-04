@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(BigData Analysis 도전기) Kaggle Geospatial Analysis Tutorial (2. Coordinate Reference Systems)</title>
+  <meta name="description" content="Introduction">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Introduction" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(BigData Analysis 도전기) Kaggle Geospatial Analysis Tutorial (2. Coordinate Reference Systems)" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(BigData Analysis 도전기) Kaggle Geospatial Analysis Tutorial (2. Coordinate Reference Systems)">
+  <meta name="twitter:description" content="Introduction">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D/2019/11/18/GA-2.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(BigData Analysis 도전기) Kaggle Geospatial Analysis Tutorial (2. Coordinate Reference Systems)</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">November 18, 2019</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/데이터분석">데이터분석</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="introduction">Introduction</h2>
+
+<blockquote>
+  <ul>
+    <li>지구의 표면을 그린 맵은 보통 2차원으로 표현된다.</li>
+    <li>하지만 우리가 알고있듯이 지구는 3차원으로 되어있다.</li>
+    <li>때문에 우리는 map projection이라는 함수를 사용해서 지구 전체를 표현해야한다.</li>
+    <li>map projection은 꼭 100퍼 정확한 것은 아니다. &gt;* 각 projection은 용도에 따라 distort되기도 한다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="https://i.imgur.com/noBRRNR.png" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>우리는 <strong>coordinate reference system(CRS)</strong>를 이용해서 지구상의 실제 위치 정보를 보여주도록 하겠다.</li>
+  </ul>
+</blockquote>
+
+<h2 id="setting-the-crs">Setting the CRS</h2>
+
+<blockquote>
+  <ul>
+    <li>GeoDataFrame을 import하게 되면 CRS는 자동으로 따라오게 된다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Load a GeoDataFrame containing regions in Ghana
+regions = gpd.read_file("../input/geospatial-learn-course-data/ghana/ghana/Regions/Map_of_Regions_in_Ghana.shp")
+print(regions.crs)
+
+{'init': 'epsg:32630'}
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>이 GeoDataFrame은 EPSG 32630을 사용하고 있는데 Mercator projection이라고 불리기도 한다.</li>
+    <li>이 projection은 각도는 살리고 지역은 조금 변형시키게 된다.</li>
+    <li>우리가 CSV file로 GeoDataFrame을 생성할때는 CRS를 직접 입력해주어야한다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Create a DataFrame with health facilities in Ghana
+facilities_df = pd.read_csv("../input/geospatial-learn-course-data/ghana/ghana/health_facilities.csv")
+
+# Convert the DataFrame to a GeoDataFrame
+facilities = gpd.GeoDataFrame(facilities_df, geometry=gpd.points_from_xy(facilities_df.Longitude, facilities_df.Latitude))
+
+# Set the coordinate reference system (CRS) to EPSG 4326
+facilities.crs = {'init': 'epsg:4326'}
+
+# View the first five rows of the GeoDataFrame
+facilities.head()
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>위의 코드와 같이 csv파일을 읽을 때는 dataframe으로 읽은 후에 이를 GeoDataFrame으로 바꿔주고</li>
+    <li><code class="language-plaintext highlighter-rouge">gpd.points_from_xy()</code>를 이용해서 x축과 y축의 값을 지정해주어야 geometry가 정해지게 된다.</li>
+  </ul>
+</blockquote>
+
+<h2 id="re-projecting">Re-projecting</h2>
+
+<blockquote>
+  <ul>
+    <li>re-projecting이란 CRS를 바꿔주는 과정을 의미한다.</li>
+    <li>GeoPandas에서는 이를 <code class="language-plaintext highlighter-rouge">to_crs()</code>를 이용해서 할 수 있다.</li>
+    <li>여러개의 GeoDataFrames를 띄우기 위해서는 다 똑같은 crs를 사용하는 것이 중요하다.</li>
+    <li>region이라는 GeoDataFrame에 facilities라는 CRS 형태가 다른 데이터를 띄우고 싶다면 이를 변경해줘야한다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Create a map
+ax = regions.plot(figsize=(8,8), color='whitesmoke', linestyle=':', edgecolor='black')
+facilities.to_crs(epsg=32630).plot(markersize=1, ax=ax)
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">to_crs()</code>는 geometry만 바꿔주기 때문에 다른 column은 다 그대로 남게된다.</li>
+  </ul>
+</blockquote>
+
+<h2 id="attributes-of-geometric-objects">Attributes of geometric objects</h2>
+
+<blockquote>
+  <ul>
+    <li>앞선 튜토리얼에서 배웠듯이 gemoetry는 우리가 뭘 보여주고자 하는지에 따라서 데이터의 형태가 다르다.</li>
+    <li>a Point for the epicenter of an earthquake,</li>
+    <li>a LineString for a street, or</li>
+    <li>a Polygon to show country boundaries.</li>
+    <li>이 3개의 종류는 각각 built-in attribute를 가지고 있어서 데이터 분석에 용이하게 사용할 수 있다.</li>
+    <li>예를 들어, point라면 x, y를 attribute로 가지고 있다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>facilities.geometry.x.head()
+
+0   -1.96317
+1   -1.585921
+2   -1.34982
+3   -1.61098
+4   -1.61098
+dtype: float64
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>LineString이라면 이에 해당하는 length를 가져올 수도 있고 Polygon이라면 area를 가져올 수도 있다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Calculate the area (in square meters) of each polygon in the GeoDataFrame 
+regions.loc[:, "AREA"] = regions.geometry.area / 10**6
+
+print("Area of Ghana: {} square kilometers".format(regions.AREA.sum()))
+print("CRS:", regions.crs)
+regions.head()
+
+Area of Ghana: 239584.5760055668 square kilometers
+CRS: {'init': 'epsg:32630'}
+</code></pre></div></div>
+
+<h2 id="exercise">Exercise</h2>
+
+<blockquote>
+  <ul>
+    <li>이번 튜토리얼에서 배운 것을 가지고 연습을 진행해보자!</li>
+    <li>멸종 위기에 처한 새들이 철새이동하며 어디로 가게 되는지 확인해보자.</li>
+  </ul>
+</blockquote>
+
+<p><img src="https://i.imgur.com/qQcS0KM.png" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>먼저 받을 것 받아주고</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import pandas as pd
+import geopandas as gpd
+
+from shapely.geometry import LineString
+
+from learntools.core import binder
+binder.bind(globals())
+from learntools.geospatial.ex2 import *
+</code></pre></div></div>
+
+<h3 id="1-load-the-data">1) Load the Data</h3>
+
+<blockquote>
+  <ul>
+    <li>새들의 이동 루트가 담긴 데이터를 받아보자.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Load the data and print the first 5 rows
+birds_df = pd.read_csv("../input/geospatial-learn-course-data/purple_martin.csv", parse_dates=['timestamp'])
+print("There are {} different birds in the dataset.".format(birds_df["tag-local-identifier"].nunique()))
+birds_df.head()
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>받아진 정보는 DataFrame이기 때문에 이를 GeoDataFrame으로 바꿔주자.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Your code here: Create the GeoDataFrame
+birds = gpd.GeoDataFrame(birds_df, geometry= gpd.points_from_xy(birds_df['location-long'], birds_df['location-lat']))
+
+# Your code here: Set the CRS to {'init': 'epsg:4326'}
+birds.crs = {'init': 'epsg:4326'}
+
+# Check your answer
+q_1.check()
+</code></pre></div></div>
+
+<h2 id="2-plot-the-data">2) Plot the Data</h2>
+
+<blockquote>
+  <ul>
+    <li>이번의 철새의 이동경로를 확인하기 위해 미국의 지도를 로드하자.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Load a GeoDataFrame with country boundaries in North/South America, print the first 5 rows
+world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
+americas = world.loc[world['continent'].isin(['North America', 'South America'])]
+americas.head()
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>그리고 나서 미국 지도에 점들을 찍어줘보자.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Your code here
+ax = americas.plot(figsize=(10,10), color='none', edgecolor='gainsboro', zorder=3)
+birds.plot(color='gray', ax=ax)
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>그런 후에는 다음과 같은 지도를 얻게 될 것이다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="/assets/GA-2-1.png" alt="사진" /></p>
+
+<h3 id="3-where-does-each-bird-start-and-end-its-journey-part-1">3) Where does each bird start and end its journey? (Part 1)</h3>
+
+<blockquote>
+  <ul>
+    <li>이제 각 새들이 어디서 출발해서 어디서 여정을 마무리하는지 맵에 표시해보자.</li>
+    <li>이를 저장하는 점들을 다음과 같이 구할 수 있다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># GeoDataFrame showing path for each bird
+path_df = birds.groupby("tag-local-identifier")['geometry'].apply(list).apply(lambda x: LineString(x)).reset_index()
+path_gdf = gpd.GeoDataFrame(path_df, geometry=path_df.geometry)
+path_gdf.crs = {'init' :'epsg:4326'}
+
+# GeoDataFrame showing starting point for each bird
+start_df = birds.groupby("tag-local-identifier")['geometry'].apply(list).apply(lambda x: x[0]).reset_index()
+start_gdf = gpd.GeoDataFrame(start_df, geometry=start_df.geometry)
+start_gdf.crs = {'init' :'epsg:4326'}
+
+# Your code here
+end_df = birds.groupby("tag-local-identifier")['geometry'].apply(list).apply(lambda x: x[len(x)-1]).reset_index()
+end_gdf = gpd.GeoDataFrame(end_df, geometry=end_df.geometry)
+end_gdf.crs = {'init' :'epsg:4326'}
+</code></pre></div></div>
+
+<h3 id="4-where-does-each-bird-start-and-end-its-journey-part-2">4) Where does each bird start and end its journey? (Part 2)</h3>
+
+<blockquote>
+  <ul>
+    <li>그렇다면 start와 end를 이용해서 모든 새들의 출발과 끝과 여정을 담은 맵을 보여주도록하자.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ax = americas.plot(figsize=(10,10), color='none', edgecolor='gainsboro', zorder=3)
+start_gdf.plot(color='red', ax=ax)
+path_gdf.plot(color='black', ax=ax)
+end_gdf.plot(color='blue', ax=ax)
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>결과 모습은 다음과 같다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="/assets/GA-2-2.png" alt="사진" /></p>
+
+<h3 id="5-where-are-the-protected-areas-in-south-america-part-1">5) Where are the protected areas in South America? (Part 1)</h3>
+
+<blockquote>
+  <ul>
+    <li>남아메리카 대륙에 대부분 도착하는 것으로 보이는데 그렇다면 미국의 어디가 Protected area인가?</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Country boundaries in South America
+south_america = americas.loc[americas['continent']=='South America']
+
+# Your code here: plot protected areas in South America
+ax = south_america.plot(figsize=(10,10), color='none', edgecolor='gainsboro', zorder=3)
+protected_areas.plot(ax = ax, color = 'green', alpha = 0.4)
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>위의 코드를 진행하면 다음과 같은 결과 값을 받을 수 있다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="/assets/GA-2-3.png" alt="사진" /></p>
+
+<h3 id="7-what-percentage-of-south-america-is-protected">7) What percentage of South America is protected?</h3>
+
+<blockquote>
+  <ul>
+    <li>이번에는 남미의 얼마가 보호되고 있는지 확인하는 코드를 짜보자.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>P_Area = sum(protected_areas['REP_AREA']-protected_areas['REP_M_AREA'])
+
+# Your code here: Calculate the total area of South America (in square kilometers)
+totalArea = sum(south_america.to_crs(epsg=3035).geometry.area)/1000000
+
+percentage_protected = P_Area/totalArea
+print('Approximately {}% of South America is protected.'.format(round(percentage_protected*100, 2)))
+
+Approximately 30.39% of South America is protected.
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>약 30퍼의 남미가 보호받고 있다.</li>
+  </ul>
+</blockquote>
+
+<h3 id="8-where-are-the-birds-in-south-america">8) Where are the birds in South America?</h3>
+
+<blockquote>
+  <ul>
+    <li>그렇다면 새들은 보호구역에 정착하고 있나?</li>
+    <li>다음 코드를 이용하면 남미에 있는 모든 새들의 위치를 확인하고 보호 받는 위치에 정착하고 있는지도 알 수 있다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ax = protected_areas[protected_areas['MARINE']!='2'].plot(figsize=(10,10), color='none', edgecolor='gainsboro', zorder=3)
+birds[birds.geometry.y &lt; 0].plot(ax=ax, color='red', alpha=0.6, markersize=10, zorder=2)
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>위 코드에서 birds의 geometry.y가 0보다 작은애들만 취해주면서 바다에 있는 새들은 제외시켜줬다.</li>
+    <li>이 부분은 정확히 어떤 기준으로 0보다 작게 했는지 이해가 되지 않지만 일단 넘어가자!!</li>
+  </ul>
+</blockquote>
+
+<p><img src="/assets/GA-2-4.png" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>이상으로 2번째 튜토리얼도 끝났다!</li>
+  </ul>
+</blockquote>
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/데이터분석">데이터분석</a>,&nbsp;<a href="/tag/geospatial_analysis">geospatial_analysis</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D/2019/11/18/GA-1.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(BigData Analysis 도전기) Kaggle Geospatial Analysis Tutorial (1. Your First Map)</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D/2019/11/18/GA-3.html">
+					<span class="page-number">(BigData Analysis 도전기) Kaggle Geospatial Analysis Tutorial (3. Interactive Maps)</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D/2019/11/18/GA-2.html',
+    'title': '(BigData Analysis 도전기) Kaggle Geospatial Analysis Tutorial (2. Coordinate Reference Systems)'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

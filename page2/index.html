@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>줌코딩의 코딩일기</title>
+  <meta name="description" content="Zoom in Coding from the Basic.">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Zoom in Coding from the Basic." />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="줌코딩의 코딩일기" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/crewcials.jpeg" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="줌코딩의 코딩일기">
+  <meta name="twitter:description" content="Zoom in Coding from the Basic.">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/crewcials.jpeg">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/page2/">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="home">
+
+<div class="site-header-container has-cover" style="background-image: url(/assets/header_image.jpeg);">
+  <div class="scrim has-cover">
+    <header class="site-header">
+      <h1 class="title">줌코딩의 코딩일기</h1>
+      <p class="subtitle">Zoom in Coding</p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+<ul class="post-list">
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/web/%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC%EC%BA%A0%ED%94%84/2020/07/14/css-layout.html">(우아한테크캠프 3기) 어렵지 않게 CSS 레이아웃 잡기</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>🤔 목적 css를 진짜 많이 얕봤다.. flutter를 이용해서 UI 구현해내는 일에 이제 익숙해졌기 때문에 스타일링 하는 것은 진짜 가볍게 여겼다가 큰코 다쳤다. 이번에 겸손한 마음으로 css 기초부터 반응형으로 레이아웃을 잡는 여러 좋은 방법들에 대해 조사해봤고 마지막으로 간단하게 github project를 따라하며 실습을 진행했다. 📗 참고 자료 poiemaweb 튜토리얼 flex box로 만들...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 14, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/web">Web</a>, 
+        
+      
+        
+        <a href="/category/우아한테크캠프">우아한테크캠프</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/nodejs/%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC%EC%BA%A0%ED%94%84/2020/07/12/express-middleware-log-in.html">(우아한테크캠프 3기) Express 미들웨어 제대로 사용하기 + 로그인 구현하기</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>🧩 목적 express의 특징에 대해서는 Node 개발자라면 알아야 할 기본 지식 포스팅을 통해 정리했으니 이번에는 express generator로 생성되는 여러 미들웨어와 로그인 프로그램 구현에 사용된 미들웨어를 정리해보려고 한다. 📽️ 프로젝트 깃헙 레포지토리 [우아한테크캠프] 배민상회 회원가입/로그인 구현 프로젝트 🏭 Express 주요 미들웨어 pug Express는 런타임에 템플릿 엔진을 이용해서 여러 변수가 있는 static한...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 12, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/nodejs">Nodejs</a>, 
+        
+      
+        
+        <a href="/category/우아한테크캠프">우아한테크캠프</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/tdd/%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC%EC%BA%A0%ED%94%84/2020/07/10/test-driven-development.html">(우아한테크캠프 3기) Test Driven Development란?</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>🧪 TDD란 Test Driven Development : 말그대로 테스트가 이끌어 나가는 개발을 의미한다. 개발을 진행하기 앞서 테스트를 먼저 만들거 테스트를 통과하기 위한 것들을 구현한다. 📒 참고글 [Agile] TDD(테스트 주도 개발)란 [번역]쉬운 테스트 주도 개발과 단위 테스트를 위한 5단계 방법론 ❓ TDD는 언제 해야할까? 처음해보는 프로그램 주제일 때(나의 불확실성) 고객 요구조건이 바뀔...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 10, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/tdd">Tdd</a>, 
+        
+      
+        
+        <a href="/category/우아한테크캠프">우아한테크캠프</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4/%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC%EC%BA%A0%ED%94%84/2020/07/09/atomic-design-pattern.html">(우아한테크캠프 3기) Atomic Design Pattern이 뭐지?</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>🤔 목적 Atomic Design Pattern을 본격적으로 적용하기에 앞서 글을 적어보려고 한다. 이 패턴을 설명하는 여러 블로그글을 가볍게 훑어보고 글들 마다 있는 아래 그림을 보면서 작은 단위의 컴포넌트인 원자를 잘 만들어서 개발하는 느낌이구나하고 넘어갔다. 하지만 막상 구현하기 앞서 여러 글들을 진득하게 앉아서 읽어보니 중점적으로 신경써야하는 부분이 있었다. 그리고 가장 많이 생각...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 9, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/디자인패턴">디자인패턴</a>, 
+        
+      
+        
+        <a href="/category/우아한테크캠프">우아한테크캠프</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/web/%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC%EC%BA%A0%ED%94%84/2020/07/03/woowa-tech-camp-day-3.html">(우아한테크캠프 3기) Day3 JS 객체 지향형 프로그래밍 & 비동기 우아한 카페 만들기</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>출근 시간이 9시가 아니라 9시 반이었기에 30분 더 자고 넉넉히 출발했다 ㅎㅎ 객체 지향형 프로그래밍 크롱님이 두시간 안에 끝내버렸던 객체 지향형 프로그래밍의 주 포인트는 세가지 였다. 의존성을 최대한 낮춰라 의존성이 낮다는 말은 역할을 잘 분리 시켜놔야 한다는 말이다. 좋은 인터페이스를 구현해놔야한다. 그래야 나중에 호환이 좋다. 호출관계를 잘 정의하라 연결은 되어있지만...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 3, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/web">Web</a>, 
+        
+      
+        
+        <a href="/category/우아한테크캠프">우아한테크캠프</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  
+</ul>
+
+<nav class="pagination" role="navigation">
+	<p>
+    
+			
+			<a class="newer-posts" href="/">
+        <span class="fa-stack fa-lg">
+          <i class="fa fa-square fa-stack-2x"></i>
+          <i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+        </span>
+      </a>
+			
+		
+		<span class="page-number">Page 2 of 62</span>
+		
+		<a class="newer-posts" href="/page3">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-square fa-stack-2x"></i>
+        <i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+		
+	</p>
+</nav>
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/page2/',
+    'title': '줌코딩의 코딩일기'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

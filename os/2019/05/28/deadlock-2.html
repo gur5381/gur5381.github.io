@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(Deadlock Detector 개발) Shared library 활용 Deadlock with Mutex Locks Detect하기 + 코드</title>
+  <meta name="description" content="Shared Library의 Dynamic Loading      C에서는 shared object를 compile할 때가 아니라 runtime 때 load할 수 있게 해준다.    이 때 load된 함수들과 변수들은 실제 코드에 합쳐지게 된다.  ">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Shared Library의 Dynamic Loading      C에서는 shared object를 compile할 때가 아니라 runtime 때 load할 수 있게 해준다.    이 때 load된 함수들과 변수들은 실제 코드에 합쳐지게 된다.  " />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(Deadlock Detector 개발) Shared library 활용 Deadlock with Mutex Locks Detect하기 + 코드" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(Deadlock Detector 개발) Shared library 활용 Deadlock with Mutex Locks Detect하기 + 코드">
+  <meta name="twitter:description" content="Shared Library의 Dynamic Loading      C에서는 shared object를 compile할 때가 아니라 runtime 때 load할 수 있게 해준다.    이 때 load된 함수들과 변수들은 실제 코드에 합쳐지게 된다.  ">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/os/2019/05/28/deadlock-2.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(Deadlock Detector 개발) Shared library 활용 Deadlock with Mutex Locks Detect하기 + 코드</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">May 28, 2019</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/os">Os</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="shared-library의-dynamic-loading">Shared Library의 Dynamic Loading</h2>
+<blockquote>
+  <ul>
+    <li>C에서는 shared object를 compile할 때가 아니라 runtime 때 load할 수 있게 해준다.</li>
+    <li>이 때 load된 함수들과 변수들은 실제 코드에 합쳐지게 된다.</li>
+  </ul>
+</blockquote>
+
+<p>예를 들어, 우리가 짠 rand() 함수를 가져오고 싶으면 다음과 같은 코드를 library file로 만들어준다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#define _GNU_SOURCE
+
+static int count = 0 ;
+
+int rand()
+{
+    return count++ ; 
+}
+</code></pre></div></div>
+
+<p>library file을 만드는 명령어는 다음과 같다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gcc -shared -fPIC -o my_rand.so my_rand.c -ldl
+</code></pre></div></div>
+
+<p>만들어진 my_rand library file을 다음과 같은 파일과 함께 실행시켜줘보자</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+
+int 
+main ()
+{
+    int i ;
+
+    srand(time(0x0)) ;
+
+    for (i = 0 ; i &lt; 10 ; i++) {
+        printf("%d\n", rand()) ;
+    }
+}
+</code></pre></div></div>
+
+<p>명령어는 다음과 같다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LD_PRELOAD=./my_rand.so ./my_rand
+</code></pre></div></div>
+
+<p><strong>결과</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>만약 근데 우리가 함수를 직접 구현하지 않고 해당 똑같은 이름의 함수를 부르고 직접 부르고 싶다면</li>
+    <li>ex. rand() 함수 내에서 실제 rand() 함수를 구현하고 싶다면 어떻게 해야할까?</li>
+    <li>dlsym를 사용하자!</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#define _GNU_SOURCE
+
+static int count = 0 ;
+int (*rand_cp)();
+int rand()
+{
+    rand_cp = dlsym(RTLD_NEXT, "rand") ;
+    return rand_cp() ; 
+}    
+</code></pre></div></div>
+
+<p>dlsym을 사용하면 rand함수 내에서 원래 rand함수의 유사한 함수를 만들어줄 수 있다.
+여기서는 rand_cp라는 function에 원래 rand 함수로 향하는 pointer를 얻게 한다.</p>
+
+<p><strong>결과</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4944835
+1503463259
+1414403411
+1381640034
+483376427
+176971988
+103351221
+1857184571
+26275652
+1380735529
+</code></pre></div></div>
+
+<p>그럼 이제 보조 툴은 알았으니 배운 걸 코드로 짜보자.</p>
+
+<h2 id="문제-이해">문제 이해</h2>
+<blockquote>
+  <ul>
+    <li>Shared Library를 활용해서 Pthread에서 mutex lock이 deadlock에 걸린 경우를 찾아보자.</li>
+    <li>저번 post에서 이야기한 Resource Allocation Graph를 활용해서 Cycle 발생시 Deadlock 발생으로 간주하고 코드를 짜보자.</li>
+  </ul>
+</blockquote>
+
+<h2 id="방법">방법</h2>
+<blockquote>
+  <ul>
+    <li>pthread_mutex_lock과 pthread_mutex_unlock을 intercept한다.</li>
+    <li>lock인 경우에 해당 thread(P)와 resource(R) 사이의 P-&gt;R edge를 추가해준다.</li>
+    <li>Edge를 추가할 때 마다 Cycle을 확인하는데 이것은 DFS를 활용한다.</li>
+    <li>이때 만약 mutex의 주인이 없으면 R-&gt;P로 edge를 변경시켜준다.</li>
+    <li>unlock인 경우에는 R-&gt;P edge를 삭제한다.</li>
+  </ul>
+</blockquote>
+
+<p><strong>과정</strong></p>
+
+<ol>
+  <li>P가 R을 Acquire하려고 하면 P-&gt;R edge가 생긴다.</li>
+  <li>P가 R을 wait하다가 잡으면 P-&gt;R edge가 R-&gt;P edge로 변하게 된다.</li>
+  <li>P가 R을 release하면 R-&gt;P edge가 사라진다.</li>
+</ol>
+
+<p><strong>제한사항</strong></p>
+
+<blockquote>
+  <ul>
+    <li>현재 코드에서는 thread(P)의 최대 개수를 10개, mutex(R)의 최대 개수를 100개로 한정한다.</li>
+  </ul>
+</blockquote>
+
+<h2 id="코드">코드</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#define _GNU_SOURCE
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;dlfcn.h&gt;
+#include &lt;execinfo.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/syscall.h&gt;
+
+#define NUM_P 10
+#define NUM_R 100
+#define NUM_V NUM_P + NUM_R
+
+int arr[NUM_V][NUM_V];
+
+int V[NUM_V];
+
+int count_P = 0;
+int count_R = NUM_P;
+
+int add_P(int id){
+    if(count_P &lt; NUM_P) V[count_P] = id;
+    return count_P++;
+}
+
+int add_R(int id){
+    if(count_R &lt; NUM_V) V[count_R] = id;
+    return count_R++;
+}
+
+int find_P(int id){
+    for(int i = 0; i &lt; count_P; i++){
+        if(V[i] == id) return i;
+    }
+    return add_P(id);
+}
+
+int find_R(int id){
+    for(int i = NUM_P; i &lt; count_R; i++){
+        if(V[i] == id) return i;
+    }
+    return add_R(id);
+}
+
+void add_E(int proc, int res){
+    int i = find_P(proc);
+    int j = find_R(res);
+    printf("[%d, %d] Edge 생성\n", i, j);
+    arr[i][j] = 1;
+}
+
+void transpose_E(int proc, int res){
+    int i = find_R(res);
+    int j = find_P(proc);
+    printf("[%d, %d] Edge 삭제\n", j, i);
+    printf("[%d, %d] Edge 생성\n", i, j);
+    arr[j][i] = 0;
+    arr[i][j] = 1;
+}
+
+void release_E(int proc, int res){
+    int i = find_R(res);
+    int j = find_P(proc);
+    printf("[%d, %d] Edge 삭제\n", i, j);
+    arr[i][j] = 0;
+}
+
+int DFS(int i, int *visited){
+    for(int j = 0; j &lt; NUM_V; j++){
+        if(arr[i][j]){
+            if(visited[j] == 1) return 1;
+
+            visited[j] = 1;
+            return DFS(j, visited);
+        }
+    }
+    return 0;
+}
+
+int isCycle(int proc){
+    int visited[NUM_V] = {0,};
+    int i = find_P(proc);
+    visited[i] = 1;
+    return DFS(i, visited);
+}
+
+
+
+int (*pthread_create_cp)(pthread_t *, const pthread_attr_t *, void *(*) (void *), void *);
+int (*pthread_mutex_init_cp)(pthread_mutex_t *restrict mutex, const pthread_mutexattr_t *restrictattr);
+int (*pthread_mutex_lock_cp)(pthread_mutex_t *mutex);
+int (*pthread_mutex_unlock_cp)(pthread_mutex_t *mutex);
+
+int pthread_mutex_lock(pthread_mutex_t *mutex){
+
+    pthread_mutex_lock_cp = dlsym(RTLD_NEXT, "pthread_mutex_lock") ;
+
+    int P = syscall(SYS_gettid);
+    int R = mutex;
+
+    add_E(P, R);
+    if(isCycle(P) == 1) printf("deadlock이요~\n");
+    if(mutex-&gt;__data.__owner == 0) transpose_E(P, R);
+
+    return pthread_mutex_lock_cp(mutex);
+}
+
+int pthread_mutex_unlock(pthread_mutex_t *mutex){
+
+    pthread_mutex_unlock_cp = dlsym(RTLD_NEXT, "pthread_mutex_unlock") ;
+
+    int P = syscall(SYS_gettid);
+    int R = mutex;
+
+    release_E(P, R);
+
+    return pthread_mutex_unlock_cp(mutex);
+}
+</code></pre></div></div>
+
+<h2 id="결과">결과</h2>
+<p><strong>Dinning_deadlock과 같이 돌렸을 때</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LD_PRELOAD=./my_mutex.so ./dinning_deadlock 
+
+[0, 10] Edge 생성
+[0, 10] Edge 삭제
+[10, 0] Edge 생성
+[1, 11] Edge 생성
+[1, 11] Edge 삭제
+[11, 1] Edge 생성
+[2, 12] Edge 생성
+[2, 12] Edge 삭제
+[12, 2] Edge 생성
+[0, 12] Edge 생성
+[3, 13] Edge 생성
+[3, 13] Edge 삭제
+[13, 3] Edge 생성
+[4, 14] Edge 생성
+[4, 14] Edge 삭제
+[14, 4] Edge 생성
+[3, 10] Edge 생성
+[1, 13] Edge 생성
+[2, 14] Edge 생성
+[4, 11] Edge 생성
+deadlock이요~
+</code></pre></div></div>
+
+<p><strong>ABBA와 같이 돌렸을 때</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LD_PRELOAD=./my_mutex.so ./dinning_deadlock 
+
+[0, 10] Edge 생성
+[0, 10] Edge 삭제
+[10, 0] Edge 생성
+[1, 11] Edge 생성
+[1, 11] Edge 삭제
+[11, 1] Edge 생성
+[0, 11] Edge 생성
+[1, 10] Edge 생성
+deadlock이요~
+</code></pre></div></div>
+
+<h2 id="느낀점">느낀점</h2>
+<blockquote>
+  <ul>
+    <li>그래프를 링크드리스트로 구현해볼까 하다가 결국에는 그냥 안전하게 array로 구현했다. 조금 아쉬움이 남는다.</li>
+    <li>일단, 제일 큰 문제는 지난 포스트에서 이야기했듯이 하나의 리소스를 여러명이 동시에 접근할 수 있게 된다면 아래 그림과 같이 <strong>Cycle이 발생하는게 항상 deadlock이 발생하지 않는다는 점이다.</strong></li>
+    <li>이 문제에 대한 답이 좀 필요할 것 같다. 일단 고생했다!</li>
+  </ul>
+</blockquote>
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/os">os</a>,&nbsp;<a href="/tag/deadlock">deadlock</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/os/2019/05/27/deadlock-1.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(Deadlock Detector 개발) Deadlock 정의, Resource-Allocation Graph 활용 Deadlock 찾기</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/os/2019/05/28/deadlock-3.html">
+					<span class="page-number">(Deadlock Predictor 개발) Deadlock 예측을 위한 Lock Graph & GoodLock Algorithm 정리</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/os/2019/05/28/deadlock-2.html',
+    'title': '(Deadlock Detector 개발) Shared library 활용 Deadlock with Mutex Locks Detect하기 + 코드'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(우아한테크캠프 3기) Express 미들웨어 제대로 사용하기 + 로그인 구현하기</title>
+  <meta name="description" content="🧩 목적">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="🧩 목적" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(우아한테크캠프 3기) Express 미들웨어 제대로 사용하기 + 로그인 구현하기" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(우아한테크캠프 3기) Express 미들웨어 제대로 사용하기 + 로그인 구현하기">
+  <meta name="twitter:description" content="🧩 목적">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/nodejs/%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC%EC%BA%A0%ED%94%84/2020/07/12/express-middleware-log-in.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(우아한테크캠프 3기) Express 미들웨어 제대로 사용하기 + 로그인 구현하기</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 12, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/nodejs">Nodejs</a>, 
+    
+  
+    
+    <a href="/category/우아한테크캠프">우아한테크캠프</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="-목적">🧩 목적</h2>
+
+<p>express의 특징에 대해서는 <a href="https://zoomkoding.github.io/node/2020/06/04/node-developer-basic.html">Node 개발자라면 알아야 할 기본 지식 포스팅</a>을 통해 정리했으니 이번에는 express generator로 생성되는 여러 미들웨어와 로그인 프로그램 구현에 사용된 미들웨어를 정리해보려고 한다.</p>
+
+<p><br /></p>
+
+<h2 id="️-프로젝트-깃헙-레포지토리">📽️ 프로젝트 깃헙 레포지토리</h2>
+
+<p><a href="https://github.com/woowa-techcamp-2020/market-8">[우아한테크캠프] 배민상회 회원가입/로그인 구현 프로젝트</a></p>
+
+<p><br /></p>
+
+<h2 id="-express-주요-미들웨어">🏭 Express 주요 미들웨어</h2>
+
+<h3 id="pug"><a href="https://pugjs.org/api/getting-started.html">pug</a></h3>
+
+<p>Express는 런타임에 템플릿 엔진을 이용해서 여러 변수가 있는 static한 템플릿 파일에 실제 값을 넣어 html 파일을 생성한다.</p>
+
+<p>Pug는 가장 대표적인 템플릿엔진으로 템플릿이 있는 디렉토리를  views에 정해주고 view engine으로 pug로 설정해주면 사용할 수 있다.</p>
+
+<p><br /></p>
+
+<p>app.js에 view engine 종류와 template directory를 정해주고</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">'</span><span class="s1">views</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">./views</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">'</span><span class="s1">view engine</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">pug</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>다음과 같이 <strong>index.pug</strong> 를 만들어 주고 title에 대한 변수값을 전달받는 template을 설정하고</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">extends</span> <span class="nx">layout</span>
+
+<span class="nx">block</span> <span class="nx">content</span>
+  <span class="nx">h1</span><span class="o">=</span> <span class="nx">title</span>
+  <span class="nx">p</span> <span class="nx">Welcome</span> <span class="nx">to</span> <span class="err">#</span><span class="p">{</span><span class="nx">title</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>router.js</strong> 에서 res.render 함수를 통해 사용할 template과 변수 값을 전달해주면</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">router</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="dl">'</span><span class="s1">index</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Express</span><span class="dl">'</span> <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>template에 변수 값을 넣어서 해당하는 페이지를 유저에게 전달된다.</p>
+
+<p><br /></p>
+
+<h3 id="morgan"><a href="https://www.npmjs.com/package/morgan">morgan</a></h3>
+
+<p>morgan은 이름에서 바로 알 수 없지만 request를 logging을 해주는 아주 유용한 미들웨어이다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">logger</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">morgan</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="c1">// ···</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">logger</span><span class="p">(</span><span class="dl">'</span><span class="s1">dev</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>morgan을 사용할 때 parameter로 format 값을 보내줄 수 있다.(이 미리 정해진 format은 tiny, common, short 등 다양하다.)</p>
+
+<p>dev format는 request를 다음과 같은 형식으로 console에 기록해준다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:method :url :status :response-time ms - :res[content-length]
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>dev format을 사용했을 때의 모습이다.</p>
+
+<p><img src="/assets/express-middleware-1.png" alt="express-middleware-0" /></p>
+
+<p><br /></p>
+
+<p>morgan을 사용하면 에러가 어떤 요청에서 발생했는지 확인할 수 있어서 매우 유용하다. 근데 만일 실제 서비스를 배포한 상태에서 서버의 상태를 콘솔로만 확인한다면 로그를 모두 확인하는데 어려움이 있다.</p>
+
+<p><br /></p>
+
+<p>🍯<strong>꿀팁</strong> 🍯</p>
+
+<p><strong>morgan은 console 대신 file에 logging 하도록 설정이 가능하다.</strong></p>
+
+<p><strong>rotating-file-stream이라는 미들웨어를 사용하면 매일 다른 파일에 로깅을 할 수 있도록 설정할 수 있고 심지어는 console에는 에러 요청만 기록하도록 하고 파일에는 모든 요청을 다 기록하도록 설정할 수도 있다.</strong></p>
+
+<p>다음은 그 예시이다!</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">express</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">morgan</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">morgan</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">rfs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">rotating-file-stream</span><span class="dl">'</span><span class="p">)</span> <span class="c1">// version 2.x</span>
+ 
+<span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">()</span>
+ 
+<span class="c1">// create a rotating write stream</span>
+<span class="kd">var</span> <span class="nx">accessLogStream</span> <span class="o">=</span> <span class="nx">rfs</span><span class="p">.</span><span class="nx">createStream</span><span class="p">(</span><span class="dl">'</span><span class="s1">access.log</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">interval</span><span class="p">:</span> <span class="dl">'</span><span class="s1">1d</span><span class="dl">'</span><span class="p">,</span> <span class="c1">// rotate daily</span>
+  <span class="na">path</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">log</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// log only 4xx and 5xx responses to console</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">morgan</span><span class="p">(</span><span class="dl">'</span><span class="s1">dev</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">skip</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">statusCode</span> <span class="o">&lt;</span> <span class="mi">400</span> <span class="p">}</span>
+<span class="p">}))</span>
+ 
+<span class="c1">// log all requests to access.log</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">morgan</span><span class="p">(</span><span class="dl">'</span><span class="s1">common</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">stream</span><span class="p">:</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">createWriteStream</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">access.log</span><span class="dl">'</span><span class="p">),</span> <span class="p">{</span> <span class="na">flags</span><span class="p">:</span> <span class="dl">'</span><span class="s1">a</span><span class="dl">'</span> <span class="p">})</span>
+<span class="p">}))</span>
+<span class="c1">// ···</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="express-session"><a href="https://www.npmjs.com/package/express-session">express-session</a></h3>
+
+<p>express-session은 서버가 세션을 이용하게 해주고 유저 쿠키에 세션 정보를 담을 수 있게 해주는 매우 유용한 미들 웨어이다.</p>
+
+<p>유저 쿠키에 세션 정보를 담을 때는 세션의 모든 정보를 담는 것이 아니라 <strong>세션의 아이디 값을 저장</strong>하고 서버에서  데이터를 관리하게 된다.</p>
+
+<p>이때 여러 옵션을 정해줘야 하는데 주요 옵션의 특징은 다음과 같다.</p>
+
+<p><strong>secret</strong> : session Id를 hash하기 위해 사용되는 key 값이다.(해쉬한 값이 connect.sid에 저장된다.)</p>
+
+<p><strong>resave</strong> : 세션을 접속할 때마다 새로운 세션을 발급할지 말지 정하는 곳이다.(true 설정시 race condition을 발생 시킬 수 있다고 한다. 대부분의 경우 false가 적절하다고 한다.)</p>
+
+<p><strong>saveUninitialized</strong> : 세션 ID를 발급하지 않는 세션도 다 기록할지 정한다.(로그인에 사용할 때는 서버 메모리 사용을 줄여주기 위해 false로 설정한다.)</p>
+
+<p><strong>storage</strong> : 세션을 어디에 저장할지 정한다.(기본 값은 MemoryStore를 사용하기 때문에 production에 사용하면 memory leak이 발생할 수도 있다. <a href="https://www.npmjs.com/package/express-session#compatible-session-stores">세션을 저장할 수 있는 다양한 storage</a>가 존재한다.)</p>
+
+<p><img src="/assets/express-middleware-2.png" alt="express-middleware-2" /></p>
+
+<p>그럼 간단히 어떻게 돌아가는지 확인해보자.</p>
+
+<p>다음 코드는 session 미들웨어를 지나가면서 어떤 req에 어떤 내용이 생기는지 보는 코드이다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">express</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">express-session</span><span class="dl">'</span><span class="p">)</span>
+ 
+<span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">()</span>
+
+<span class="kd">function</span> <span class="nx">logSessionInfo</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`req.session : </span><span class="p">${</span><span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`req.sessionID : </span><span class="p">${</span><span class="nx">req</span><span class="p">.</span><span class="nx">sessionID</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`express-session 통과 전`</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`req.headers.cookie : </span><span class="p">${</span><span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+  <span class="nx">logSessionInfo</span><span class="p">(</span><span class="nx">req</span><span class="p">);</span>
+  <span class="nx">next</span><span class="p">();</span>
+<span class="p">})</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">session</span><span class="p">({</span>
+  <span class="na">secret</span><span class="p">:</span> <span class="dl">'</span><span class="s1">keyboard cat</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">resave</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="na">saveUninitialized</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">}));</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`express-session 통과 후`</span><span class="p">);</span>
+  <span class="nx">logSessionInfo</span><span class="p">(</span><span class="nx">req</span><span class="p">);</span>
+  <span class="nx">next</span><span class="p">();</span>
+<span class="p">})</span>
+
+<span class="c1">// ···</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>출력 결과는 다음과 같다.</p>
+
+<p><img src="/assets/express-middleware-3.png" alt="express-middleware-3" /></p>
+
+<p><br /></p>
+
+<p>🗒️<strong>정리</strong> 🗒️</p>
+
+<p>express-sesssion은 req.headers.cookie에 주어진 sid를 sessionID로 번역하고 그 sessionID에 해당하는 session 값을 req.session에 저장하게 된다!</p>
+
+<p><strong>즉, 세션의 정보 값은 쿠키에 전달되지 않고  해쉬화된 sid만 유저의 쿠키에 저장되고 요청이 들어오면 sid를 번역하고 얻은 session ID에 해당하는 session 값을 req.session에 넣어주어 next함수에서 사용할 수 있게 해준다!!(이제 좀 알겠다…ㅋㅋㅋ)</strong></p>
+
+<p><br /></p>
+
+<h2 id="-본격-express로-로그인-구현하기">🤝 본격 express로 로그인 구현하기</h2>
+
+<p>그럼 이제 로그인 구현의 express의 middleware을 알아보고 로그인 페이지를 구현해보자.</p>
+
+<h3 id="passport"><a href="http://www.passportjs.org/docs/">passport</a></h3>
+
+<p>passport는 node에서 가장 많이 쓰이는 authentication 미들웨어이다. 간단하게 username과 password를 제공하는 로그인 방법부터 OpenID와 OAuth 전략도 제공하기 때문에 매우 유용하게 사용할 수 있다.</p>
+
+<p>passport에서 제공하는 여러 strategy를 설치해서 사용할 수 있다.</p>
+
+<p><img src="/assets/express-middleware-4.png" alt="express-middleware-4" /></p>
+
+<p>다음과 같이 passport와 하나의 Strategy를 가져와서</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">passport</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">passport</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">localStrategy</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">passport-local</span><span class="dl">'</span><span class="p">).</span><span class="nx">Strategy</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>어떤 식으로 strategy의 구체적인 내용을 정의하고 passport에 넣어준다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">passport</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="k">new</span> <span class="nx">LocalStrategy</span><span class="p">(</span>
+	<span class="c1">//verify callback 함수</span>
+  <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">User</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span> <span class="na">username</span><span class="p">:</span> <span class="nx">username</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">done</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span> <span class="p">}</span>
+			<span class="c1">// 아이디 없음</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">donnull</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="p">{</span> <span class="na">message</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Incorrect username.</span><span class="dl">'</span> <span class="p">});</span>
+      <span class="p">}</span>
+			<span class="c1">// 비밀번호 틀림</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">.</span><span class="nx">validPassword</span><span class="p">(</span><span class="nx">password</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">done</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="p">{</span> <span class="na">message</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Incorrect password.</span><span class="dl">'</span> <span class="p">});</span>
+      <span class="p">}</span>
+			<span class="c1">// 성공</span>
+      <span class="k">return</span> <span class="nx">done</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">user</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">));</span>
+</code></pre></div></div>
+
+<p>그리고 passport.authenticate를 다음과 같이 login request에 사용할 수 있다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">'</span><span class="s1">/login</span><span class="dl">'</span><span class="p">,</span>
+  <span class="nx">passport</span><span class="p">.</span><span class="nx">authenticate</span><span class="p">(</span><span class="dl">'</span><span class="s1">local</span><span class="dl">'</span><span class="p">),</span>
+  <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// If this function gets called, authentication was successful.</span>
+    <span class="c1">// `req.user` contains the authenticated user.</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="dl">'</span><span class="s1">/users/</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">username</span><span class="p">);</span>
+  <span class="p">});</span>
+</code></pre></div></div>
+
+<p>passport.authentication 함수가 성공하면 req.user에 유저 정보를 넣어서 콜백 함수를 실행하지만 로그인 실패시 바로 401 authentication error 메시지를 전달한다.</p>
+
+<p><br /></p>
+
+<p><strong>❓그럼 로그인 여부는 어디서 결정 될까?</strong></p>
+
+<p>위의 코드에서  username, password, done을 파라미터로 받는 함수는 verify callback라고 하는데 여기서 authentication 성공과 실패 여부를 <strong>done함수</strong>로 전달한다. (이때 전달된 값이 req.user에 넣어진다.)</p>
+
+<p>성공시에는 done의 두번째 인자로 유저 정보로 실패시에는 false를 반환한다.</p>
+
+<p>에러 발생시에는 첫번째 인자에 에러를 넣어서 반환한다. // done(err);</p>
+
+<p><br /></p>
+
+<p><strong>❓로그인 세션을 사용하고 싶다면?</strong></p>
+
+<p>passport 또한 session을 사용할 수 있다.</p>
+
+<p>무조건 session 미들웨어를 이용한 후에 passport의 session을 사용한다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">session</span><span class="p">({</span> <span class="na">secret</span><span class="p">:</span> <span class="dl">'</span><span class="s1">keyboard cat</span><span class="dl">'</span> <span class="p">}));</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">passport</span><span class="p">.</span><span class="nx">initialize</span><span class="p">());</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">passport</span><span class="p">.</span><span class="nx">session</span><span class="p">());</span>
+</code></pre></div></div>
+
+<p>세션을 이용하기 위해서는 serializeUser와 deserializeUser 함수를 정의해줘야 한다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">passport</span><span class="p">.</span><span class="nx">serializeUser</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">user</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">done</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">passport</span><span class="p">.</span><span class="nx">deserializeUser</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">User</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">done</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">user</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>📩 <strong>serializeUser</strong></p>
+
+<p>verify callback가 유저 정보를 전달하면 실행되는 함수로, 성공한 유저의 정보를 session에 추가한다.</p>
+
+<p><br /></p>
+
+<p>📤 <strong>deserializeUser</strong></p>
+
+<p>deserializeUser은 Cookie에 저장된 passport session 정보를 이용해서 User정보를 가져오는 함수이다.<br />
+앞에서 session과 같이 cookie에는 구체적인 유저정보가 담기지 않고 passport session id가 저장되어 있다.</p>
+
+<p>🎈session 사용량을 줄이기 위해서 user의 id만 저장하고 요청이 오면 id에 해당하는 유저정보를 가져와서 쓰면 좋다.</p>
+
+<p><br /></p>
+
+<p><strong>❓그럼 passport session은 유저에게 어떻게 저장될까?</strong></p>
+
+<p>passport용 세션이 새로 생기는 게 아니라 express session에 하나의 property로 들어가게 된다.<br />
+cookie에 들어있는 express session이 생성한 connect.sid을 풀면 그 안에 passport session 정보가 들어있는 걸 볼 수 있다.</p>
+
+<p><img src="/assets/express-middleware-5.png" alt="express-middleware-5" /></p>
+
+<p><br /></p>
+
+<p><strong>❓로그인 상태에 따라 페이지 접근 제어하기!</strong></p>
+
+<p>마이페이지와 같은 페이지에 접근할 때는 유저의 로그인 상태에 따라서 페이지를 달리 해줘야 한다.</p>
+
+<p>이런 상황에는 passport에 의해 req에 생성된 isAuthenticated를 이용할 수 있다. 함수의 형태는 다음과 같다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">req</span><span class="p">.</span><span class="nx">isAuthenticated</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">property</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">user</span><span class="dl">'</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_passport</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">_passport</span><span class="p">.</span><span class="nx">instance</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">property</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_passport</span><span class="p">.</span><span class="nx">instance</span><span class="p">.</span><span class="nx">_userProperty</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">user</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="k">return</span> <span class="p">(</span><span class="k">this</span><span class="p">[</span><span class="nx">property</span><span class="p">])</span> <span class="p">?</span> <span class="kc">true</span> <span class="p">:</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>위의 함수를 이용하면 다음과 같은 함수를 만들어서 페이지를 보여주기 전에 로그인 상태를 확인하여 로그인 되지 않은 req를 login page로 redirect 해줄 수 있다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">isAuthenticated</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">())</span> <span class="k">return</span> <span class="nx">next</span><span class="p">();</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="dl">'</span><span class="s1">/login</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// ···</span>
+
+<span class="nx">router</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/mypage</span><span class="dl">'</span><span class="p">,</span> <span class="nx">isAuthenticated</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="dl">'</span><span class="s1">mypage</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">user</span><span class="p">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user</span> <span class="p">}));</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="bcrypt"><a href="https://www.npmjs.com/package/bcrypt">bcrypt</a></h3>
+
+<p>bcrpyt는 비밀번호를 쉽게 암호화해주는 미들웨어이다.</p>
+
+<p>hash를 생성할때는 bcrypt의 hash 함수를 이용하고 비밀번호를 확인할 때는 compare 함수를 이용한다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">saltRounds</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="nx">user</span><span class="p">.</span><span class="nx">passwordHash</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">bcrypt</span><span class="p">.</span><span class="nx">hash</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span><span class="err"> </span><span class="nx">saltRounds</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">match</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">bcrypt</span><span class="p">.</span><span class="nx">compare</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">passwordHash</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><strong>❓bcrpyt가 근데 뭐지요? <a href="https://d2.naver.com/helloworld/318732">비밀번호 암호화 관련 사진 출처 및 참고자료</a></strong></p>
+
+<p>비밀번호를 단방향으로 hashing 만으로 생길 수 있는 유추 가능성이나 빠른 속도로 인해 해커들에게 편의성을 제공할 수 있다.</p>
+
+<p>이를 해결하기 위해 salt를 비밀번호에 더한 후에 hashing을 진행하여 다이제스트를 생성한다.<br />
+bcrypt는 이에 더해 다이제스트를 생성하는 과정을 몇번 진행할지 결정하는 ‘work factor’(여기서는 <strong>saltRounds</strong>이다)를 조정하는 것 만으로 <strong>시스템 보안성을 증가</strong>시킨다고 한다.</p>
+
+<p><img src="/assets/express-middleware-6.png" alt="express-middleware-6" /></p>
+
+<p><br /></p>
+
+<h3 id="flash"><a href="https://www.npmjs.com/package/connect-flash">flash</a></h3>
+
+<p>flash는 세션에서 메시지를 저장할 때 사용하는 특별한 공간이다.</p>
+
+<p>flash에 작성된 메시지는 한번 유저한테 display되면 바로 삭제된다.</p>
+
+<p><br /></p>
+
+<p><strong>❓어디에 쓸까? 로그인 실패 메시지 전달에!</strong></p>
+
+<p>주로 redirect와 많이 사용되는데 특히 로그인 실패 이유 메시지를 띄울 때 사용하면 매우 유용하다 ㅎㅎ</p>
+
+<p>passport는 flash를 이용해서 message를 띄우는 걸 지원한다.</p>
+
+<p>verify callback 함수를 보면 다음과 같이 message를 같이 보내주게 된다. 이 부분은 flash에 저장되게 된다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ···</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">done</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="p">{</span> <span class="na">message</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Incorrect username.</span><span class="dl">'</span> <span class="p">});</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">.</span><span class="nx">validPassword</span><span class="p">(</span><span class="nx">password</span><span class="p">))</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">done</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="p">{</span> <span class="na">message</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Incorrect password.</span><span class="dl">'</span> <span class="p">});</span>
+<span class="p">}</span>
+<span class="c1">// ···</span>
+</code></pre></div></div>
+
+<p>그리고 req.flash()를 이용해서 해당 값을 유저에게 전달할 수 있다!<strong>(한번 보여주면 사라진다.)</strong></p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">router</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/login</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">req</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">()</span> 
+    <span class="p">?</span> <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="dl">'</span><span class="s1">/mypage</span><span class="dl">'</span><span class="p">)</span> 
+    <span class="p">:</span> <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="dl">'</span><span class="s1">login</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">failureMsg</span> <span class="p">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">().</span><span class="nx">error</span> <span class="p">})</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p><img src="/assets/express-middleware-7.png" alt="express-middleware-7" /></p>
+
+<p><br /></p>
+
+<h2 id="-로그인-정보-저장용-파일-기반-디비-구현하기">📄 로그인 정보 저장용 파일 기반 디비 구현하기</h2>
+
+<p>이전에 사용했던 sequelize와 같은 ORM과 유사하게 테이블 형태를 정의하고 create, update, getById 함수를 내장한 모델 클래스를 만들어보았다.</p>
+
+<p>validate 함수를 통해 유저가 입력한 값이 테이블의 attributes의 타입과 일치하는지 확인하는 함수도 구현해봤다 ㅎㅎ</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">fs</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">class</span> <span class="nx">Model</span> <span class="p">{</span>
+    
+    <span class="kd">static</span> <span class="nx">sync</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">fileName</span><span class="p">)){</span>
+            <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">fileName</span><span class="p">,</span> <span class="dl">'</span><span class="s1">utf8</span><span class="dl">'</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">items</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">static</span> <span class="nx">init</span> <span class="o">=</span> <span class="p">(</span><span class="nx">attributesTypes</span><span class="p">,</span> <span class="p">{</span> <span class="nx">tableName</span><span class="p">,</span> <span class="nx">sync</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">tableName</span> <span class="o">=</span> <span class="nx">tableName</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">dirname</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s2">`../database`</span><span class="p">)</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">fileName</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">dirname</span><span class="p">}</span><span class="s2">/</span><span class="p">${</span><span class="nx">tableName</span><span class="p">}</span><span class="s2">.json`</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">attributesTypes</span> <span class="o">=</span> <span class="nx">attributesTypes</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">items</span> <span class="o">=</span> <span class="p">[];</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">sync</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">sync</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="kd">static</span> <span class="nx">write</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">items</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">dirname</span><span class="p">))</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">mkdirSync</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">dirname</span><span class="p">);</span>
+        <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">fileName</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="dl">'</span><span class="s1">utf8</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kd">static</span> <span class="nx">validate</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{};</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="p">[</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">]</span> <span class="k">of</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">item</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">attributesTypes</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">||</span> <span class="o">!</span><span class="nx">value</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+
+            <span class="k">switch</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">attributesTypes</span><span class="p">[</span><span class="nx">key</span><span class="p">]){</span>
+                <span class="k">case</span> <span class="dl">'</span><span class="s1">date</span><span class="dl">'</span><span class="p">:</span>
+                    <span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="k">case</span> <span class="dl">'</span><span class="s1">boolean</span><span class="dl">'</span><span class="p">:</span>
+                    <span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">on</span><span class="dl">'</span> <span class="o">||</span> <span class="nx">value</span> <span class="o">==</span> <span class="mi">1</span><span class="p">;</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="k">case</span> <span class="k">typeof</span><span class="p">(</span><span class="nx">value</span><span class="p">):</span>
+                    <span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="nl">default</span><span class="p">:</span>
+                    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">User Input Error</span><span class="dl">'</span><span class="p">);</span> 
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="nx">data</span><span class="p">.</span><span class="nx">createdAt</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+        <span class="nx">data</span><span class="p">.</span><span class="nx">updatedAt</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+        <span class="k">return</span> <span class="nx">data</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">static</span> <span class="nx">getById</span> <span class="o">=</span> <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="nx">item</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">id</span><span class="p">);</span>   
+
+    <span class="kd">static</span> <span class="nx">create</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">validatedItem</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">validate</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">validatedItem</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">write</span><span class="p">();</span>
+        <span class="k">return</span> <span class="nx">validatedItem</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">static</span> <span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">id</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">findIndex</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+        <span class="nx">item</span><span class="p">.</span><span class="nx">updatedAt</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">items</span><span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=</span> <span class="nx">item</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">write</span><span class="p">();</span>
+    <span class="p">}</span> 
+
+    <span class="kd">static</span> <span class="k">delete</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">id</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">findIndex</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+        <span class="nx">item</span><span class="p">.</span><span class="nx">updatedAt</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">items</span><span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">write</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">Model</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>그리고 User table을 위의 모델를 기반으로 만들었다:)</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">Model</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./model</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">class</span> <span class="nx">Users</span> <span class="kd">extends</span> <span class="nx">Model</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="nx">init</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">super</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
+            <span class="na">id</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">pw</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">email</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">name</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">phoneNo</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">address1</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">address2</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">zipCode</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">isAdAgreed</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">boolean</span><span class="dl">'</span><span class="p">,</span>
+        <span class="p">},</span> <span class="p">{</span> 
+            <span class="na">tableName</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Users</span><span class="dl">'</span><span class="p">,</span> 
+            <span class="na">sync</span> <span class="p">:</span> <span class="kc">true</span> 
+        <span class="p">});</span>
+    <span class="p">}</span> 
+<span class="p">}</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">Users</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h2 id="️-프로젝트-깃헙-레포지토리-1">📽️ 프로젝트 깃헙 레포지토리</h2>
+
+<p><a href="https://github.com/woowa-techcamp-2020/market-8">[우아한테크캠프] 배민상회 회원가입/로그인 구현 프로젝트</a></p>
+
+<p><br /></p>
+
+<h2 id="-회고">💭 회고</h2>
+
+<ul>
+  <li>이번 기회를 통해서 세션이 어떻게 동작하고 특히 passport에서 세션이 어떻게 이용되는지 좀더 잘 이해할 수 있었던 것 같다.</li>
+  <li>다음에는 morgan을 파일로 로깅하는데 까지 사용해봐야겠다.</li>
+  <li>모르고 사용해서 사실 불안한 부분들이 많았는데 이번 기회에 그런 불안함이 많이 해소된 것 같아 보람차다.</li>
+  <li><strong>❓무엇보다 프론트엔드는 너무 부족하니 다음 기회에는 프론트엔드 공부에도 더 많이 신경써봐야겠다!</strong></li>
+</ul>
+
+<h2 id="잘못-정리된-점이나-피드백-있으면-말씀해주세요">잘못 정리된 점이나 피드백 있으면 말씀해주세요!</h2>
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/javascript">javascript</a>,&nbsp;<a href="/tag/node">node</a>,&nbsp;<a href="/tag/express">express</a>,&nbsp;<a href="/tag/우아한테크캠프">우아한테크캠프</a>,&nbsp;<a href="/tag/백엔드개발">백엔드개발</a>,&nbsp;<a href="/tag/노드">노드</a>,&nbsp;<a href="/tag/익스프레스">익스프레스</a>,&nbsp;<a href="/tag/미들웨어">미들웨어</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/tdd/%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC%EC%BA%A0%ED%94%84/2020/07/10/test-driven-development.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(우아한테크캠프 3기) Test Driven Development란?</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/web/%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC%EC%BA%A0%ED%94%84/2020/07/14/css-layout.html">
+					<span class="page-number">(우아한테크캠프 3기) 어렵지 않게 CSS 레이아웃 잡기</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/nodejs/%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC%EC%BA%A0%ED%94%84/2020/07/12/express-middleware-log-in.html',
+    'title': '(우아한테크캠프 3기) Express 미들웨어 제대로 사용하기 + 로그인 구현하기'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(OS 기본개념 정리) CH4 Multithreaded Programming</title>
+  <meta name="description" content="Chapter4. Multithreaded Programming">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Chapter4. Multithreaded Programming" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(OS 기본개념 정리) CH4 Multithreaded Programming" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(OS 기본개념 정리) CH4 Multithreaded Programming">
+  <meta name="twitter:description" content="Chapter4. Multithreaded Programming">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/os/2019/04/23/os-4.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(OS 기본개념 정리) CH4 Multithreaded Programming</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">April 23, 2019</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/os">Os</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="chapter4-multithreaded-programming">Chapter4. Multithreaded Programming</h2>
+
+<h3 id="41-overview">4.1 Overview</h3>
+
+<h4 id="thread란">Thread란?</h4>
+
+<ul>
+  <li>basic unit of CPU utilization이다.</li>
+  <li>Process의 control flow이기도 하다.</li>
+</ul>
+
+<h4 id="thread의-장점">Thread의 장점</h4>
+
+<ul>
+  <li>Resposiveness : 어떤 코드 일부가 막혀있거나 다른 일을 하고 있더라도 유저의 요청에 즉각 대응할 수 있다.</li>
+  <li>Resource Sharing : 프로세스는 shared memory나 message passing을 이용해서 리소스를 공유하지만 thread는 그냥 데이터를 공유한다. 기술이 필요하지 않다. (Global Variables)</li>
+  <li>Economy : 생성 비용이 작다(리소스 카피를 안해서 그렇단다.)</li>
+  <li>Scalability : 멀티 코어 일 때 계속해서 성능이 더 좋아진다.</li>
+</ul>
+
+<h4 id="process와-차이점">Process와 차이점</h4>
+
+<ul>
+  <li>프로세스는 생성하는데 비용과 시간이 큼, 리소스를 카피 해야하기 때문에</li>
+  <li>만일 같은 일을 할거라면 리소스 카피는 무의미하다.</li>
+  <li>쓰레드는 리소스 카피 안해서 시간이 훨 짧게 듬. 뿐만 아니라 데이터 공유가 쉬움</li>
+</ul>
+
+<h3 id="42-multicore-programming">4.2 Multicore Programming</h3>
+
+<p>CPU 안에 코어가 여러개 있다면 multi core라고 한다. 
+각 코어가 control을 잡고 Multithreaded Programming을 할 수 있다.</p>
+
+<h4 id="parallelism-vs-concurrency">Parallelism vs. concurrency</h4>
+
+<p>parallel하다 : 하나 이상의 태스크를 동시에 작업한다.(doing)
+concurrent하다 : 동시에 하나 이상의 태스크를 다룬다.(dealing)</p>
+
+<p>찾다보니 이게 제일 정확한거 같다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/os4-1.png" alt="사진" /></p>
+
+<p>위의 그래프를 보듯이 parallelism은 말그대로 하나 이상의 일이 동시에 진행되는 거고 concurrency는 여러개의 일을 진행하되 context switch 등을 이용해서 더 효율적으로 여러가지 일을 진행하는 것을 의미한다.</p>
+
+<h4 id="programming-challenges">programming challenges</h4>
+
+<ol>
+  <li>identify tasks : task 쪼개기 어려워</li>
+  <li>balance : 이전 만큼의 퍼포먼스가 나와야 함</li>
+  <li>data splitting : 데이터를 각각에게 맞게 줘야할 텐데</li>
+  <li>data dependency : 데이터 sync 잘못 맞추면 큰일나</li>
+  <li>test &amp; debugging : 일이 동시에 여러개 진행되니까 디버깅 쉽지않아.</li>
+</ol>
+
+<h4 id="type-of-parallelism">Type of Parallelism</h4>
+
+<blockquote>
+  <ul>
+    <li>Data Parallelism : 데이터의 subset을 분배하는데 초점</li>
+    <li>Task Parallelism : task를 각 코어에 분배하는데 초점</li>
+  </ul>
+</blockquote>
+
+<h4 id="multithreading-models">Multithreading Models</h4>
+
+<p><strong>첫번째. Many-to-One</strong></p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/os4-2.png" alt="사진" /></p>
+
+<ul>
+  <li>Many Users to One Kernel</li>
+  <li>system call이 막히면 다 막힘</li>
+  <li>kernel이 하나 이기 때문에 multi-core 효과 없음.</li>
+</ul>
+
+<p><strong>두번째. One-to-One</strong></p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/os4-3.png" alt="사진" /></p>
+
+<ul>
+  <li>하나의 유저당 하나의 kernel 쓰레드</li>
+  <li>Syscall 다 괜춘 Multi도 잘됨</li>
+  <li>근데 문제는 kernel을 너무 많이 만들어야 되서 Application한테 너무 무거운 짐을 주는 걸 수도…</li>
+</ul>
+
+<p><strong>세번째. Many-to-Many</strong></p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/os4-4.png" alt="사진" /></p>
+
+<ul>
+  <li>여러 유저가 적당량의 커넬을 돌려 쓸 수 있다. 아주 좋아.</li>
+  <li>Application에게 지우는 짐이 무겁지 않다.</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/os4-5.png" alt="사진" /></p>
+
+<ul>
+  <li>이런식으로 one to one 과 many to many를 동시에 쓰는 <strong>two-level model</strong>도 있다.</li>
+</ul>
+
+<h3 id="44-thread-libraries">4.4 Thread Libraries</h3>
+
+<p>Thread를 위한 API같은 친구들이다.</p>
+
+<p>방법은 두가지이다.</p>
+
+<ol>
+  <li>유저단에서 library를 import해서 쓰는 방법</li>
+  <li>kernel level에서 os가 제공하는 thread library를 쓰는 방법</li>
+</ol>
+
+<p>Thread Library 3개</p>
+
+<ul>
+  <li>pthread : Posix Standard extension</li>
+  <li>windows - kernel window</li>
+  <li>java - Java programming 에서 JVM은 host OS의 Library를 사용</li>
+</ul>
+
+<h4 id="async--sync-thread-방법">async &amp; sync thread 방법</h4>
+
+<p>async - child와 parent thread가 동시에 일해 concurrently
+sync - wait for children to terminate =&gt; fork-join, 데이터 쉐어링에 용이</p>
+
+<h4 id="pthread-implementation">pthread implementation</h4>
+
+<p>쓰레드 생성(create)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pthread_t tid; /* the thread identifier */
+/* create the thread */
+pthread_create(&amp;tid,&amp;attr,runner,argv[1]);
+</code></pre></div></div>
+
+<p>쓰레드 끝날 때까지 기다림(join)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pthread join(tid,NULL);
+</code></pre></div></div>
+
+<p>이 두과정을 통해서 thread 순서를 정할 수도 있다.</p>
+
+<h3 id="45-implicit-threading">4.5 Implicit Threading</h3>
+
+<ul>
+  <li>Thread는 Correctness를 확인하기가 어렵다.</li>
+  <li>그 밖에 앞에서 명시한 challenge 들을 보완해야 한다.</li>
+</ul>
+
+<p>=&gt; 이를 위해 implicit threading을 한다.</p>
+
+<h4 id="thread-pool">Thread Pool</h4>
+
+<ul>
+  <li>매번 쓰레드가 생성되는 낭비를 방지하기 위해서 사용</li>
+  <li>thread를 미리 준비해놓고 작업을 할 때 쉬고 있는 thread를 사용</li>
+  <li>이 경우 생성시간을 줄일 수 있다. concurrent threading 가능</li>
+</ul>
+
+<h4 id="open-mp">Open MP</h4>
+
+<p>parallel할 구간을 미리 명시</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#pragma omp parallel
+</code></pre></div></div>
+
+<h3 id="46-threading-issues">4.6 Threading Issues</h3>
+
+<h4 id="fork랑-exec-문제">Fork랑 Exec 문제</h4>
+
+<ul>
+  <li>fork하면 process의 모든 thread를 복사할건가? 아님 지금 fork를 호출한 Thread만?</li>
+  <li>둘다 지원하니 잘 선택하시게</li>
+  <li>exec은 process를 replace한다 즉 지금 호출한 thread말고 다 죽여버리니까 조심해서 써</li>
+</ul>
+
+<h4 id="signal-handling-문제">Signal Handling 문제</h4>
+
+<ul>
+  <li>Signal은 event 발생으로 생겨나서 프로세스에 전달되는데</li>
+  <li>프로세스에 전달되서 시그널을 핸들하게 된다.</li>
+  <li>Sync - illegal use of memory</li>
+  <li>Async - 외부 event에 의해 보내짐</li>
+  <li>multithread는 쓰레드가 뭐를 받을 지 명시할 수 있게 되있다.</li>
+</ul>
+
+<h4 id="thread-cancellation-문제">Thread Cancellation 문제</h4>
+
+<p>쓰레드를 종료하는 두가지 방법</p>
+
+<ol>
+  <li>Async cancellation : thread가 다른 하나의 thread를 선택해서 사살</li>
+  <li>Deferred cancellation : 내가 죽어야 하나 계속 확인(periodically)</li>
+</ol>
+
+<p>async가 문제야 왜냐면 다른 애를 선택해서 죽이는 중에 resource가 할당 되거나 죽은지 모르고 resource를 할당하게 될 수도 있다.</p>
+
+<p>그래서 deferred cancellation을 보통 default로 사용합니다.</p>
+
+<p>그 밖에 thread-local storage 문제와 scheduler activations 문제가 있다.</p>
+
+<h3 id="summary">Summary</h3>
+
+<p>A thread is a flow of control within a process. A multithreaded process contains several different flows of control within the same address space. The benefits of multithreading include increased responsiveness to the user, resource sharing within the process, economy, and scalability factors, such as more efficient use of multiple processing cores.
+User-level threads are threads that are visible to the programmer and are unknown to the kernel. The operating-system kernel supports and manages kernel-level threads. In general, user-level threads are faster to create and manage than are kernel threads, because no intervention from the kernel is required.
+Three different types of models relate user and kernel threads. The many- to-one model maps many user threads to a single kernel thread. The one-to-one model maps each user thread to a corresponding kernel thread. The many-to- many model multiplexes many user threads to a smaller or equal number of kernel threads.
+Most modern operating systems provide kernel support for threads. These include Windows, Mac OS X, Linux, and Solaris.
+Thread libraries provide the application programmer with an API for creating and managing threads. Three primary thread libraries are in common use: POSIX Pthreads, Windows threads, and Java threads.
+In addition to explicitly creating threads using the API provided by a library, we can use implicit threading, in which the creation and management of threading is transferred to compilers and run-time libraries. Strategies for implicit threading include thread pools, OpenMP, and Grand Central Dispatch.
+Multithreaded programs introduce many challenges for programmers, including the semantics of the fork() and exec() system calls. Other issues include signal handling, thread cancellation, thread-local storage, and scheduler activations.</p>
+
+<ul>
+  <li>Opearting System Concepts Ninth Edition by Abraham Silberschatz 참조</li>
+</ul>
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/os">os</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/2019/04/21/dae-1.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(대경권 대학생 프로그래밍 경진대회) 3번 학교 대표 뽑기</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/os/2019/04/28/os-5.html">
+					<span class="page-number">(OS 기본개념 정리) CH5 Process Scheduling</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/os/2019/04/23/os-4.html',
+    'title': '(OS 기본개념 정리) CH4 Multithreaded Programming'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

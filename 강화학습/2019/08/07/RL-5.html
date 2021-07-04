@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(강화학습 입문) 5. 강화학습 심화:폴리시 그레이디언트(Policy Gradient)</title>
+  <meta name="description" content="폴리시 그레이디언트">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="폴리시 그레이디언트" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(강화학습 입문) 5. 강화학습 심화:폴리시 그레이디언트(Policy Gradient)" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(강화학습 입문) 5. 강화학습 심화:폴리시 그레이디언트(Policy Gradient)">
+  <meta name="twitter:description" content="폴리시 그레이디언트">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/%EA%B0%95%ED%99%94%ED%95%99%EC%8A%B5/2019/08/07/RL-5.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(강화학습 입문) 5. 강화학습 심화:폴리시 그레이디언트(Policy Gradient)</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">August 7, 2019</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/강화학습">강화학습</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h3 id="폴리시-그레이디언트">폴리시 그레이디언트</h3>
+
+<h4 id="정책-기반-강화학습">정책 기반 강화학습</h4>
+
+<blockquote>
+  <ul>
+    <li>그간 배웠던 강화학습은 가치 기반이다. 가치 기반은 가치함수를 기반으로 행동을 선택하고 업데이트하면서 학습한다.</li>
+    <li><strong>정책 기반 강화학습</strong>은 <strong>가치함수를 토대로 행동을 결정하지 않고 상태에 따로 바로 행동을 선택</strong>한다.</li>
+    <li>큐함수를 근사했던 딥살사와 달리 정책 기반에서는 <strong>인공신경망이 정책을 근사</strong>한다.</li>
+    <li>정책신경망(정책을 근사하는 인공신경망)에서는 <strong>출력층의 활성함수가 Softmax함수</strong>이다.</li>
+  </ul>
+</blockquote>
+
+<p><strong>Softmax함수란?</strong></p>
+
+<blockquote>
+  <ul>
+    <li>Softmax함수는 <strong>출력이 다 합해서 1이 나오기 원할 때 사용</strong>한다.</li>
+    <li>이를 사용하는 이유는 바로 <strong>정책의 정의가 바로 각 행동을 할 확률이기 때문</strong>이다.</li>
+    <li>그렇다면 정책 기반 강화학습의 목표는 무엇일까?</li>
+  </ul>
+</blockquote>
+
+<h4 id="폴리시-그레이디언트-1">폴리시 그레이디언트</h4>
+
+<blockquote>
+  <ul>
+    <li>정책신경망을 사용할 경우에 정책신경망의 계수에 따라 누적보상이 달라질 것이다.</li>
+    <li>때문에 정책기반 강화학습의 목표 또한 좋은 정책 신경망의 계수를 찾는 것이다.</li>
+    <li>기존 정책은 상태마다 행동에 따라 확률이 주어지지만 이제는 정책신경망이 정책을 대체하게 된다.</li>
+    <li>아래와 같이 정책 신경망의 가중치값(쎄타)으로 정책을 표현할 수 있다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/RL5-1.png" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>이 때 위에 나오는 쎄타를 최적화하는 것이 목표이다. 정책을 최적화하는 목표함수(Objective Fuction)를 J라고 하자.</li>
+    <li>목표함수 J를 최적화하는 방법은 목표함수를 미분해서 그 미분값에 따라 정책을 업데이트하는 것이다.</li>
+    <li>오류함수를 최소화하는 것과 달리 여기서는 목표함수를 최대화 해야한다.</li>
+    <li>따라서 경사상승법(Gradient Ascent)이라고 부른다.</li>
+    <li>경사상승법에 따라 정책 신경망을 업데이트하는 것을 수식으로 나타내면 다음과 같다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/RL5-2.png" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>위의 식에서 역삼각형 밑에 쎄타가 있는 기호는 쎄타에 대해 미분을 하는 기호다.</li>
+    <li>시점이 지날 때마다 현재 값에 미분값의 일정치를 더해줌으로써 정책 신경망을 업데이트한다.</li>
+    <li>이를 Policy Gradient(폴리시 그레이디언트)라고 한다.</li>
+  </ul>
+</blockquote>
+
+<p><strong>목표함수는 어떻게 정의될 수 있나?</strong></p>
+
+<blockquote>
+  <ul>
+    <li>그것은 주로 2가지 방법에 의해서 정의될 수 있다.</li>
+    <li>1.게임과 같은 경우에는 첫 state의 가치함수가 최대로 만들 대상이 된다.(이 때는 가치함수를 미분해야함으로 쉽지않다.)</li>
+    <li>2.<strong>각 time step마다 받을 수 있는 reward의 평균값이 최대로 만들 대상이 된다.</strong></li>
+    <li>두번쨰 방법은 리처트 서튼의 Policy Gradient Methods for Reinforcement Learing with Function Approximation”에서 소개되었다.</li>
+    <li>거기서 소개된 폴리시 그레이디언트 정리(Policy Gradient Theorem)은 다음과 같다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/RL5-3.png" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>위 식에서 첫 summation은 에이전트가 s라는 상태에 있을 확률을 의미한다.</li>
+    <li>위의 수식은 <strong>가능한 모든 상태에 대해 각 상태에서 특정행동을 했을 때 받을 수 있는 큐함수의 기댓값을 의미</strong>한다.</li>
+    <li>위 수식은 log 함수의 미분에 따라 다음과 같이 표현할 수도 있다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/RL5-4.png" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>우변 중에서 곱셈 좌측은 <strong>에이전트가 어떤 상태 s에서 행동 a를 선택할 확률</strong>을 의미한다.</li>
+    <li>기댓값의 정의가 <strong>확률</strong> x 받은 값 이라고 한다면, 이는 기댓값으로 표현 가능한다.</li>
+    <li>즉, 최종적으로 얻은 목표함수의 미분값에 대한 수식은 다음과 같다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/RL5-5.png" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>결국 에이전트가 정책신경망을 업데이트하기 위해 구해야하는 식은 기댓값 괄호 안에 있는 값이다.</li>
+    <li>결국 폴리시 그레이언트 업데이트 식은 다음과 같다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/RL5-6.png" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>여기서 <strong>문제는, 현재 에이전트는 정책만 가지고 있지 큐함수를 가지고 있지 않다는 것이다!</strong></li>
+    <li>이 문제를 해결하기 위해 큐함수를 근사할 수 있는 반환값으로 대체하는 것이 고전적인 방법이다.</li>
+    <li>결국 REINFORCE 알고리즘의 업데이트 식은 다음과 같이 완성된다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/RL5-7.png" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>결국 <strong>에피소드가 끝날 때까지 기다려서 에피소드 동안 지나온 상태에 대한 반환값을 보내줘야 한다</strong>.</li>
+    <li>에피소드마다 실제로 얻은 보상으로 학습하는 폴리시 그레이디언트이다.</li>
+    <li>그래서 <strong>몬테카를로 폴리시 그레이디언트</strong>라고도 부른다.</li>
+  </ul>
+</blockquote>
+
+<h4 id="reinforce-코드-설명">REINFORCE 코드 설명</h4>
+
+<p>이 코드에서는 에이전트가 환경과 상호작용하는 방식은 다음과 같다.</p>
+
+<blockquote>
+  <ul>
+    <li>1.상태에 따른 행동 선택</li>
+    <li>2.선택한 행동으로 한 타임스텝 진행</li>
+    <li>3.환경으로부터 다음 상태와 보상을 받음</li>
+    <li>4.다음 상태에 대한 행동을 선택, 에피소드가 끝날 때까지 반복</li>
+    <li>5.환경으로부터 받은 정보를 토대로 에피소드마다 학습을 진행</li>
+  </ul>
+</blockquote>
+
+<p>이 코드는 에이전트가 정책신경망을 가지고 있기 때문에 그저 정책신경망의 출력을 통해서 행동을 정할 수 있다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 정책신경망으로 행동 선택
+def get_action(self, state):
+    policy = self.model.predict(state)[0]
+    return np.random.choice(self.action_size, 1, p=policy)[0]
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>정책 자체가 확률적이기 때문에 저절로 탐험하게 된다.(탐욕정책 필요x)</li>
+  </ul>
+</blockquote>
+
+<p>에피소드가 끝날 때까지 지속적으로 행동을 선택하고 상태, 행동, 보상을 rewards라는 리스트에 저장해놓는다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def append_sample(self, state, action, reward):
+    self.states.append(state[0])
+    self.rewards.append(reward)
+    act = np.zeros(self.action_size)
+    act[action] = 1
+    self.actions.append(act)
+</code></pre></div></div>
+
+<p>그리고 에피소드가 끝나면 에이전트는 그레이디언트를 계산한다. 먼저 rewards로 저장된 리스트로 부터 반환값을 계산한다.
+반환값을 계산하는 방법은 다음과 같이 역으로 계산하면 훨씬 간단하다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/RL5-8.png" alt="사진" /></p>
+
+<p>코드로 표현하면 다음과 같다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for t in reversed(range(0, len(rewards))):
+    running_add = running_add * self.discount_factor + rewards[t]
+    discounted_rewards[t] = running_add
+</code></pre></div></div>
+
+<p>반환값을 바탕으로 그레이디언트를 계산해서 네트워크를 업데이트하기 위해서는 오류함수를 구해야 한다.</p>
+
+<p>오류함수를 위한 수식은 다음과 같다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/RL5-9.png" alt="사진" /></p>
+
+<p>여기서 오류함수를 찾기 위해서 필요한 것이 있는데 바로 크로스 엔트로피이다. 크로스 엔트로피란 y와 p 두 값이 얼마나 가까운지를 보여준다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/RL5-10.png" alt="사진" /></p>
+
+<p>다음 코드에서는 크로스 엔트로피로 오류함수를 찾는 과정을 보여준다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 크로스 엔트로피 오류함수 계산
+action_prob = K.sum(action * self.model.output, axis=1)
+cross_entropy = K.log(action_prob) * discounted_rewards
+loss = -K.sum(cross_entropy)
+</code></pre></div></div>
+
+<p>위의 과정을 통해 만들어진 loss가 최종 오류함수가 된다.</p>
+
+<p>결국 에피소드가 진행된 후에는 train_model을 통해서 rewards를 이용해서 정쳑샌경망을 역으로 업데이트한다.</p>
+
+<h2 id="느낀점">느낀점</h2>
+
+<blockquote>
+  <ul>
+    <li>이것은 매우 어렵다. 확실히 어렵다…</li>
+    <li>처음부터 완벽하게 이해하면 좋겠지만 지금 더 하면 재미가 없어질 것 같아서 일단 오늘 공부한 내용에서 손을 떼려고 한다.</li>
+    <li>확실히 에피소드 하나가 끝나고 나서 학습을 해서 인지 학습 속도는 매우 느리다.</li>
+    <li>초기에 헤매는 과정이 정말 길다. 하지만 고차원에서는 이러한 정책을 근사하는 방법이 더 용이하다고 한다.</li>
+    <li>다시 한번 돌아봐야할 것 같다. 오늘은 일단은 고생 많아따….</li>
+  </ul>
+</blockquote>
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/강화학습">강화학습</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/%EA%B0%95%ED%99%94%ED%95%99%EC%8A%B5/2019/08/07/RL-4.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(강화학습 입문) 4. 강화학습 심화:딥살사(Deep SALSA)</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/%EB%B0%B1%EC%A4%80/2019/08/08/baekjoon-1012.html">
+					<span class="page-number">(백준 알고리즘 문제풀이) 1012번 유기농 배추</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/%EA%B0%95%ED%99%94%ED%95%99%EC%8A%B5/2019/08/07/RL-5.html',
+    'title': '(강화학습 입문) 5. 강화학습 심화:폴리시 그레이디언트(Policy Gradient)'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

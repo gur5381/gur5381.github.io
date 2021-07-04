@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>알고리즘 도전자를 위한 국제 && 국내 코딩 대회 정리</title>
+  <meta name="description" content="휴학하고 ACM-ICPC와 같은 알고리즘 대회를 열심히 나가고자 했으나 무슨 대회가 있는지 참여는 어떻게 하는지 몰라 방황하고 있었다.">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="휴학하고 ACM-ICPC와 같은 알고리즘 대회를 열심히 나가고자 했으나 무슨 대회가 있는지 참여는 어떻게 하는지 몰라 방황하고 있었다." />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="알고리즘 도전자를 위한 국제 && 국내 코딩 대회 정리" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="알고리즘 도전자를 위한 국제 && 국내 코딩 대회 정리">
+  <meta name="twitter:description" content="휴학하고 ACM-ICPC와 같은 알고리즘 대회를 열심히 나가고자 했으나 무슨 대회가 있는지 참여는 어떻게 하는지 몰라 방황하고 있었다.">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/codingtest/2019/09/09/coding-test-list.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">알고리즘 도전자를 위한 국제 && 국내 코딩 대회 정리</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">September 9, 2019</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/codingtest">Codingtest</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <p>휴학하고 ACM-ICPC와 같은 알고리즘 대회를 열심히 나가고자 했으나 무슨 대회가 있는지 참여는 어떻게 하는지 몰라 방황하고 있었다.</p>
+
+<p>나와 같은 사람들을 위해 알고리즘 마스터가 되기 까지 열심히 나가볼 수 있는 대회를 정리해보고자 한다.</p>
+
+<p><strong>대형 코딩 대회 주최는 보통 1년 단위로 진행되기 때문에 올해 대회가 이미 끝났다면 내년 이맘때 쯤으로 계획을 잡고 준비하면 될 듯하다.</strong></p>
+
+<h2 id="대형-국제-코딩-대회">대형 국제 코딩 대회</h2>
+
+<h3 id="1-acm-icpc9월--10월">1. ACM-ICPC(9월 ~ 10월)</h3>
+
+<p>먼저 알고리즘을 한다면 꼭 한번 들어봤을 ACM-ICPC다.</p>
+
+<p><img src="/assets/coding-test-1.png" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>주관 : ICPC</li>
+    <li>사이트 : <a href="http://icpckorea.org/">ICPCKorea 사이트</a></li>
+    <li>참가 조건 :
+      <blockquote>
+        <ul>
+          <li>대학생으로 구성된 팀(선수 3명+  지도교수 1명)</li>
+          <li>2회 이상 ACM-ICPC 세계 대회 참가학생 참가불가</li>
+          <li>5회 이상 ACM-ICPC 지역 대회 참가학생 참가불가</li>
+          <li><strong>휴학생은 본선 참가불가:(</strong></li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>참가 방법 : 지원 접수(9월 1일 - 9월 20일)</li>
+    <li>올해 일정 :
+      <blockquote>
+        <ul>
+          <li>예선 : 10월 4일(금) – 10월 5일(토)</li>
+          <li>지역대회 본선 : 11월 8일(금) – 11월 9일(토)(한국 지역 본선으로 90개팀 내외)</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>상금 : 일단 한국대회 우승시 500만원에 대통령상을 준다고한다…</li>
+  </ul>
+</blockquote>
+
+<h3 id="2-google-codejam4월--8월">2. Google CodeJam(4월 ~ 8월)</h3>
+
+<p><img src="/assets/coding-test-2.jpg" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>주관 : Google</li>
+    <li>사이트 : <a href="http://icpckorea.org/">구글코드잼</a></li>
+    <li>참가 조건 : 없음</li>
+    <li>참가 방법 : 지원 접수(3월 5일 ~ 4월 7일)</li>
+    <li>올해 일정 : 라운드 별로 진행(Qualitication Round, Round 1 ~ 3, Final Round)</li>
+    <li>상금 :
+      <blockquote>
+        <ul>
+          <li>1st Place $15,000 USD</li>
+          <li>2nd Place $2,000 USD</li>
+          <li>3rd Place $1,000 USD</li>
+          <li>4th—25th Place $100 USD</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ul>
+</blockquote>
+
+<h3 id="3-facebook-hackercup6월--7월">3. Facebook HackerCup(6월 ~ 7월)</h3>
+
+<p><img src="/assets/coding-test-3.jpg" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>주관 : Facebook</li>
+    <li>사이트 : <a href="https://www.facebook.com/hackercup/">페이스북 해커컵</a></li>
+    <li>참가 조건 : 없음</li>
+    <li>참가 방법 : 지원 접수(6월 17일까지, Qualification Round 종료 전까지)</li>
+    <li>올해 일정 :
+      <blockquote>
+        <ul>
+          <li>Online Qualification Round (72 hours): June 14, 2019, 10am PDT - June 17, 2019, 10am PDT</li>
+          <li>Online Round 1 (24 hours): June 29, 2019, 10am PDT - June 30, 2019, 10am PDT</li>
+          <li>Online Round 2 (3 hours): July 13, 2019, 10am PDT - 1pm PDT</li>
+          <li>Online Round 3 (3 hours): July 27, 2019, 10am PDT - 1pm PDT</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ul>
+</blockquote>
+
+<h2 id="국내-대회대형">국내 대회(대형)</h2>
+
+<h3 id="1-scpc6월--7월">1. SCPC(6월 ~ 7월)</h3>
+
+<p><img src="/assets/coding-test-4.jpg" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>주관 : 삼성</li>
+    <li>사이트 : <a href="https://www.codeground.org/contest/contest">SCPC</a></li>
+    <li>참가 조건 : 대학(원) 재학 또는 휴학생 (전공 및 학년 제한 없음)</li>
+    <li>참가 방법 : 지원 접수</li>
+    <li>올해 일정 :
+      <blockquote>
+        <ul>
+          <li>1차 온라인 예선 : 6/23(토) ~ 6/24(일), 24시간</li>
+          <li>2차 온라인 예선 : 7/7(토), 12시간</li>
+          <li>본선대회 : 7/31(화)</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>상금 : 1등 100만원</li>
+  </ul>
+</blockquote>
+
+<h3 id="2-kakao-code-festival7월--8월">2. Kakao Code Festival(7월 ~ 8월)</h3>
+
+<p><img src="/assets/coding-test-5.png" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>주관 : 카카오</li>
+    <li>사이트 : <a href="https://contest.kakaocode.com/info">카카오 코드 페스티벌</a></li>
+    <li>참가 조건 : 대학(원)생</li>
+    <li>참가 방법 : 지원 접수</li>
+    <li>올해 일정 : <strong>올해는 쉼</strong>
+      <blockquote>
+        <ul>
+          <li>예선(online): 2018년 8월 4일(토) 오후 1시~7시</li>
+          <li>예선 결과 발표: 2018년 8월 10일(금) 오후 6시</li>
+          <li>본선(offline): 2018년 8월 25일(토) 오후 1시~6시 (장소: 카카오 판교오피스, 시간은 사정에 따라 변경될 수 있음)</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>혜택 :
+      <blockquote>
+        <ul>
+          <li>본선 입상자는 카카오 입사지원 시 서류전형/코딩테스트 면제</li>
+          <li>우수한 성적을 거둔 분들을 위한 인턴 프로그램 제안 예정</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ul>
+</blockquote>
+
+<h3 id="3-카카오-블라인드-채용-코딩-테스트9월--10월">3. 카카오 블라인드 채용 코딩 테스트(9월 ~ 10월)</h3>
+
+<p><img src="/assets/2020-kakao-blind-1.jpg" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>주관 : 카카오</li>
+    <li>사이트 : <a href="https://www.welcomekakao.com/competitions/102/2020-kakao-blind-recruitment">카카오 블라인드 채용</a></li>
+    <li>참가 조건 :
+      <blockquote>
+        <ul>
+          <li>학력, 전공 무관</li>
+          <li>입사 후, 풀타임 근무가 가능하신 분</li>
+          <li>병역필 또는 면제자로 해외여행에 결격 사유가 없는 분</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>참가 방법 : 지원 접수(9월 4일까지)</li>
+    <li>올해 일정 :
+      <blockquote>
+        <ul>
+          <li>온라인 코딩 테스트 : 9월 7일(토)</li>
+          <li>오프라인 코딩 테스트 : 9월 21일(토)</li>
+          <li>1차 인터뷰 : 10월 초</li>
+          <li>2차 인터뷰 : 10월 중순</li>
+          <li>최종 합격 : 10월 말</li>
+          <li>입사 : 2020년 1월 초</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>혜택 : 카카오 입사</li>
+  </ul>
+</blockquote>
+
+<h2 id="국내-대회백준-oj">국내 대회(백준, OJ)</h2>
+
+<p>그 밖에도 여러 기관과 개인이 출제하는 여러가지 대회들이 있다. 이중 <strong>백준 코딩 대회는 대회 당일에 출제되는 문제를 풀면 자동으로 대회에 참가하게 된다</strong>.</p>
+
+<h3 id="1-백준-ucpc7월8월">1. 백준 UCPC(7월~8월)</h3>
+
+<blockquote>
+  <ul>
+    <li>주관 : 전국 대학생 프로그래밍 대회 동아리 연합 대회
+(삼성전자 후원)</li>
+    <li>사이트 : <a href="https://ucpc.acmicpc.net/info">UCPC</a></li>
+    <li>참가 조건 : 본선일 기준으로 대학교에 재학 중이거나 대학원 석사과정에 재학 중인 학생, <strong>휴학생도 참가 가능</strong></li>
+    <li>올해 일정 :
+      <blockquote>
+        <ul>
+          <li>예비소집 : 7월 26일 (금) 00:00 ~ 7월 27일 (토) 13:00</li>
+          <li>온라인 예선 대회 : 7월 27일 (토) 14:00 ~ 17:00</li>
+          <li>온라인 예선 대회 Open Contest : 7월 27일 (토) 18:00 ~ 21:00</li>
+          <li>본선 대회 (Open Contest 포함) : 8월 3일(토) 11:00 ~ 16:00</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>상금 :
+      <blockquote>
+        <ul>
+          <li>1등상 (1위) : 40만원 상당의 상품 × 3</li>
+          <li>2등상 (2위~3위) : 30만원 상당의 상품 × 3</li>
+          <li>3등상 (4위~6위) : 10만원 상당의 상품 × 3</li>
+          <li>참가상 : 모든 참가팀에게 2만원 상당의 상품 × 3</li>
+          <li>(미확정) 소정의 추첨 경품을 준비 중입니다.</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ul>
+</blockquote>
+
+<h3 id="2-백준-천하제일-코딩대회6월--7월">2. 백준 천하제일 코딩대회(6월 ~ 7월)</h3>
+
+<p>선린고 교내 대회지만 Open Contest를 이용하면 우리도 참여 가능하다.</p>
+
+<blockquote>
+  <ul>
+    <li>주관 : 선린인터넷고등학교</li>
+    <li>사이트 : <a href="https://www.acmicpc.net/contest/view/437">천하제일 코딩대회 예선 Open Contest</a></li>
+    <li>참가 조건 : 없음(Open Contest)</li>
+    <li>올해 일정 : 예선(6월 19일), 본선(7월 18일)</li>
+  </ul>
+</blockquote>
+
+<h3 id="3-oj-function-cup9월">3. OJ Function Cup(9월)</h3>
+
+<p>OJ라는 온라인 저지 사이트인데 문제도 괜찮고 1년에 한번씩 열리는 Function Cup도 참여해볼만하다!</p>
+
+<blockquote>
+  <ul>
+    <li>주관 : OJ</li>
+    <li>사이트 : <a href="https://oj.uz/contest/view/FUNCTIONCUP4">OJ Function Cup</a></li>
+    <li>참가 조건 : 3인 1조</li>
+    <li>참가 방법 : 지원 접수</li>
+    <li>올해 일정 :
+      <blockquote>
+        <ul>
+          <li>9월 1일 오후 1시 0분 ~ 9월 1일 오후 6시 0분 (UTC+9)</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>상금 : 피자 기프티콘, 티셔츠</li>
+  </ul>
+</blockquote>
+
+<h2 id="주기적으로-열리는-코딩대회">주기적으로 열리는 코딩대회</h2>
+
+<blockquote>
+  <ul>
+    <li>주기적(보통 주단위)으로 대회가 열리는 해외 코딩 사이트로는 크게 3개가 있다.</li>
+    <li><a href="https://atcoder.jp">AtCoder</a></li>
+    <li><a href="https://codeforces.com">CodeForces</a></li>
+    <li><a href="https://www.topcoder.com/spacenet?gclid=CjwKCAjw8NfrBRA7EiwAfiVJpTg25EhjbIYp_lmpV-8I7vD55hwLB6A-cwFjfyLr42_ipU9E3IS2ehoCCA8QAvD_BwE">TopCoder</a></li>
+    <li>모두 문제가 영어로 출제된다는 어려움이 있지만 그래도 문제를 제한된 시간 속에서 풀어보는 연습하기에는 딱 좋은 사이트이다.</li>
+    <li>또 CodeForces와 TopCoder에서 랭커가 된다면 이에 따라 백준에서도 이름색이 변하게 되는 영광을 누릴 수 있다.</li>
+  </ul>
+</blockquote>
+
+<h2 id="정리">정리</h2>
+
+<blockquote>
+  <ul>
+    <li>1년 중 다양한 시기에 열리나 대부분 <strong>6월 ~ 9월</strong> 사이에 주요 코딩 대회들이 열리는 것 같다.</li>
+    <li>지금 시작하는 사람이라면 <strong>올해 10월 ICPC에 경험삼아 참가해보고 내년 6월까지 백준과 해외 코딩 대회에 주기적으로 참여하며 열심히 알고리즘을 판 다음에 내년 여름에 있는 대회와 ICPC 입상에 도전해보는 것도 좋을 것 같다!</strong>(사실 내 계획이다ㅎㅎ)</li>
+  </ul>
+</blockquote>
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/%EB%B0%B1%EC%A4%80/2019/09/08/baekjoon-1520.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(백준 알고리즘 문제풀이) 1520번 내리막 길</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/%EB%B0%B1%EC%A4%80/2019/09/15/baekjoon-3986.html">
+					<span class="page-number">(백준 알고리즘 문제풀이) 3986번 좋은 단어</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/codingtest/2019/09/09/coding-test-list.html',
+    'title': '알고리즘 도전자를 위한 국제 && 국내 코딩 대회 정리'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

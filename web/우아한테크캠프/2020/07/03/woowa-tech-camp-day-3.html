@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(우아한테크캠프 3기) Day3 JS 객체 지향형 프로그래밍 & 비동기 우아한 카페 만들기</title>
+  <meta name="description" content="출근 시간이 9시가 아니라 9시 반이었기에 30분 더 자고 넉넉히 출발했다 ㅎㅎ">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="출근 시간이 9시가 아니라 9시 반이었기에 30분 더 자고 넉넉히 출발했다 ㅎㅎ" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(우아한테크캠프 3기) Day3 JS 객체 지향형 프로그래밍 & 비동기 우아한 카페 만들기" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(우아한테크캠프 3기) Day3 JS 객체 지향형 프로그래밍 & 비동기 우아한 카페 만들기">
+  <meta name="twitter:description" content="출근 시간이 9시가 아니라 9시 반이었기에 30분 더 자고 넉넉히 출발했다 ㅎㅎ">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/web/%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC%EC%BA%A0%ED%94%84/2020/07/03/woowa-tech-camp-day-3.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(우아한테크캠프 3기) Day3 JS 객체 지향형 프로그래밍 & 비동기 우아한 카페 만들기</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 3, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/web">Web</a>, 
+    
+  
+    
+    <a href="/category/우아한테크캠프">우아한테크캠프</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <p>출근 시간이 9시가 아니라 9시 반이었기에 30분 더 자고 넉넉히 출발했다 ㅎㅎ</p>
+
+<h2 id="객체-지향형-프로그래밍">객체 지향형 프로그래밍</h2>
+
+<p>크롱님이 두시간 안에 끝내버렸던 객체 지향형 프로그래밍의 주 포인트는 세가지 였다.</p>
+
+<ul>
+  <li>의존성을 최대한 낮춰라
+    <ul>
+      <li>의존성이 낮다는 말은 역할을 잘 분리 시켜놔야 한다는 말이다.</li>
+    </ul>
+  </li>
+  <li>좋은 인터페이스를 구현해놔야한다. 그래야 나중에 호환이 좋다.</li>
+  <li>호출관계를 잘 정의하라
+    <ul>
+      <li>연결은 되어있지만 최대한 느슨하게 해라</li>
+    </ul>
+  </li>
+</ul>
+
+<p>그리고 무엇보다 중요한 것은 개발 전에 노트북을 덮고 설계에 집중해야 한다는 것이다. 바로 개발에 들어가면 시행착오 속에서 엄청난 비용이 발생할 수 있다!</p>
+
+<p>객체 지향을 좀 더 공부하고 싶다면 좋은 책을 한권 읽어 보는 것을 추천한다. (ex. 객체지향 프로그래밍에 대한 오해와 진실)</p>
+
+<h2 id="객체-지향형-프로그래밍-미션">객체 지향형 프로그래밍 미션</h2>
+
+<p><a href="https://gist.github.com/crongro/61d3126778c34c0667a5ed81af5d1a17">ClassifierAlpha과 PrimeAlpha 클래스 소스코드</a></p>
+
+<p>두개의 클래스를 클래스가 아닌 함수로 구성하는 문제였다.</p>
+
+<p>그리고 최대한 중복은 제거하고 코드를 개선할 수 있는 부분은 개선시켜야 했다.</p>
+
+<h3 id="내-과제-코드">내 과제 코드</h3>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">isFactor</span> <span class="p">(</span><span class="nx">number</span><span class="p">,</span> <span class="nx">potentialFactor</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">number</span> <span class="o">%</span> <span class="nx">potentialFactor</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+    
+<span class="kd">function</span> <span class="nx">factors</span> <span class="p">(</span><span class="nx">number</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">factorSet</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Set</span><span class="p">();</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">pod</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">pod</span> <span class="o">&lt;=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sqrt</span><span class="p">(</span><span class="nx">number</span><span class="p">);</span> <span class="nx">pod</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">isFactor</span><span class="p">(</span><span class="nx">number</span><span class="p">,</span> <span class="nx">pod</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nx">factorSet</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">pod</span><span class="p">);</span>
+            <span class="nx">factorSet</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">number</span> <span class="o">/</span> <span class="nx">pod</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">factorSet</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">equalSet</span> <span class="p">(</span><span class="nx">aset</span><span class="p">,</span> <span class="nx">bset</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">aset</span><span class="p">.</span><span class="nx">size</span><span class="o">!==</span> <span class="nx">bset</span><span class="p">.</span><span class="nx">size</span><span class="p">)</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">a</span> <span class="k">of</span> <span class="nx">aset</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">bset</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">a</span><span class="p">))</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">getPrime</span> <span class="p">(</span><span class="nx">number</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">primeSet</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Set</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="nx">number</span><span class="p">]);</span>
+    <span class="k">return</span> <span class="nx">number</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">equalSet</span><span class="p">(</span><span class="nx">factors</span><span class="p">(</span><span class="nx">number</span><span class="p">),</span> <span class="nx">primeSet</span><span class="p">)</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">prime</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">''</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">getClass</span> <span class="p">(</span><span class="nx">number</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">currentFactor</span> <span class="o">=</span> <span class="nx">factors</span><span class="p">(</span><span class="nx">number</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">sumWithoutNumber</span> <span class="o">=</span> <span class="nx">sum</span><span class="p">(</span><span class="nx">currentFactor</span><span class="p">)</span> <span class="o">-</span> <span class="nx">number</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">sumWithoutNumber</span> <span class="o">==</span> <span class="nx">number</span><span class="p">)</span> <span class="k">return</span> <span class="dl">'</span><span class="s1">perfect</span><span class="dl">'</span><span class="p">;</span>
+    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">sumWithoutNumber</span> <span class="o">&gt;</span> <span class="nx">number</span><span class="p">)</span> <span class="k">return</span> <span class="dl">'</span><span class="s1">abundant</span><span class="dl">'</span><span class="p">;</span>
+    <span class="k">else</span> <span class="k">return</span> <span class="dl">'</span><span class="s1">deficient</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">sum</span> <span class="p">(</span><span class="nx">factors</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">Array</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nx">factors</span><span class="p">).</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">classify</span> <span class="p">(</span><span class="nx">number</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="nx">number</span><span class="p">}</span><span class="s2"> : </span><span class="p">${</span><span class="nx">getClass</span><span class="p">(</span><span class="nx">number</span><span class="p">)}</span><span class="s2">, </span><span class="p">${</span><span class="nx">getPrime</span><span class="p">(</span><span class="nx">number</span><span class="p">)}</span><span class="s2">\n`</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">].</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">classify</span><span class="p">(</span><span class="nx">b</span><span class="p">),</span> <span class="dl">''</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="회고">회고</h3>
+
+<p>OOP 과제였는데 함수형 코드를 짜보라 하셨다. 크롱님은 모든 경우에 OOP가 좋은 것은 아니라고 하셨다. 상황에 맞춰 설계할 수 있는 능력을 키워야겠다.</p>
+
+<p>아직 객체 지향형에 대해서 익숙치 않은데 말씀 해주신 대로 책을 한번 읽어보자!</p>
+
+<h2 id="비동기">비동기</h2>
+
+<p>오후 시간 동안에는 비동기에 대해 배워보았다.</p>
+
+<p>비동기를 이해하고 있다면 다음 코드가 진행되면서 콜스택, 콜백큐와 이벤트 루프가 어떻게 동작하는지  구두로 설명할 수 있어야 한다고 말씀하셨다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">baseData</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">100</span><span class="p">];</span>
+
+<span class="kd">const</span> <span class="nx">asyncRun</span> <span class="o">=</span> <span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+   <span class="nx">arr</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">v</span><span class="p">,</span><span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+     <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+       <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">cb 2</span><span class="dl">"</span><span class="p">);</span>
+         <span class="nx">fn</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+        <span class="p">},</span><span class="mi">1000</span><span class="p">);</span>
+       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">cb 1</span><span class="dl">"</span><span class="p">);</span>
+     <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+   <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="nx">asyncRun</span><span class="p">(</span><span class="nx">baseData</span><span class="p">,</span> <span class="nx">idx</span> <span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">idx</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>이 부분의 설명이 어렵다면 <a href="https://www.youtube.com/watch?v=8aGhZQkoFbQ">What the heck is the event loop anyway?</a> 를 보면 도움이 진짜 많이 될 것이다.</p>
+
+<h2 id="비동기-카페-만들기">비동기 카페 만들기</h2>
+
+<p>비동기 동작 원리를 이해하기 위해 카페를 구현해보는 과제를 내주셨다.</p>
+
+<p>금요일 6시 안에는 얕은 수준의 설계 정도만 가능했기에 토요일을 써서 완성했다.</p>
+
+<h3 id="목표">목표</h3>
+
+<ul>
+  <li><a href="https://github.com/woowa-techcamp-2020/Woowa-Cafe/issues/1">구현 요구 사항</a>대로 구현하기</li>
+  <li><strong>최대한 설계를 잘해보고 설계대로 구현</strong>해보자</li>
+</ul>
+
+<h3 id="클래스-관계도-그림">클래스 관계도 그림</h3>
+
+<p><img src="/assets/woowa-tech-camp-day-3-diagram.HEIC" alt="그림" /></p>
+
+<h3 id="초기-클래스와-이벤트-설계">초기 클래스와 이벤트 설계</h3>
+
+<ul>
+  <li><a href="https://github.com/woowa-techcamp-2020/Woowa-Cafe/issues/3">초기 클래스</a></li>
+  <li><a href="https://github.com/woowa-techcamp-2020/Woowa-Cafe/issues/2">초기 이벤트</a></li>
+</ul>
+
+<h3 id="결과물">결과물</h3>
+
+<p><a href="https://github.com/woowa-techcamp-2020/Woowa-Cafe">Woowa Cafe Repository</a></p>
+
+<h3 id="회고-1">회고</h3>
+
+<ul>
+  <li>같이 설계하다 보니 낯선 부분이 있어서 깊이 몰입해서 설계하는데 어려움이 있었던 것 같다.</li>
+  <li>잘 설계해보고 싶었으나 구현하다보니 예상하지 못했던 변경 점들이 발견됐고 그것에 맞춰서 초기 설계가 많이 바뀌었다.</li>
+  <li>이벤트의 종류는 잘 정의된 것 같은데 Event Driven 하게 짜는게 익숙하지 못해서 짜기 전까지는 잘 동작이 그려지지 않았던 것 같다.</li>
+  <li>전반적인 그림을 그리며 각 클래스에 필요한 것들을 정의한 건 도움이 많이 됐던 것 같다.</li>
+  <li>다음 주 프로젝트 때는 같이 설계하는 과정이 조금 익숙해졌으면 좋겠다!ㅠㅎㅎ</li>
+</ul>
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/우아한테크캠프">우아한테크캠프</a>,&nbsp;<a href="/tag/OOP">OOP</a>,&nbsp;<a href="/tag/카페만들기">카페만들기</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC%EC%BA%A0%ED%94%84/2020/07/02/woowa-tech-camp-day-2.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(우아한테크캠프 3기) Day2 자바스크립트 돌발 미션</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4/%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC%EC%BA%A0%ED%94%84/2020/07/09/atomic-design-pattern.html">
+					<span class="page-number">(우아한테크캠프 3기) Atomic Design Pattern이 뭐지?</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/web/%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC%EC%BA%A0%ED%94%84/2020/07/03/woowa-tech-camp-day-3.html',
+    'title': '(우아한테크캠프 3기) Day3 JS 객체 지향형 프로그래밍 & 비동기 우아한 카페 만들기'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

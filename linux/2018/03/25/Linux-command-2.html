@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(Linux Week 1st) Linux Command 정리2</title>
+  <meta name="description" content="후우 지난 번 CH 1~ 4을 정리하면서 기본적인 Command를 정리해보았다. 중요한 건 아직도 정리할 내용이 수두룩하게 쌓여있다는 거! 공부할 것이 많다는 사실에 짜릿함을 느낀다&gt;&lt;">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="후우 지난 번 CH 1~ 4을 정리하면서 기본적인 Command를 정리해보았다. 중요한 건 아직도 정리할 내용이 수두룩하게 쌓여있다는 거! 공부할 것이 많다는 사실에 짜릿함을 느낀다&gt;&lt;" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(Linux Week 1st) Linux Command 정리2" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(Linux Week 1st) Linux Command 정리2">
+  <meta name="twitter:description" content="후우 지난 번 CH 1~ 4을 정리하면서 기본적인 Command를 정리해보았다. 중요한 건 아직도 정리할 내용이 수두룩하게 쌓여있다는 거! 공부할 것이 많다는 사실에 짜릿함을 느낀다&gt;&lt;">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/linux/2018/03/25/Linux-command-2.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(Linux Week 1st) Linux Command 정리2</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">March 25, 2018</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/linux">Linux</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <p>후우 지난 번 CH 1~ 4을 정리하면서 기본적인 Command를 정리해보았다. 중요한 건 아직도 정리할 내용이 수두룩하게 쌓여있다는 거! 공부할 것이 많다는 사실에 짜릿함을 느낀다&gt;&lt;</p>
+
+<p>다시 자세 교정하고 정신줄 잡고 달려보자. 스아압!~~</p>
+
+<h2 id="ch-5-working-with-commands">CH 5. Working With Commands</h2>
+
+<p>이 챕터에서는 여태까지 배운 왜 존재하는지 모를 커맨드들을 조그음 이해해보려고 한다.</p>
+
+<p>이 챕터에 있는 여러 커맨드를 소개하기 전에 커맨드가 무엇인가에 대해 한번 논해보자…(머리아플각이다)</p>
+
+<p>일단 커맨드는 크게 4종류로 나뉜다.
+a. An executable program. (컴퓨터 언어로 쓰여진 컴파일 가능한 파일을 의미한다)
+b. A command built into the shell itself. (bash가 지원하는 커맨드를 shell builtins라고 한다. Ex. cd)
+c.  A shell function. (environment에 incorporate된 작은 shell script(?)) -추후에 배운단다..
+d. An alias. (우리가 정의하는 커맨드다.)</p>
+
+<p>잘모르겠지만 일단 고고!!</p>
+
+<h4 id="1-type">1. type</h4>
+
+<p>이 친구는 shell builtin으로 command의 종류를 보여준다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/1.png" alt="사진" /></p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/2.png" alt="사진" /></p>
+
+<h4 id="2-which">2, which</h4>
+
+<p>이 친구는 executable의 정확한 로케이션을 알려주는 역할을 한다.
+단, executable program에만 알려준다!!</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/3.png" alt="사진" /></p>
+
+<p>cd는 executable이 아니니까 응답이 없다.. 뭔가 에러 얘기도 안나오니까 기분나쁨…</p>
+
+<h4 id="3-help">3. help</h4>
+
+<p>bash가 지원하는 shell builtin에 대한 도움말이다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/4.png" alt="사진" /></p>
+
+<p>근데 이거 bash에는 도는데 putty에 안된다..;; 뭐지… 확인해봐야할듯 하다.
+일단 동의어로는 cd –help가 있다..;; 이거 쉅 때는 됐는데 왜 안되지;;</p>
+
+<h4 id="4-man">4. man</h4>
+
+<p>매뉴얼을 보여주는 역할을 하는 친구다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/5.png" alt="사진" /></p>
+
+<p>매뉴얼에 섹션이 나뉘어져 있는데 그 섹션번호를 입력하면 손쉽게 그 부분의 매뉴얼을 볼 수 있다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/6.png" alt="사진" /></p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/7.png" alt="사진" /></p>
+
+<p>내가 아는 ls , pwd는 section이 한개라 일단 1로 해보자;;</p>
+
+<h4 id="5-apropos">5. apropos</h4>
+
+<p>이 친구는 manual 중에서 해당 단어가 있는 곳을 찾아주서 보여준다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/8.png" alt="사진" /></p>
+
+<h4 id="6-whatis">6. whatis</h4>
+
+<p>이건 말 그대로 커맨드의 이름과 한줄 설명이 나온다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/9.png" alt="사진" /></p>
+
+<h4 id="7-info">7. info</h4>
+
+<p>이 친구는 프로그램의 info entry를 열어서 보여준다.
+꽤 상세하고 리더를 위해 충분한 설명이 있다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/10.png" alt="사진" /></p>
+
+<h4 id="8-alias">8. alias</h4>
+
+<p>내 고유의 command를 만들어주는 친구이다.</p>
+
+<p>이거 하기전에
+꿀팁!! 커맨드 여러개를 한줄에 치려면 커맨드 사이에 ; 를 입력하면 된다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/11.png" alt="사진" /></p>
+
+<p>여기서 alias를 사용해보자!
+먼저 커맨드 이름을 검색해보자 type을 이용해서 확인이 가능하다.
+만약 입력한 이름에 해당하는 커맨드가 없다면 바로 ㄱㄱ</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>alias [command 명] ='~~;~~'
+</code></pre></div></div>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/12.png" alt="사진" /></p>
+
+<p>여기서 = ‘ 사이에 띄어쓰기 하면 안된다!</p>
+
+<p>지우고 싶을 때는 unalias 커맨드명 하면 된다!</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/13.png" alt="사진" /></p>
+
+<p>그냥 alias를 입력하면 만들어진 모든 alias들이 보인다</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/14.png" alt="사진" /></p>
+
+<p>Alias는 세션이 종료되면 없어진다… 그럼 매번 설정해줘야 하는 건가… 암튼 일단 여기까지 6장 이었다.</p>
+
+<h2 id="ch-6-redirection">CH 6. Redirection</h2>
+
+<p>이번 챕터에서는 input과 output을 한번 바꿔보자 여지껏은 지정된 커맨드에 해당되는 input과 output 출력을 실행해보는게 다였지만 이번엔 한번 우리가 output이 입력되는 위치를 바꿔보자 ㅎㅎ</p>
+
+<p><strong>Redirecting Standard Output</strong>
+일단 예시 한번 보고 가자</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/15.png" alt="사진" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ls -a /usr/bin &gt; /home/u21500670/example.txt 여기를 보면 ls -a 라는 커맨드의 결과를 example.txt로 출력하라는 것을 의미한다. 이때 스크린 상에는 출력하지 않게 되는게 특징이다!!
+</code></pre></div></div>
+
+<p>그런데 만약에 앞에 커맨드에 해당하는 결과가 에러가 난다면?? 그럼 좀 당황스러운데.. 에러값이 example.txt로 들어갈까? 함 돌려보자</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/16.png" alt="사진" /></p>
+
+<p>에러 내용이 스크린 상으로 입력되었다. 그리고 파일의 용량이 0으로 보아 txt파일 자체는 쓸 준비를 했는데 내용이 들어오지 않은 것 같다.</p>
+
+<p>똑똑하다 ㅋㅋ 그렇다면 엠티파일을 만들 때 redirection operator를 써도 될 거 같은데 ㅎㅎ</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/17.png" alt="사진" /></p>
+
+<p>된.다.</p>
+
+<p>근데 만약에 overwrite안하고 그냥 뒤에 덧붙이고 싶으면 어떻게 해야할까 ㅎㅎ
+이때 사용하는 것이 » 이다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/18.png" alt="사진" /></p>
+
+<p>example1.txt 용량 커진거 보소:)</p>
+
+<p><strong>Redirecting Standard Error</strong>
+만약에 에러값을 보내고 싶으면 어떻게 할까?
+에러를 입력하려면 텍스트 파일 앞에 있는 operator 앞에 2만 붙여주면 된다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/19.png" alt="사진" /></p>
+
+<p><strong>Redirecting Standard Output And Standard Error To One File</strong>
+모든 결과물을 single file에 넣고 싶을 때 두가지 방법이 있다.
+하나는 2&gt;&amp;1 notation을 이용하는 방법이다</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/20.png" alt="사진" /></p>
+
+<p>또 다른 방법은 &amp;&gt;라는 notation을 이용해서 인풋과 아웃풋을 모두 받는 방법이 있다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/21.png" alt="사진" /></p>
+
+<p><strong>Disposing Of Unwanted Output</strong>
+결과가 항상 필요한 것은 아니다. 사실 에러 메세지나 상태 메세지는 버리고 싶을 때가 있다. 이때는 이것을 보내는 것이 /dev/null이다
+쓰레기통 같은 개념인거 같다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/22.png" alt="사진" /></p>
+
+<p><strong>Redirecting Standard Input</strong>
+이번에는 input을 어떻게 다른위치로 보낼 수 있는 지 알아보자</p>
+
+<h4 id="1-cat">1. cat</h4>
+<p>이 친구는 하나 이상의 파일을 읽고 standard output에게 복사해준다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/23.png" alt="사진" /></p>
+
+<p>그냥 cat을 하면</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/24.png" alt="사진" /></p>
+
+<p>이렇게 커서가 밑으로 내려가서 입력을 받는다. 이때 문장을 쳐주고 ctrl d 하면</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/25.png" alt="사진" /></p>
+
+<p>이렇게 나온다. 왜 한번더 반복하냐면 input을 받아서 보낼 곳이 없어서 그냥 스크린에 보여준 것이다.</p>
+
+<p>그렇다면 이번에는 
+파일을 만들어서 그 안에 input을 넣어보자</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/26.png" alt="사진" /></p>
+
+<p>이렇게 cat &gt; [파일명] 을 입력하면 뒤에 입력한 text가 파일 안으로 쏙 들어가게 된다.</p>
+
+<p>확인해보자.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/27.png" alt="사진" /></p>
+
+<p>그렇다면 cat &lt; [파일명] 이 된다면 결과는 뭐가 나올까?</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/28.png" alt="사진" /></p>
+
+<p>동일하다! 왜? 이것은 키보드로 부터 input을 받은 것이 아니라 텍스트 파일로 부터 input을 받은 것이기 때문에 cat [파일명]과 동일한 값을 출력한다.</p>
+
+<p>여기서 집고 갈 <pipe line="">
+파이프라인은 | 를 이용하여 하나의 output과 input의 커맨드를 묶을 수 있게 해준다.</pipe></p>
+
+<h4 id="2-필터">2. 필터</h4>
+<p>이거는 pipe line을 굉장히 많이 사용한다고 보면 된다. 필터는 input을 받아서 어떻게 좀 바뀐 내용으로 output하는 역할을 한다.</p>
+
+<p>그중 자주 쓰이는 sort를 한번 배워보자
+a. sort
+이 친구는 파이프라인에서 이용하면 data를 하나의 분류된 list로 만들어 준다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/29.png" alt="사진" /></p>
+
+<p>이렇게 치면…</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/30.png" alt="사진" /></p>
+
+<p>이렇게 알파벳 순으로 정리된 내용의 data가 출력된다.</p>
+
+<p>b. uniq
+이 친구는 sorted data에서 반복된 내용이 있으면 삭제해 주는 역할을 한다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/31.png" alt="사진" /></p>
+
+<p>이렇게! 끼워주면~ uniq 알아서 sort된 내용에서 반복되는 내용을 삭제해준다!
+근데 만약에 역으로 반복된 내용만 보고 싶다면 uniq -d를 이용하면 된다!</p>
+
+<p>c. wc
+이 친구는 줄, 단어, 바이트 수를 보여주는 역할을 한다.
+(-l을 붙이면 라인수만 보여준다)</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/32.png" alt="사진" /></p>
+
+<p>d. grep
+이 친구는  파일 내에 있는 텍스트 패던을 찾아주는 역할을 한다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/33.png" alt="사진" /></p>
+
+<p>e. head / tail
+이 친구들은 파일의 첫 10줄, 뒤에 10줄을 출력해주는 역할을 한다. 
+-n을 사용 시에는 원하는 양 만큼의 라인을 출력할 수 있다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/34.png" alt="사진" /></p>
+
+<p>f. tee 
+스탠다드 인풋을 읽고 이것을 스텐다드 아읏풋과 여러 파일에 복사한다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/Linux-command/2/35.png" alt="사진" /></p>
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/리눅스">리눅스</a>,&nbsp;<a href="/tag/리눅스명령어">리눅스명령어</a>,&nbsp;<a href="/tag/Linux">Linux</a>,&nbsp;<a href="/tag/CommandLine">CommandLine</a>,&nbsp;<a href="/tag/Command">Command</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/linux/2018/03/22/Linux-command-1.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(Linux Week 1st) Linux Command 정리1</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/linux/2018/03/31/Linux-command-3.html">
+					<span class="page-number">(Linux Week 2nd) Linux Command 정리3</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/linux/2018/03/25/Linux-command-2.html',
+    'title': '(Linux Week 1st) Linux Command 정리2'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

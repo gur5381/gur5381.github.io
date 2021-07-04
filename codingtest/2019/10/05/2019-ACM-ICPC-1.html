@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>2019 ACM ICPC Seoul Regional 예선 참가 후기 및 문제 풀이</title>
+  <meta name="description" content="2019 ICPC Seoul Regional">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="2019 ICPC Seoul Regional" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="2019 ACM ICPC Seoul Regional 예선 참가 후기 및 문제 풀이" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="2019 ACM ICPC Seoul Regional 예선 참가 후기 및 문제 풀이">
+  <meta name="twitter:description" content="2019 ICPC Seoul Regional">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/codingtest/2019/10/05/2019-ACM-ICPC-1.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">2019 ACM ICPC Seoul Regional 예선 참가 후기 및 문제 풀이</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">October 5, 2019</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/codingtest">Codingtest</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="2019-icpc-seoul-regional">2019 ICPC Seoul Regional</h2>
+
+<blockquote>
+  <ul>
+    <li><strong>ACM-ICPC</strong>는 알고리즘에 자신 있는 사람이라면 한번쯤 도전해볼 만한 세계 규모의 프로그래밍 경진 대회이다.</li>
+    <li>나는 이번 여름 방학부터 본격적으로 알고리즘 문제를 풀었기에 아직 많이 부족하지만 내년을 기대하면서 <strong>Negend</strong>(Next Legend)라는 이름으로 (최)진혁이와 예준이와 예선 대회에 참가했다.</li>
+    <li>운 좋게도 4문제 풀고도 학교에서는 좋은 성적을 거둘 수 있었다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="/assets/2019-ICPC-4.png" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>이 포스팅을 통해 <strong>대회 후기</strong>와 우리가 <strong>접근한 문제들의 접근법과 코드를 공유</strong>하고자 한다.</li>
+  </ul>
+</blockquote>
+
+<h2 id="대회-준비">대회 준비</h2>
+
+<blockquote>
+  <ul>
+    <li>대회에 앞서서 같이 풀어본 경험이 많이 부족하기 때문에 한 대의 컴퓨터로 2018년도, 2017년도 문제를 함께 푸는 <strong>연습 세션을 진행</strong>했다.</li>
+    <li>처음 세션을 진행했을 때는 문제를 어떻게 같이 푸는지 모르겠어서 나한테 주어진 문제는 혼자 풀려고 애를 많이 썼다. 하지만 내가 마지막에 풀려는 문제를 풀지 못한 체 세션을 끝내게 되었다.</li>
+    <li>2번째 세션부터 진혁이와 예준이와 알고리즘 방법에 대해서 의논하기로 맘 먹었다. 각자 접해본 문제와 방법이 다르기 같이 풀 때 더 큰 효과가 있을 수 있다 판단했기 때문이다.</li>
+    <li>실제로 <strong>진혁이와 예준이와 의논하면서 문제 풀이 방법까지 접근하는 시간이 훨씬 짧아짐을 느꼈다.</strong></li>
+    <li>뿐만 아니라 <strong>모니터와 키보드를 하나 더 준비해서 실제 환경과 유사하게 문제를 풀어본 경험</strong>이 도움이 많이 됐다.</li>
+  </ul>
+</blockquote>
+
+<h2 id="대회-당일">대회 당일</h2>
+
+<p><img src="/assets/2019-ICPC-1.jpeg" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>막상 대회장에 도착하니 긴장이 밀려왔다.</li>
+    <li>내년을 목표로 경험삼아 나온 이번 대회지만 그래도 잘하고 싶은 욕심이 컸다.</li>
+    <li>그래도 진혁이랑 예준이가 옆에서 많이 힘이 되어주어서 조금 긴장을 덜고 힘내볼 수 있었다.</li>
+  </ul>
+</blockquote>
+
+<p><img src="/assets/2019-ICPC-2.jpeg" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>ICPC 서버의 문제로 등록을 제외하고는 제출의 결과를 확인 받지 못했다.</li>
+    <li>제출의 결과를 받지 못하니 중간부터 답답함과 함께 집중력이 흐트러지기 시작했다.</li>
+    <li>이때가 진짜 고비였다.(진혁, 예준이가 버텨줘서 진짜 고마웠다.)</li>
+  </ul>
+</blockquote>
+
+<p><img src="/assets/2019-ICPC-3.png" alt="사진" /></p>
+
+<blockquote>
+  <ul>
+    <li>추가 시간 30분 포함해서 3시간 반 동안에 시험 동안에 우리는 총 6문제에 솔루션 제출하고 시험을 마무리했다.</li>
+    <li>우여곡절 끝에 끝냈지만 만족했다.</li>
+  </ul>
+</blockquote>
+
+<h2 id="대회-후기">대회 후기</h2>
+
+<blockquote>
+  <ul>
+    <li><strong>대회 환경에 문제가 생기는 바람</strong>에 심적으로 너무 힘들었다.</li>
+    <li>L번과 J번을 틀린 이유를 확인하지 못한 채로 시험을 마무리하게 되어서 너무 아쉬움이 남는다.</li>
+    <li><strong>알고리즘을 떠올리고 이를 증명</strong>해내지 못해서 엄한 시간을 너무 많이 낭비해버렸다. 이를 더 공부해봐야겠다.</li>
+    <li>이번 대회를 통해서 <strong>같이 하는 즐거움</strong>을 조금은 느낀 것 같아 너무 감사하다. 진짜 진혁, 예준에게 감사하다.</li>
+    <li>내년에는 진짜 레전드가 되도록 열시미 해봐야겠다!</li>
+  </ul>
+</blockquote>
+
+<h2 id="문제-풀이">문제 풀이</h2>
+
+<p>문제는 우리가 쉽게 접근했던 문제 순으로 나열했다.</p>
+
+<h3 id="problem-b-balanced-string">Problem B (Balanced String)</h3>
+
+<p><a href="https://www.acmicpc.net/problem/17520">백준 17520번 링크</a></p>
+
+<blockquote>
+  <ul>
+    <li>이 문제는 디피로 접근하면 쉽게 풀 수 있는 문제이다.</li>
+    <li>이진 문자열의 모든 부분 문자열이 균형잡힌 문자열이기 때문에</li>
+    <li>1자리부터 시작해서 원하는 자리까지 0과 1의 개수차가 0과 1인 애들 정보를 계속해서 기억해주면 되는 문제이다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;cstdio&gt;
+int n, c0, c1, n0, n1;
+int main(){
+    c1 = 2;
+    scanf("%d", &amp;n);
+    for(int i = 1; i &lt; n; i++)n1 = (c0 * 2) % 16769023, n0 = c1, c0 = n0, c1 = n1;
+    printf("%d", (c0 + c1) % 16769023);
+}
+</code></pre></div></div>
+
+<h3 id="problem-h-four-squares">Problem H (Four Squares)</h3>
+
+<p><a href="https://www.acmicpc.net/problem/1699">백준 1699번 링크</a></p>
+
+<blockquote>
+  <ul>
+    <li>이 문제는 이전에 풀어본 <a href="https://www.acmicpc.net/problem/1699">백준 1699번</a>과 거의 동일하다.(오늘 백준 사이트에 올라온 것을 보고서야 알았다…)</li>
+    <li>이 문제도 <strong>DP</strong>로 접근하면 쉽게 풀 수 있는 문제이다.</li>
+    <li>일단 num에 원하는 값보다 작거나 같은 모든 제곱수를 저장하고 1부터 n까지 값들을 찾아나간다.</li>
+    <li>이때 해당 수에서 제곱수를 뺀 위치에 값이 있을 경우 중 제일 작은 값에다가 +1을 해주어 해당 위치에 저장한다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;cstdio&gt;
+
+int n, m, arr[100001], num[100001];
+
+int main(){
+    scanf("%d", &amp;n);
+    for(int i = 1; i &lt; 100001; i++){
+        //일단 해당 수 전의 모든 제곱수들을 다 저장해줌
+        int sqr = i*i;
+        if(sqr &gt; n)break;
+        num[i] = sqr, m = i + 1;
+    } 
+    for(int i = 1; i &lt;= n; i++){
+        int MIN = 1000000;
+        //i에서 제곱수들을 뺀 위치에 값이 있는 애들 중에 제일 작은 값 + 1을 넣어줌
+        for(int j = 0; j &lt; m; j++){
+            if(i - num[j] &lt; 0) continue;
+            if((i - num[j]) &amp;&amp; !arr[i - num[j]])continue;
+            if(arr[i - num[j]] + 1 &lt; MIN) MIN = arr[i - num[j]] + 1;
+        }
+        arr[i] = MIN;
+    }
+    printf("%d", arr[n]);
+}
+</code></pre></div></div>
+
+<h3 id="problem-c-byte-coin">Problem C (Byte Coin)</h3>
+
+<p><a href="https://www.acmicpc.net/problem/17521">백준 17521번 링크</a></p>
+
+<blockquote>
+  <ul>
+    <li>이 문제는 그냥 말그대로 제일 쌀 때 사서 제일 비쌀 때 팔면 되는 문제이다.</li>
+    <li>타입을 조심해주는게 관건이다!</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;cstdio&gt;
+int n, cur, d = -1, arr[16];
+int main(){
+    long long ans = 0, c = 0, coin = 0;
+    scanf("%d %lld", &amp;n, &amp;c);
+    for(int i = 0; i &lt; n; i++)scanf("%d", &amp;arr[i]);
+    for(int i = 1; i &lt;= n; i++){
+        cur = arr[i] - arr[i-1];
+        if(cur != 0)cur = cur &gt; 0 ? 1 : -1;
+        if(d == cur || cur == 0)continue;
+        if(d &gt; 0)c += coin * arr[i-1], coin = 0;
+        else coin = c / arr[i-1], c -= coin * arr[i-1];
+        if(c &gt; ans)ans = c;
+        d = cur;
+    }
+    if(c + coin * arr[n - 1] &gt; ans)ans = c + coin * arr[n - 1];
+    printf("%lld", ans);
+}
+</code></pre></div></div>
+
+<h3 id="problem-l-two-machines">Problem L (Two Machines)</h3>
+
+<p><a href="https://www.acmicpc.net/problem/17528">백준 17528번 링크</a></p>
+
+<blockquote>
+  <ul>
+    <li>11월 4일, 한달만에 드디어 Two Machines를 풀어냈다…</li>
+    <li>이분탐색, dp, 그리디 다 해보고 결국에 이정진님의 댓글을 보고 dp를 이용해서 문제를 풀어내게 되었다.</li>
+    <li>작업의 개수는 250개로 각 작업의 최대값은 250이기 때문에 최대 시간은 <strong>62500</strong>이다.</li>
+    <li>이 때 250개의 작업쌍을 받게 될 때 마다 62500의 경우를 확인한다면 이때 총 시간은 62500*250으로 <strong>천오백만</strong>이된다. 1초가 1억이라고 봤을 때 이거는 될 방법이라고 봤다.</li>
+    <li>방법은 어레이 dp[251][62501] 짜리를 하나 준비한다.</li>
+    <li>dp[i][j]는 i번째 작업이면서 a가 j일 때, b가 가질 수 있는 최소값을 의미한다.</li>
+    <li>dp[i][j]는 dp[i-1][j]에서 $a_i$와 $b_i$ 중 하나를 선택해서 더해주며 업데이트된다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+int n, arr[251][2], dp[251][62501];
+
+int main(){
+    scanf("%d", &amp;n);
+    for(int i = 0; i &lt; n; i++){
+        scanf("%d %d", &amp;arr[i][0], &amp;arr[i][1]);
+    }
+    for(int i = 0; i &lt; n; i++){
+        for(int j = 0; j &lt; 62501; j++)dp[i][j] = 987654321;
+    }
+    dp[0][arr[0][0]] = 0;
+    dp[0][0] = arr[0][1];
+    for(int i = 1; i &lt; n; i++){
+        for(int j = 0; j &lt; 62501; j++){
+            if(dp[i - 1][j] == -1)continue;
+            dp[i][j + arr[i][0]] = min(dp[i][j + arr[i][0]], dp[i - 1][j]);
+            dp[i][j] = min(dp[i][j], dp[i - 1][j] + arr[i][1]); 
+        }
+    }
+    int ans = 987654321;
+    for(int i = 0; i &lt; 62501; i++)ans = min(ans, max(i, dp[n - 1][i]));
+    printf("%d", ans);
+}
+</code></pre></div></div>
+
+<h2 id="대회를-마치며">대회를 마치며</h2>
+
+<blockquote>
+  <ul>
+    <li>ACM-ICPC라는 큰 대회에서 입상도 입상이지만 팀으로 함께 하는 기쁨을 느낄 수 있어서 정말 좋았다.</li>
+    <li>그리고 문제 접근을 잘못하는 오류를 줄이기 위해 내 알고리즘을 증명해낼 수 있는 능력을 기르거나 더 넓은 시야를 길러야 겠다!</li>
+  </ul>
+</blockquote>
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/ICPC">ICPC</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/%EB%B0%B1%EC%A4%80/2019/10/02/baekjoon-2529.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(백준 알고리즘 문제풀이) 2529번 부등호</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/codingtest/naver/2019/10/12/2019-naver-hackday-1.html">
+					<span class="page-number">2019 NAVER CAMPUS HACKDAY WINTER 코딩테스트 후기 및 문제 풀이</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/codingtest/2019/10/05/2019-ACM-ICPC-1.html',
+    'title': '2019 ACM ICPC Seoul Regional 예선 참가 후기 및 문제 풀이'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

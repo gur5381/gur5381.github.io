@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(프로그래머스 코딩테스트 고득점 kit) Dynamic Programming Level3 등굣길</title>
+  <meta name="description" content="문제">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="문제" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(프로그래머스 코딩테스트 고득점 kit) Dynamic Programming Level3 등굣길" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(프로그래머스 코딩테스트 고득점 kit) Dynamic Programming Level3 등굣길">
+  <meta name="twitter:description" content="문제">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/2019/04/15/dp-5.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(프로그래머스 코딩테스트 고득점 kit) Dynamic Programming Level3 등굣길</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">April 15, 2019</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/프로그래머스">프로그래머스</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="문제">문제</h2>
+
+<p>계속되는 폭우로 일부 지역이 물에 잠겼습니다. 물에 잠기지 않은 지역을 통해 학교를 가려고 합니다. 집에서 학교까지 가는 길은 m x n 크기의 격자모양으로 나타낼 수 있습니다.</p>
+
+<p>아래 그림은 m = 4, n = 3 인 경우입니다.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/dp-5.png" alt="사진" /></p>
+
+<p>가장 왼쪽 위, 즉 집이 있는 곳의 좌표는 (1, 1)로 나타내고 가장 오른쪽 아래, 즉 학교가 있는 곳의 좌표는 (m, n)으로 나타냅니다.</p>
+
+<p>격자의 크기 m, n과 물이 잠긴 지역의 좌표를 담은 2차원 배열 puddles이 매개변수로 주어질 때, 학교에서 집까지 갈 수 있는 최단경로의 개수를 1,000,000,007로 나눈 나머지를 return 하도록 solution 함수를 작성해주세요.</p>
+
+<p><strong>제한사항</strong></p>
+<blockquote>
+  <ul>
+    <li>격자의 크기 M, N은 1 이상 100 이하인 자연수입니다.</li>
+    <li>물에 잠긴 지역은 0개 이상 10개 이하입니다.</li>
+    <li>집과 학교는 물에 잠기지 않았습니다.</li>
+  </ul>
+</blockquote>
+
+<h2 id="어떻게-접근할-것인가">어떻게 접근할 것인가?</h2>
+
+<blockquote>
+  <ul>
+    <li>bfs를 이용해서 거리를 하나씩 늘려가면서 훑어보자(좌우상하)</li>
+    <li>굳이 이미 거쳐간 지점은 확인할 필요 없게 해당지점까지 가는 최단거리를 적어놓자(array에 저장)</li>
+    <li>최단거리가 아니거나 array 밖으로 빠지면 버려!</li>
+  </ul>
+</blockquote>
+
+<h2 id="queue-코드복잡도---정답율-50점-나머지-다-시간초과">queue 코드(복잡도 : , 정답율: 50점, 나머지 다 시간초과)</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;iostream&gt;
+
+using namespace std;
+int** array;
+queue&lt;pair&lt;int, int&gt;&gt; q;
+
+int bfs(int m, int n){
+    int count = 0;
+    q.push(make_pair(1,1));
+    while(!q.empty()){
+        //일단 하나꺼내
+        pair &lt;int,int&gt; r = q.front(); 
+        int cur_dist = array[r.first][r.second];
+        if(r.first == m &amp;&amp; r.second == n) count++;
+        q.pop();
+        //사방향으로 보내버려
+        //좌
+        if(cur_dist + 1 &lt;= array[r.first-1][r.second]){
+            array[r.first-1][r.second] = cur_dist+1;
+            q.push(make_pair(r.first-1, r.second));
+        }
+        //우
+        if(cur_dist + 1 &lt;= array[r.first+1][r.second]){
+            array[r.first+1][r.second] = cur_dist+1;
+            q.push(make_pair(r.first+1, r.second));
+        }
+        //상
+        if(cur_dist + 1 &lt;= array[r.first][r.second-1]){
+            array[r.first][r.second-1] = cur_dist+1;
+            q.push(make_pair(r.first, r.second-1));
+        }
+        //하
+        if(cur_dist + 1 &lt;= array[r.first][r.second+1]){
+            array[r.first][r.second+1] = cur_dist+1;
+            q.push(make_pair(r.first, r.second+1));
+        }
+
+    }
+    return count;
+} 
+
+
+int solution(int m, int n, vector&lt;vector&lt;int&gt;&gt; puddles) {
+    //웅덩이랑 판 테두리를 -1로 만들어버려
+    array = new int*[m+2];
+    for(int i = 0; i &lt; m+2; i++)array[i] = new int[n+2];
+    for(int i = 0; i &lt; m+2; i++){
+        for(int j = 0; j &lt; n+2; j++) array[i][j] = -1;
+        
+    }
+    for(int i = 1; i &lt; m+1; i++){
+        for(int j = 1; j &lt; n+1; j++) array[i][j] = 1000;
+    }
+
+    //웅덩이: -1, 집: 0
+    for(int i = 0; i &lt; puddles.size(); i++)array[puddles[i][0]][puddles[i][1]] = -1;
+    array[1][1] = 0;
+
+    return bfs(m,n)%1000000007;
+
+}
+</code></pre></div></div>
+
+<h2 id="더-효율적으로">더 효율적으로?</h2>
+
+<blockquote>
+  <ul>
+    <li>문뜩 떠오른 생각인데 이미 같은 길을 간 친구들을 queue에 넣지 말고 그냥 값만 저장해주면 어떤가</li>
+    <li>그럼 그 길을 간 대표 한명이 가면 나머지 사람은 갈필요 없이 결과를 더 금방 볼 수 있다.</li>
+    <li>짜보자…</li>
+  </ul>
+</blockquote>
+
+<h2 id="dp-활용-코드복잡도--정답율-100점">dp 활용 코드(복잡도: , 정답율: 100점)</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;iostream&gt;
+
+using namespace std;
+int** array;
+int** ways;
+queue&lt;pair&lt;int, int&gt;&gt; q;
+
+void to_array(int dist, int org_i, int org_j, int i, int j){
+    if(dist &lt;= array[i][j]){
+        if(dist == array[i][j]){
+            ways[i][j] += ways[org_i][org_j];
+            ways[i][j] %= 1000000007;
+        }
+        else{
+            ways[i][j] = ways[org_i][org_j];
+            array[i][j] = dist;
+            q.push(make_pair(i, j));
+        }
+    }
+}
+
+int bfs(int m, int n){
+    int count = 0;
+    q.push(make_pair(1,1));
+    while(!q.empty()){
+        pair &lt;int,int&gt; r = q.front();
+        int cur_dist = array[r.first][r.second];
+        if(r.first == m &amp;&amp; r.second == n) return ways[r.first][r.second];
+        q.pop();
+        to_array(cur_dist+1, r.first, r.second, r.first-1, r.second);
+        to_array(cur_dist+1, r.first, r.second, r.first+1, r.second);
+        to_array(cur_dist+1, r.first, r.second, r.first, r.second-1);
+        to_array(cur_dist+1, r.first, r.second, r.first, r.second+1);
+    }
+    return count;
+}
+
+
+int solution(int m, int n, vector&lt;vector&lt;int&gt;&gt; puddles) {
+    array = new int*[m+2];
+    ways = new int*[m+2];
+    for(int i = 0; i &lt; m+2; i++)array[i] = new int[n+2];
+    for(int i = 0; i &lt; m+2; i++)ways[i] = new int[n+2];
+    for(int i = 0; i &lt; m+2; i++){
+        for(int j = 0; j &lt; n+2; j++) array[i][j] = -1;
+    }
+    for(int i = 1; i &lt; m+1; i++){
+        for(int j = 1; j &lt; n+1; j++){
+            array[i][j] = 1000;
+            ways[i][j] = 0;
+        }
+    }
+    for(int i = 0; i &lt; puddles.size(); i++)array[puddles[i][0]][puddles[i][1]] = -1;
+    array[1][1] = 0;
+    ways[1][1] = 1;
+    return bfs(m,n);
+}
+</code></pre></div></div>
+
+<p><strong>야스..!! 개 잘 짰다고 생각했…</strong></p>
+
+<h2 id="미친코드어떤-갓성님이-짠-코드인가">미친코드(어떤 갓성님이 짠 코드인가)</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;string&gt;
+#include &lt;vector&gt;
+#define mod 1000000007;
+using namespace std;
+
+int dy[101][101];
+bool map[101][101];
+int solution(int m, int n, vector&lt;vector&lt;int&gt;&gt; puddles) {
+    for(int i=0; i&lt;puddles.size(); i++) map[puddles[i][1]][puddles[i][0]] = 1;
+    dy[1][1] = 1;
+    for(int i=1; i&lt;=n; i++){
+        for(int j=1; j&lt;=m; j++){
+            if(i==1 &amp;&amp; j==1) continue;
+            if(map[i][j] == 1) continue;
+            dy[i][j] = (dy[i-1][j] + dy[i][j-1]) % mod;
+        }
+    }
+    return dy[n][m];
+}
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>좌측 끝부터 순서대로 읽으면서 큐이런거 다 안쓰고 바로 위와 좌에 있는 원소를 그냥 더했다.</li>
+    <li>큐 안쓰고 이런식으로 해도 어차피 필요한 워와 옆 원소의 값들은 다 구해지기 때문에</li>
+    <li>순서 대로 읽어도 된다는… 충격적인 사실.. 다리 풀린다…</li>
+  </ul>
+</blockquote>
+
+<h2 id="느낀점">느낀점</h2>
+
+<blockquote>
+  <ul>
+    <li>손수 연산과정을 따라가면서 뭔가 중복된 연산이 존재한다 싶으면 빨리 DP로 갈아타자.</li>
+    <li>생각을 할 때 좀 더 많이 생각해야 한다. 내꺼가 제일 효율적이라는 말은 <strong>거짓말이고 재앙이다.</strong></li>
+    <li>DP를 이제는 어느정도 이해한 것 같아서 다행이다.</li>
+  </ul>
+</blockquote>
+
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/dp">dp</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/2019/04/15/dp-4.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(프로그래머스 코딩테스트 고득점 kit) Dynamic Programming Level3 정수 삼각형</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/algorithm/2019/04/20/knapsack-2.html">
+					<span class="page-number">(알고리즘) Knapsack 알고리즘 2 Branch and Bound, Heap + 코드</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/2019/04/15/dp-5.html',
+    'title': '(프로그래머스 코딩테스트 고득점 kit) Dynamic Programming Level3 등굣길'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

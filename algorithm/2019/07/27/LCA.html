@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(알고리즘) LCA 알고리즘 + C++ 예제코드</title>
+  <meta name="description" content="LCA란">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="LCA란" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(알고리즘) LCA 알고리즘 + C++ 예제코드" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(알고리즘) LCA 알고리즘 + C++ 예제코드">
+  <meta name="twitter:description" content="LCA란">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/algorithm/2019/07/27/LCA.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(알고리즘) LCA 알고리즘 + C++ 예제코드</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 27, 2019</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/algorithm">Algorithm</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="lca란">LCA란</h2>
+
+<blockquote>
+  <ul>
+    <li>LCA란 Lowest Common Ancestor의 약자로 트리 속 두 노드의 가장 가까운 조상 노드를 의미한다.</li>
+    <li>이것을 BFS나 DFS를 이용해 모든 경로를 훑어봄으로써 두 노드 사이의 같은 조상을 찾을 수도 있겠지만 이를 더욱 빠르게 하기 위해 만든 알고리즘이 LCA 알고리즘이다.</li>
+  </ul>
+</blockquote>
+
+<h2 id="lca-알고리즘">LCA 알고리즘</h2>
+
+<blockquote>
+  <ul>
+    <li>방법은 간단하다.</li>
+    <li>1.트리를 만들고 각 노드의 조상들을 저장한다.</li>
+    <li>2.두 노드의 깊이를 같게 깊이가 깊은 노드를 조상으로 업데이트 시켜준다.</li>
+    <li>3.두 노드를 조상으로 올리면서 가장 가까운 공통조상을 찾아준다.</li>
+  </ul>
+</blockquote>
+
+<h2 id="트리-만들기-알고리즘">트리 만들기 알고리즘</h2>
+
+<p>트리를 만드는 방법은 두가지가 있다.
+자세한 내용은 코드를 보면서 설명하고자 한다.</p>
+
+<h3 id="bfs를-이용한-트리-만들기">BFS를 이용한 트리 만들기</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void build_tree(){
+    queue&lt;int&gt; q;
+    depth[1] = 1, ac[0][1] = 1;
+    q.push(1);
+    while(!q.empty()){
+        u = q.front(); q.pop();
+        for(int i = 0; i &lt; ll[u].size(); i++){
+            v = ll[u][i];
+            if(depth[v] == 0){
+                depth[v] = depth[u] + 1;
+                ac[0][v] = u;
+                q.push(v);
+            }
+        }
+    }
+}
+void find_parent(){
+    for(int i = 1; i &lt; 17; i++){
+        for(int j = 1; j &lt; n + 1; j++)ac[i][j] = ac[i-1][ac[i-1][j]];
+    }
+}
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>위 코드에서 build_tree는 트리를 만들어주는 함수이다.</li>
+    <li>1번 노드를 기준으로 해서 트리를 뻗쳐나가고 그에 따라서 깊이인 level을 저장해주고 parent를 업데이트 시켜준다.(parent에 대한 내용은 좀있다 다시 설명하겠다.)</li>
+  </ul>
+</blockquote>
+
+<h3 id="dfs를-이용한-트리-만들기">DFS를 이용한 트리 만들기</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void getTree(int current, int parent){
+    depth[current] = depth[parent] + 1;
+    ac[current][0] = parent;
+    for(int i = 1; i &lt;= max_level; i++){
+        temp = ac[current][i-1];
+        ac[current][i] = ac[temp][i-1];
+    }
+    int len = ll[current].size();
+    for(int i = 0; i &lt; len; i++){
+        int child = ll[current][i];
+        if(child != parent) getTree(child, current);
+    }
+}
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>BFS와 달리 부모노드에서 밑으로 뻗친 애들를 이용해 getTree를 다시 호출하며 트리를 만들어 간다.</li>
+  </ul>
+</blockquote>
+
+<h3 id="조상-저장하기">조상 저장하기</h3>
+
+<blockquote>
+  <ul>
+    <li>이 모든 LCA 알고리즘의 핵심은 각 노드에서의 조상 값을 저장하는데 있다.</li>
+    <li>물론 각 노드의 모든 조상 값을 저장하면 좋겠지만 이것은 나중에 탐색할때 시간이 많이 걸린다.</li>
+    <li>따라서 이 알고리즘에서는 각 노드의 2^n번째 조상값을 ac라는 어레이에 저장해두었다.</li>
+  </ul>
+</blockquote>
+
+<h4 id="dfs에서-조상-저장하기">DFS에서 조상 저장하기</h4>
+
+<blockquote>
+  <ul>
+    <li>DFS에서는 각 노드를 발견하는 동시에 그 위로 있는 조상들을 확인한다.</li>
+    <li>여기서 temp는 2^(i-1)번째 조상이다.</li>
+    <li>ac[current][i]는 temp의 2^(i-1)번째 조상이므로 이것은 current의 2^i번째 조상과 동일하다.</li>
+    <li>예를 들어, i가 1이라면 2^(1-1)번째의 2번째 즉 윗조상의 바로 윗조상인 2번째 위인 조상이다.</li>
+    <li>i가 2라면 2^(2-1)번째의 2^(2-1)번째인 4번째 위인 조상을 의미한다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for(int i = 1; i &lt;= max_level; i++){
+    temp = ac[current][i-1];
+    ac[current][i] = ac[temp][i-1];
+}
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>여기서 맥스 레벨은 다음과 같은 식을 이용해 구한다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>max_level = (int)floor(log2(SIZE))
+</code></pre></div></div>
+
+<h4 id="bfs에서-조상-저장하기">BFS에서 조상 저장하기</h4>
+
+<blockquote>
+  <ul>
+    <li>BFS에서는 트리가 다 만들어진 후에 각 노드의 바로 윗 조상에 대한 정보만 가지고 한꺼번에 조상 어레이의 업데이트를 진행한다.</li>
+    <li>조상을 2의 곱으로 저장하는 방식은 동일하다.</li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void find_parent(){
+    for(int i = 1; i &lt; 17; i++){
+        for(int j = 1; j &lt; n + 1; j++)ac[i][j] = ac[i-1][ac[i-1][j]];
+    }
+}
+</code></pre></div></div>
+
+<h2 id="본격-최소-공통-조상-찾기">본격 최소 공통 조상 찾기</h2>
+
+<p>일단 코드를 보자.</p>
+
+<p>int find_LCA(int a, int b){</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//a와 b의 깊이 같게 하기(depth[b] &gt; depth[a]일때)
+for(int i = max_level; i &gt;= 0; i--){
+    if(depth[a] &lt;= depth[ac[b][i]]) b = ac[b][i];
+}
+if(a == b) return a;
+
+//공통 조상 찾기
+for(int i = max_level; i &gt;= 0; i--){
+    if(ac[a][i] != ac[b][i])a = ac[a][i], b = ac[b][i];
+}
+
+return ac[a][0]; }
+</code></pre></div></div>
+
+<h3 id="depth-같게-하기">depth 같게 하기</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//a와 b의 깊이 같게 하기(depth[b] &gt; depth[a]일때)
+for(int i = max_level; i &gt;= 0; i--){
+    if(depth[a] &lt;= depth[ac[b][i]]) b = ac[b][i];
+}
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>이 과정은 조금 헷갈릴 수 있으니 집중해서 코드를 보기 바란다.</li>
+    <li>먼저 해야하는 것은 깊이를 같게 해주는 과정이다.</li>
+    <li>더 깊이 있는 노드(b)의 조상을 맨 위부터 확인하면서 a보다 깊거나 같으면 해당 조상으로 업데이트 한다.</li>
+    <li>이 때 차이가 홀수리먄 아땋게 같게 되나하고 도착 못하지 않나 하고 의문이 들 수 있다.</li>
+    <li>하지만 모든 수는 2진수로 표현할 수 있다는 것을 기억하길 바란다.</li>
+    <li>이 과정이 끝나면 자연스럽게 그 차이가 줄어들게 된다.</li>
+  </ul>
+</blockquote>
+
+<h3 id="공통-조상-찾기">공통 조상 찾기</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//공통 조상 찾기
+for(int i = max_level; i &gt;= 0; i--){
+    if(ac[a][i] != ac[b][i])a = ac[a][i], b = ac[b][i];
+}
+</code></pre></div></div>
+
+<blockquote>
+  <ul>
+    <li>이 과정 또한 depth를 같게하는 과정과 유사하게 진행된다.</li>
+    <li>이 과정의 목표는 두 점의 맨위 조상부터 시작해서 공통분모가 달라지는 최초지점을 찾는 것이 목표이다.</li>
+    <li>그리고 각 노드는 그 조상값으로 업데이트 한다.</li>
+    <li>즉, 업데이트한 친구의 바로 윗 조상이 공통 분모가 되는 것이다!</li>
+    <li>이 과정에서도 탐색을 통해 홀수번째 조상도 방문하게 되어있다.</li>
+  </ul>
+</blockquote>
+
+<h2 id="dfs-최종-코드">DFS 최종 코드</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;queue&gt;
+#include &lt;vector&gt;
+#include &lt;cstdio&gt;
+#include &lt;cmath&gt;
+
+#define INF 1000000000
+#define SIZE 50020
+
+using namespace std;
+
+vector&lt;vector&lt;int&gt; &gt; ll;
+int ac[SIZE][17], depth[SIZE];
+int n, m, v, w, u, max_level, temp, child;
+
+void getTree(int current, int parent){
+    depth[current] = depth[parent] + 1;
+    ac[current][0] = parent;
+    for(int i = 1; i &lt;= max_level; i++){
+        temp = ac[current][i-1];
+        ac[current][i] = ac[temp][i-1];
+    }
+    int len = ll[current].size();
+    for(int i = 0; i &lt; len; i++){
+        int child = ll[current][i];
+        if(child != parent) getTree(child, current);
+    }
+}
+
+int find_LCA(int a, int b){
+    for(int i = max_level; i &gt;= 0; i--){
+        if(depth[a] &lt;= depth[ac[b][i]]) b = ac[b][i];
+    }
+    if(a == b) return a;
+    for(int i = max_level; i &gt;= 0; i--){
+        if(ac[a][i] != ac[b][i])a = ac[a][i], b = ac[b][i];
+    }
+    return ac[a][0];
+}
+
+int main(){
+    scanf("%d", &amp;n);
+    ll = vector&lt;vector&lt;int&gt; &gt;(n + 1);
+    for(int i = 1; i &lt; n; i++){
+        scanf("%d %d", &amp;v, &amp;u);
+        ll[v].push_back(u);
+        ll[u].push_back(v);
+    }
+    depth[0] = -1;
+    max_level = (int)floor(log2(SIZE));
+    getTree(1, 0);
+    scanf("%d", &amp;m);
+    while(m--){
+        scanf("%d %d", &amp;v, &amp;u);
+        printf("%d\n", depth[v] &lt; depth[u] ? find_LCA(v, u) : find_LCA(u, v));
+    }
+}
+</code></pre></div></div>
+
+<h2 id="bfs-최종-코드">BFS 최종 코드</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include &lt;queue&gt;
+#include &lt;vector&gt;
+#include &lt;cstdio&gt;
+#define INF 1000000000
+
+using namespace std;
+
+vector&lt;vector&lt;int&gt; &gt; ll;
+int ac[17][50020], depth[50020];
+int n, m, v, w, u;
+
+int find_LCA(int chd, int par){
+    int diff = depth[chd] - depth[par];
+    for(int i = 16; i &gt;= 0; i--){
+        if((1&lt;&lt;i) &lt;= diff){
+            chd = ac[i][chd];
+            diff -= (1&lt;&lt;i);
+        }
+    }
+    if(chd == par) return chd;
+    for(int i = 16; i &gt;= 0; i--){
+        if(ac[i][chd] != ac[i][par]){
+            chd = ac[i][chd];
+            par = ac[i][par];
+        } 
+    } 
+    return ac[0][chd];
+}
+
+void build_tree(){
+    queue&lt;int&gt; q;
+    depth[1] = 1, ac[0][1] = 1;
+    q.push(1);
+    while(!q.empty()){
+        u = q.front(); q.pop();
+        for(int i = 0; i &lt; ll[u].size(); i++){
+            v = ll[u][i];
+            if(depth[v] == 0){
+                depth[v] = depth[u] + 1;
+                ac[0][v] = u;
+                q.push(v);
+            }
+        }
+    }
+}
+void find_parent(){
+    for(int i = 1; i &lt; 17; i++){
+        for(int j = 1; j &lt; n + 1; j++)ac[i][j] = ac[i-1][ac[i-1][j]];
+    }
+}
+
+int main(){
+    scanf("%d", &amp;n);
+    ll = vector&lt;vector&lt;int&gt; &gt;(n + 1);
+    for(int i = 1; i &lt; n; i++){
+        scanf("%d %d", &amp;v, &amp;u);
+        ll[v].push_back(u);
+        ll[u].push_back(v);
+    }
+    build_tree();
+    find_parent();
+
+    scanf("%d", &amp;m);
+    while(m--){
+        scanf("%d %d", &amp;v, &amp;u);
+        printf("%d\n", depth[v] &lt; depth[u] ? find_LCA(v, u) : find_LCA(u, v));
+    }
+}
+</code></pre></div></div>
+
+<h2 id="느낀점">느낀점</h2>
+
+<blockquote>
+  <ul>
+    <li>조상을 2의 곱으로 저장해서 탐색하는 사람들의 발상은 진짜 대박인거 같다.</li>
+    <li>아무리 두 점의 깊이 차이가 크더라도 max_level번의 iteration 만에 조상을 같게 만들 수 있고 LCA를 찾아낼 수 있다.</li>
+    <li>이런걸 짜낸 사람도 대단하지만 일단 2주째 묵혀놨던 LCA를 드디어 제대로 이해하고 정리한 나도 잘했다 해주고 싶다.</li>
+    <li>고생했다!</li>
+  </ul>
+</blockquote>
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/algorithm">algorithm</a>,&nbsp;<a href="/tag/LCA">LCA</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/%EB%B0%B1%EC%A4%80/2019/07/27/baekjoon-9663.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(백준 알고리즘 문제풀이) 9663번 N-Queen</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/%EB%B0%B1%EC%A4%80/2019/07/28/baekjoon-1922.html">
+					<span class="page-number">(백준 알고리즘 문제풀이) 1197번 최소 스패닝 트리, 1922번 네트워크 연결</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/algorithm/2019/07/27/LCA.html',
+    'title': '(알고리즘) LCA 알고리즘 + C++ 예제코드'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

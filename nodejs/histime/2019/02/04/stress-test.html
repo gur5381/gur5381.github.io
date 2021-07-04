@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(HisTime) Nodejs 서버 테스트하기, Artillery 사용법 - 스트레스 테스트</title>
+  <meta name="description" content="배경">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="배경" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(HisTime) Nodejs 서버 테스트하기, Artillery 사용법 - 스트레스 테스트" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(HisTime) Nodejs 서버 테스트하기, Artillery 사용법 - 스트레스 테스트">
+  <meta name="twitter:description" content="배경">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/nodejs/histime/2019/02/04/stress-test.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(HisTime) Nodejs 서버 테스트하기, Artillery 사용법 - 스트레스 테스트</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">February 4, 2019</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/nodejs">Nodejs</a>, 
+    
+  
+    
+    <a href="/category/histime">Histime</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="배경">배경</h2>
+
+<p>이제 나름 끝났다 생각하고 서버에 올리면 다인 줄 알았다.</p>
+
+<p>근데 막상 서버 올렸는데 터지면 어떡하지!? 하는 걱정이 생겨났다.</p>
+
+<p>결국 민수형 도움으로 찾게 된 Artillery를 이용해 서버 스트레스 테스트하게 되었다.</p>
+
+<h2 id="artillery">Artillery</h2>
+
+<p>Artillery는 Node.js로 작성된 스트레스 테스트 도구이다.</p>
+
+<p>테스트를 가볍게 진행할 수도 있고 아니면 클라이언트의 시나리오를 짜서 서버를 테스트 해볼 수도 있다.</p>
+
+<p>테스트를 위해서 json 파일을 만들어서 해당 루틴을 따라서 진행할 수도 있다.</p>
+
+<p>자세한 설명은 다음 링크를 참조하면 좋을 것 같다!!</p>
+
+<p><a href="https://blog.outsider.ne.kr/1238">https://blog.outsider.ne.kr/1238</a></p>
+
+<h2 id="테스트하기">테스트하기</h2>
+
+<p>다음은 내가 테스트하기 위해 짰던 test.json 코드이다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+    "config": {
+        "target": "http://203.252.99.231",
+        "phases": [
+            {"duration": 60, "arrivalRate": 200}
+        ],
+        "defaults": {
+            "headers": {
+                "User-Agent": "Artillery"
+            }
+        }
+    },
+    "scenarios": [
+        {
+            "name": "유저테스트",
+            "flow": [
+                {"post":
+                    {
+                        "url": "/api/login",
+                        "json": {"id": "[아이디]", "password": "[비밀번호]" }
+                    }
+                },
+                {"post":
+                    {
+                        "url": "/api/show",
+                        "json": {"student_id": "[학번]" }
+                    }
+                },
+                {"post":
+                    {
+                        "url": "/api/make/fav_list",
+                        "json": {"student_id": "[학번]" }
+                    }
+                },
+                {"post":
+                    {
+                        "url": "/api/make/search/name",
+                        "json": {"course_name": "[학번]" }
+                    }
+                }
+            ]
+        }
+    ]
+}
+</code></pre></div></div>
+
+<p>여기서 target은 해당 ip고 duration은 테스트 시간, arrivalRate은 초당 테스트 수, scenarios의 flow는 테스트 진행 시나리오를 의미한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>artillery run test.json
+</code></pre></div></div>
+
+<p>테스트 시작!</p>
+
+<h2 id="일차-테스트-결과-및-대응">일차 테스트 결과 및 대응</h2>
+
+<p>이를 진행하면서 여러가지 문제를 발견했다.</p>
+
+<p>일단 유저 두명 로그인에도 다음과 같은 에러를 보여주면서 서버가 꺼진다.</p>
+
+<h3 id="1-directory-listing-denied">1. Directory Listing Denied</h3>
+
+<p>￼<img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/stress-test-2.png" alt="그림" />
+￼<img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/stress-test-1.png" alt="그림" /></p>
+
+<p>여기서 말하는 <strong>디렉토리 리스팅이란</strong></p>
+
+<p>취약한 서버 설정으로 브라우징 하는 모든 파일들을 보여준다. 
+많은 경우에 디렉토리의 목록을 보여주는 것이 보안에 직결되는 문제는 아니지만 만약 해당 파일 저장과 열람이 가능하다면 이에 대한 이야기는 달라질 것이다.</p>
+
+<p>개인정보 유출 및 스크립트 유츨의 위험이 매우 크다.</p>
+
+<p>나무 위키에 의하면</p>
+
+<p>￼<img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/stress-test-3.png" alt="그림" /></p>
+
+<p><strong>예상</strong></p>
+
+<p>즉, 우리가 너무 많은 리퀘스트를 보내면 수간적으로 우리 IP 대역이 디렉토리 리스팅을 시도하는 것으로 판단하고 차단 당하는 것이 아닐까 싶다!!</p>
+
+<p>이를 막기 위한 수단이지 않을까 싶다.<strong>(이 판단은 잘못되었다. 히즈넷은 초당 100개 request도 차단하지 않는다)</strong></p>
+
+<h3 id="2-ram-메모리-부족">2. RAM 메모리 부족</h3>
+
+<p>￼<img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/stress-test-4.png" alt="그림" /></p>
+
+<p>서버가 에러로 꺼졌는데도 RAM이 점점 차오르는 것을 볼 수 있었다.</p>
+
+<p>htop을 찍어보니 background에 계속해서 phantom-prebuilt 같은 친구들이 돌고 있었다.</p>
+
+<p><strong>예상</strong></p>
+
+<p>로그인 할 때 마다 쌓였기 때문에</p>
+
+<p>Spookyjs에 object 생성 후 삭제되지 않아 매번 종료되지 않은 크롤링 object가 남아 있는 것이라 예상했다.</p>
+
+<h3 id="대응">대응</h3>
+
+<p>Spookyjs를 포기하기로 했다.</p>
+
+<p>아무리 내가 마주한 문제들에 대해서 답도 없고 현재 모듈이 0.2 버전이고 4년 전에 유지보수를 중단한 모듈을 계속 사용할 수 없었다.</p>
+
+<p>그래서 찾은 친구가 구글에서 만든 puppeteer이다.</p>
+
+<p>이 훌륭한 크롤러로 로그인 코드를 다시 짜기 시작했다.</p>
+
+<h2 id="이차-테스트-결과-및-대응">이차 테스트 결과 및 대응</h2>
+
+<p>일단 로그인만 테스트 해보았다.</p>
+
+<h3 id="로그인-초당-5명-20초-일-때">로그인 초당 5명 20초 일 때</h3>
+
+<p>￼<img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/stress-test-5.png" alt="그림" /></p>
+
+<p>￼<img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/stress-test-6.png" alt="그림" /></p>
+
+<p>로그인 실패하는 것 없이 꽤 무난하게 통과한다!!</p>
+
+<h3 id="로그인-초당-10명-20초-일-때">로그인 초당 10명 20초 일 때</h3>
+
+<p>초반에는 버티는 듯했으나 시간이 갈 수록 터져버렸다.</p>
+
+<p>￼<img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/stress-test-7.png" alt="그림" /></p>
+
+<p>램 사용량이 터졌고</p>
+
+<p>￼<img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/stress-test-8.png" alt="그림" /></p>
+
+<p>이러한 메세지와 함께 피씨가 먹통이 되버렸다…</p>
+
+<h3 id="디비-쿼리-초당-200개-테스트">디비 쿼리 초당 200개 테스트</h3>
+
+<p>￼<img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/stress-test-9.png" alt="그림" /></p>
+
+<p>￼<img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/stress-test-10.png" alt="그림" /></p>
+
+<p>무난히 성공!!</p>
+
+<h3 id="대응-1">대응</h3>
+
+<p>동시 로그인이 문제인데 이를 위해서 RAM 메모리가 커지면 나을지 RAM을 추가로 달기로 했다.</p>
+
+<h2 id="후기">후기</h2>
+
+<p>이 테스트를 진행하지 않았다면 정말 말도 안되는 성능으로 출시해버릴뻔 했다.</p>
+
+<p>이러한 테스트를 미리 진행하는 것은 매우 중요하구나를 느끼면서 테스터를 만들어준 개발자에게 감사하다!</p>
+
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/artillery">artillery</a>,&nbsp;<a href="/tag/nodejs-test">nodejs-test</a>,&nbsp;<a href="/tag/server-test">server-test</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/web/histime/2019/01/30/axios.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(HisTime) axios 사용법 + 정의</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/2019/03/20/hash-1.html">
+					<span class="page-number">(프로그래머스 코딩테스트 고득점 kit) 해시 Level1 완주하지 못한 선수</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/nodejs/histime/2019/02/04/stress-test.html',
+    'title': '(HisTime) Nodejs 서버 테스트하기, Artillery 사용법 - 스트레스 테스트'
+  });
+</script>
+
+
+
+  </body>
+
+</html>

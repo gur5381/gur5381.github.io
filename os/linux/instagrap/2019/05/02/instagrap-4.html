@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134826755-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134826755-1');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>(InstaGrap 개발) 코드 채점 프로그램 개발 보고서</title>
+  <meta name="description" content="InstaGraP이란?">
+  
+  <meta name="author" content="Jinhyeok Jeong">
+  <meta name="copyright" content="&copy; Jinhyeok Jeong 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="InstaGraP이란?" />
+  <meta property="og:url" content="https://zoomkoding.github.io" />
+  <meta property="og:site_name" content="줌코딩의 코딩일기" />
+  <meta property="og:title" content="(InstaGrap 개발) 코드 채점 프로그램 개발 보고서" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://zoomkoding.github.io/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="(InstaGrap 개발) 코드 채점 프로그램 개발 보고서">
+  <meta name="twitter:description" content="InstaGraP이란?">
+  <meta name="twitter:image" content="https://zoomkoding.github.io/assets/instacode.png">
+  <meta name="twitter:url" content="https://zoomkoding.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://zoomkoding.github.io/os/linux/instagrap/2019/05/02/instagrap-4.html">
+  <link rel="alternate" type="application/rss+xml" title="줌코딩의 코딩일기" href="https://zoomkoding.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/Crewcials.jpeg" alt="줌코딩의 코딩일기">
+      
+    </a>
+    <div class="nav-link new-blog outer">
+      <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+        <div class="button-text">
+          <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+          <div class="label">
+            <div class="name">zoomkoding.com</div>
+            <div class="description">이전한 블로그로 이동하기</div>     
+          </div>    
+        </div>
+         
+      </button>
+    </div>
+  
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        <li class="nav-link new-blog inner">
+          <button type="button" onclick="location.href='https://www.zoomkoding.com'">
+            <div class="button-text">
+              <img class="thumbnail" src="https://github.com/zoomKoding/zoomKoding.github.io/blob/source/zoomkoding-small.png?raw=true" alt="개발 블로그 테마 개발">
+              <div class="label">
+                <div class="name">zoomkoding.com</div>
+                <div class="description">이전한 블로그로 이동하기</div>     
+              </div>    
+            </div>
+             
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">(InstaGrap 개발) 코드 채점 프로그램 개발 보고서</h1>
+      <p class="info">by <strong>줌코딩</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">May 2, 2019</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/os">Os</a>, 
+    
+  
+    
+    <a href="/category/linux">Linux</a>, 
+    
+  
+    
+    <a href="/category/instagrap">Instagrap</a>
+    
+  
+  </div>
+</section>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<article class="post-content">
+  <h2 id="instagrap이란">InstaGraP이란?</h2>
+
+<p>인스타그랩은 Instant Programming Assignment Program으로 백준과 프로그래머스와 같은 채점프로그램이다. 이것은 OS에서 배운 Process, Multithread programming, signal, server-client communication 등등을 실제로 구현해볼 수 있는 기회이다.  코드를 제출하는 자(submitter), 코드를 받고 채점거리를 주는 자(Instagrapd), 실제로 코드를 컴파일하고 결과를 확인해주는 자(worker) 을 이용해서 만들었다. ㅎㅎ 아래는 결과 이미지와 보고서이다.</p>
+
+<h2 id="구현-모습">구현 모습</h2>
+
+<p>아래 사진들은 구현된 채점 모습이다. UI는 따로 구축하지 않은 점 양해해주길 바랍니당ㅎㅎ</p>
+
+<p>왼쪽이 Worker이고, 중간이 Instagrapd, 오른쪽이 Submitter이다.</p>
+
+<h3 id="컴파일-에러가-있는-코드-제출-시">컴파일 에러가 있는 코드 제출 시</h3>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/instagrap-4.png" alt="사진" /></p>
+
+<h3 id="런타임-에러가-있는-코드-제출-시">런타임 에러가 있는 코드 제출 시</h3>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/instagrap-3.png" alt="사진" /></p>
+
+<h3 id="채점-시간3초-초과-시">채점 시간(3초) 초과 시</h3>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/instagrap-2.png" alt="사진" /></p>
+
+<h3 id="에러-없는-코드-제출-시해당-코드의-output도-맞는-경우">에러 없는 코드 제출 시(해당 코드의 Output도 맞는 경우)</h3>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/instagrap-1.png" alt="사진" /></p>
+
+<h1 id="보고서">보고서</h1>
+
+<h2 id="1----introduction">1.    Introduction</h2>
+
+<h3 id="11----the-popularity-of-the-instant-grading-program">1.1    The popularity of the Instant Grading Program</h3>
+
+<p>If you are a student majoring in Computer Science(CS), you must have heard about Baekjoon or Programmers. They are very popular among CS students as the understanding of Algorithms and Data Structure has been highly valued by many companies. Basically, what the program does is giving a computer problem with certain inputs and make users to make a solution generating certain outputs.</p>
+
+<h3 id="12----motivation-for-instagrap">1.2    Motivation for InstaGrap</h3>
+
+<p>As we discussed about intercommunication among processes, multiprocessing and multithreading, developing the instant grading program seems to be a good chance to understand what we have learn by actual implementation.</p>
+
+<h2 id="2----knowledge-needed-for-instagrap">2.    Knowledge needed for InstaGrap</h2>
+
+<h3 id="21----process-communication">2.1    Process Communication</h3>
+
+<p>There are two kinds of communication between processes. One is within the process which is, InterProcess Communication(IPC). When a parent process creates a child process, communication between them might be needed. To enable the interaction, shared memory and message passing are used. 
+There is another kind of communication, which happens in client-server process. This can be done using sockets and pipes. A socket is defined as an endpoint for communication. A communication between a pair of applications consists of a pair of sockets, one at each end of communication channel. Pipes provide a relatively simple ways for processes to communicate with one one another. Ordinary pipes allow communication between parent and child processes, while named pipes permit unrelated processes to communicate.</p>
+
+<h3 id="22----multiprocessing-and-multithreading">2.2    Multiprocessing and Multithreading</h3>
+
+<p>A process is a program in execution. Operating systems provide a mechanism for one process to create new child processes which enables multiprocessing. The parent process can wait for its children to terminate or parent and child processes can execute concurrently.
+A thread is a flow of control within a process. A multithreaded process can have several different flows of control within a single process. Using multiple threads, the program can have multiple benefits such as increased responsiveness to the user, resource sharing within the process, economy, and scalability factors.
+By utilizing multiple threads and processes, a program can have many benefits. However, there can be some issues asides from the benefits. It is important to schedule the processes and threads well and make their memory access correct.</p>
+
+<h3 id="23----standard-io">2.3    Standard I/O</h3>
+
+<p>These are standard streams for input, output, and error output. By default, standard input is read from the keyboard, while standard output and standard error are printed to the screen. To be more precise, stdin, stdout, and stderr are stream pointers available to access the standard streams. These pointers can be used as argument to functions. Typical examples are getchar and putchar. They use stdin and stdout respectively.</p>
+
+<h2 id="3----instagrap-implementation">3.    InstaGrap Implementation</h2>
+
+<h3 id="31-the-program-overview">3.1 The Program Overview</h3>
+
+<p>This program is to grade a given C file from the user(submitter). When a user gives a C file and user information, the administrator(instagrapd) starts grading with various inputs. The administrator gives tasks to worker to do execution of the code and receives the result from the worker. When the grading is all over, the submitter receives the result.</p>
+
+<h3 id="32----communication-between-processes">3.2    Communication Between Processes</h3>
+
+<p>There needs to have communication between processes. As each Processes are in remoted places, the communication should not be made by files or IPC methods. For each communication, TCP socket communication. Even though it is slower than the UDP communication, it is more reliable to use TCP socket communication as it checks the connection is successfully made.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/instagrap-5.png" alt="사진" /></p>
+
+<p>Fig 1. The Overall Communication among Processes</p>
+
+<p>However, the cost for the communication is highly expensive for the socket communication. This is because the socket continues to sit and wait for messages to come. Therefore, this program repeats creating and closing the connection between the processes.</p>
+
+<h4 id="321----between-submitter-and-instagrapd">3.2.1    between submitter and instagrapd</h4>
+
+<p>For the communication between submitter and instagrapd, there are two communications. The first is for giving the student information(the student ID and the password) and the target c file. Once the connection is made and message is successfully delivered, the connection is closed without waiting. The second communication is for checking the result is ready. By giving the student ID and the password, submitter frequently communicate with instagrapd to check whether the result is ready or not. When instagrapd receives the information, it checks whether the grading is done by using check_user_table().(This will be explained in the latter part.) If the grading result is ready, it returns the results to submitter. Otherwise, it tells submitter to wait and close the connection again.</p>
+
+<h4 id="322----between-instagrapd-and-worker">3.2.2    between instagrapd and worker</h4>
+
+<p>The communication between instagrapd and worker is made with sockets either. instagrapd sends the code and one standard input(stdin). After worker finishes grading, it returns the grading result back to the instagrapd and closes the connection.</p>
+
+<h4 id="323----how-to-send-the-multiple-data-in-tcp">3.2.3    How to send the multiple data in TCP</h4>
+
+<p>To send data to each to one another with multiple data, the data has been put into one single string (char*) and used ‘@’ to indicate where to trim. When the data is get to each process, the data is parsed using strtok().</p>
+
+<h3 id="33----inside-submitter">3.3    Inside submitter</h3>
+
+<p>submitter receives the data by the arguments. First, it sends the code and the student information to instagrapd. After then, it frequently creates the connection with instagrapd and receives the result back and print.</p>
+
+<h3 id="34----inside-instagrapd">3.4    Inside instagrapd</h3>
+
+<p>When it is started, it creates a port for the submitters to connect. As the connection is made, it creates a child process to handle the communication within the connection and goes back to the listening. When thecode is received from submitter, it makes a connection to worker. Then, it gives worker a stdin file and the code for 10 times. Whenever, submitter makes a connection to instagrapd, it checks the user table to see whether the grading result is ready.</p>
+
+<h4 id="341----how-to-store-the-grading-result-from-worker">3.4.1    How to store the grading result from worker</h4>
+
+<p>As it has to send the code and receive the grading results from worker for the amount of testcases, instagrapd should store the grading result to somewhere. For this, a file named by the student ID is created. and continuously the grading result is accumulated.</p>
+
+<h4 id="342----handling-multiple-users">3.4.2    Handling Multiple Users</h4>
+
+<p>There are global variables to handle multiple users. In instagrapd, arrays for id, password, and finished exist. The array named finished contains information about whether the result is ready or not. When the student information is given, the data is put to empty space for id and pw array.</p>
+
+<p>int id[100];
+char pw[100][20];
+int finished[100];</p>
+
+<p>As submitter’s request received, it checks whether the ID and the password exist and are correct by check_user_table(). If it is correct, it gets the index according to the id and see finished[index]’s value. If it is 1, the id, pw, finished for the index are all initialized, and returns the accumulated grading result back to submitter. If it is 0, it sends submitter “wait.”</p>
+
+<h3 id="35----inside-worker">3.5    Inside worker</h3>
+
+<p>worker is to compile and run the given source code with the standard input and returns the result to instagrapd. The parent process create child process and run in a synchronous manner.</p>
+
+<p><img src="https://raw.githubusercontent.com/zoomKoding/zoomKoding.github.io/source/assets/_posts/instagrap-6.png" alt="사진" /></p>
+
+<p>Fig 2. worker’s process family</p>
+
+<h4 id="351----how-to-compile-and-check">3.5.1    How to compile and check</h4>
+
+<p>To compile “gcc” command has to be executed. For this, I have used execl. When this function is called, a control is given to the execl process and the termination is made inside the process. Therefore, we have to create a child process to compile. As seen in figure 2, you create a child process. In child process, the parent process waits until the child1 process is over. If there is a compiled file named “test,” the compile succeeds, otherwise the parent process returns the build fail message.</p>
+
+<h4 id="352----how-to-execute-the-compiled-file-with-stdin">3.5.2    How to execute the compiled file with stdin</h4>
+
+<p>As the file named “test” created, the execution with the stdin to create an output starts. To do so, the child process number 2 is created to run the execution. By using freopen, stdin, stdout and stderr file can be decided. All of them work as a real standard input. When the error is detected, it gives error message to the stderr file. If there is no error, then the stdout file will have the result. It returns the result back to the file.</p>
+
+<p>freopen(“input.in”, “r”, stdin);
+freopen(“output.out”, “w”, stdout);
+freopen(“error.out”, “a+”, stderr);
+execl(“test”, 0, (char *) NULL);
+exit(0);</p>
+
+<h2 id="4-----issues-to-discuss">4.     Issues to Discuss</h2>
+
+<h3 id="41-the-issue-of-multithreading-and-data-size">4.1 The Issue of Multithreading and Data size</h3>
+
+<p>As it deals with multiple users, and worker has to work at least 10 times per user with different standard input, there has been a possibility of using multithreads. However, we failed to implement multithreading because the data we send to worker gets to big. Sometimes, the testcase input to send to worker is greater than 6 million bytes. We had trouble handling more than one input because of the size. To send multiple data to worker there should be a better way to handle enormously large input data. Moreover, if we can use ThreadPool, it seems to be able to save wasted for creating the process.</p>
+
+<h3 id="42----the-issue-of-pipe">4.2    The issue of Pipe</h3>
+
+<p>As mentioned above, we used alarm signal to deal with a problem with a run time of more than or same as 3 seconds. Because the process that the alarm signal receives is terminated, we used fork() to create the child process and it handles alarm signal before terminated. Since the child process handles alarm signal, parent process cannot know whether run time exceeds 3 seconds or not. We need a data transfer between parent process and child process. We judged that the pipe was completely suitable to meet our needs. However, we suffered a series of endless debugging. We also saw many memory-related errors that we have never seen since we majored in computer science. It was meaningful, but we found an alternative plan. If we have a chance, I want to implement it using a pipe.</p>
+
+<h2 id="5----guideline-for-this-program">5.    GuideLine for this program</h2>
+
+<h3 id="51----commands-for-this-program">5.1    Commands for this program</h3>
+
+<h4 id="511----submitter-command">5.1.1    Submitter Command</h4>
+
+<p>./submitter -n <IP>:<Port> -u <ID> -k <PW> <File></File></PW></ID></Port></IP></p>
+
+<p>-<IP> : IP address of instagrapd
+-<Port> : port number of instagrapd
+-<ID> student ID as a 8 digit number
+-<PW> password as a 8 digit alphanumeric string
+-<File> a target C source code file</File></PW></ID></Port></IP></p>
+
+<p>Ex. ./submitter -n 127.0.0.1:8090 -u 21500670 -k 12345678 submit.c</p>
+
+<h4 id="512----instagrapd-command">5.1.2    Instagrapd Command</h4>
+
+<p>./instagrapd -p <Port> -w <IP>:<WPort> <Dir></Dir></WPort></IP></Port></p>
+
+<p>-<Port> port for listening of instagrapd 
+-<IP> IP address of worker
+-<WPort> port of worker
+-<Dir> a path to a testcase directory</Dir></WPort></IP></Port></p>
+
+<p>Ex. ./instagrapd -p 8090 -w 127.0.0.1:8091 ./testcase</p>
+
+<h4 id="513----worker-command">5.1.3    Worker Command</h4>
+
+<p>./worker -p <Port>
+-<Port> port for listening</Port></Port></p>
+
+<p>Ex. ./worker -p 8091</p>
+
+<h3 id="52----how-to-use-makefile">5.2    How to Use Makefile</h3>
+
+<ul>
+  <li>make : you can make instagradp, submitter, worker objects</li>
+  <li>make clean : clear everything.</li>
+</ul>
+
+<h2 id="instagrap을-마치며">InstaGraP을 마치며..</h2>
+
+<p>음… 뭐랄까 진짜 재밌게 할 수 있을거 같았는데 시간이 따라주지 않아서 제대로 끝마치지 못한 것 같아 너무 아쉽다.</p>
+
+<p>그래도 짧은 시간동안 내가 할 수 있는 최선을 다했고 재밌었다. 이제 막 배운 Process, Thread, Signal, 프로세스간의 통신을 실제로 구현해보면서 참 많이 배웠다, OS를 완전 잘 공부했는지는 모르겠지만 물어보면 아 나 그거 해보긴 했어요! 라고 말할 수 있을 것 같다 ㅎㅎ 잘 가랏! 안녀엉~</p>
+
+
+</article>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2827068140840250"
+     data-ad-slot="5554915178"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/linux">linux</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/os/2019/04/28/os-5.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">(OS 기본개념 정리) CH5 Process Scheduling</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+				<a href="/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/2019/05/04/brute-1.html">
+					<span class="page-number">(프로그래머스 코딩테스트 고득점 kit) 완전탐색 Level1 모의고사</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
+			
+		</span>
+	</section>
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'zoomKoding';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">줌코딩의 코딩일기</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:zoomkoding@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">zoomkoding@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://github.com/zoomkoding" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">ZoomKoding</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Zoom in Coding from the Basic.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83878761-1', 'auto');
+  ga('send', 'pageview', {
+    'page': '/os/linux/instagrap/2019/05/02/instagrap-4.html',
+    'title': '(InstaGrap 개발) 코드 채점 프로그램 개발 보고서'
+  });
+</script>
+
+
+
+  </body>
+
+</html>
